@@ -1,0 +1,86 @@
+@import url('https://fonts.cdnfonts.com/css/crasher-gear');
+
+.header{
+    padding: .3em;
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    background-color: #131313;
+}
+
+.left{
+    display: flex;
+    padding-left: 1em;
+    flex: 1 1 20%;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav__ul{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    text-decoration:none;
+    list-style: none;
+    color: #fff;
+}
+
+.ul__item{
+    text-decoration: none;
+}
+
+.ul__links{
+    text-decoration: none;
+    color: #fff;
+    font: 1.5em/1.5 serif;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 60%;
+    font-family: 'Crasher Gear', sans-serif;
+    font-size: 3rem;
+    letter-spacing: 20px;
+    color: #fff;
+}
+
+.right{
+    display: flex;
+    flex: 1 1 20%;
+    align-items: center;
+    justify-content: center;
+    padding-right: 1em;
+}
+
+@media all and (max-width: 1300px){
+    .nav__ul{
+        justify-content: space-evenly;
+    }
+    .logo{
+        font-size: 2.6rem;
+    }
+}
+
+
+  
+  @media all and (max-width: 900px){
+    .logo{
+        font-size: 2.4rem;
+    }
+  }
+  
+  @media all and (max-width: 700px){
+    .logo{
+        font-size: 2.2rem;
+    }
+  }
+  
+  @media all and (max-width: 500px){
+    .logo{
+        font-size: 2rem;
+    }
+  }
