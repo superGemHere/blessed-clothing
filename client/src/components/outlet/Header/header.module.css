@@ -11,10 +11,20 @@
 .left{
     display: flex;
     padding-left: 1em;
-    flex: 1 1 20%;
+    flex: 1 1 25%;
     align-items: center;
     justify-content: center;
 }
+
+#menu__button{
+    display: none;
+    color: #fff;
+    font-size: 4em;
+}
+
+/* #left{
+    visibility: visible;
+} */
 
 .nav__ul{
     display: flex;
@@ -29,6 +39,7 @@
 
 .ul__item{
     text-decoration: none;
+    width: fit-content;
 }
 
 .ul__links{
@@ -41,7 +52,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 1 1 60%;
+    flex: 1 1 50%;
     font-family: 'Crasher Gear', sans-serif;
     font-size: 3rem;
     letter-spacing: 20px;
@@ -50,10 +61,20 @@
 
 .right{
     display: flex;
-    flex: 1 1 20%;
+    flex: 1 1 25%;
     align-items: center;
     justify-content: center;
     padding-right: 1em;
+}
+
+#right{
+    visibility: visible;
+}
+
+#cart__button{
+    display: flex;
+    color: #fff;
+    font-size: 1.5em;
 }
 
 @media all and (max-width: 1300px){
@@ -66,6 +87,38 @@
 }
 
 
+@media all and (max-width: 990px){
+    .header{
+        padding: 1em 0;
+    }
+    #menu__button{
+        display: flex;
+        flex: 1 1 20%;
+    }
+
+    .left{
+       display:none;
+        padding: 0;
+        justify-items: flex-start;
+    }
+
+    .logo{
+        flex: 1 1 80%;
+        justify-self: flex-start;
+    }
+    .right{
+        padding: 0;
+        display: none;
+    }
+
+    #left{
+        display: none;
+    }
+    #right{
+        display: none;
+    }
+  }
+
   
   @media all and (max-width: 900px){
     .logo{
@@ -73,14 +126,20 @@
     }
   }
   
-  @media all and (max-width: 700px){
+  /* @media all and (max-width: 700px){
     .logo{
         font-size: 2.2rem;
     }
+    
   }
+  */
   
   @media all and (max-width: 500px){
-    .logo{
-        font-size: 2rem;
+    .header{
+        padding: 2em 0;
     }
-  }
+    
+    /* .logo{
+        font-size: 2rem;
+    } */
+  } 
