@@ -3,9 +3,17 @@
 .header{
     padding: .3em;
     display: flex;
+    flex-direction: column;
     width: 100%;
     justify-content: space-evenly;
     background-color: #131313;
+    gap: 3em;
+}
+
+nav{
+    display: flex;
+    width: 100%;
+    /* justify-content: space-evenly; */
 }
 
 .left{
@@ -30,7 +38,7 @@
     display: flex;
     width: 100%;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 1em;
     text-decoration:none;
     list-style: none;
@@ -46,17 +54,30 @@
     text-decoration: none;
     color: #fff;
     font: 1.5em/1.5 serif;
+
+    &:visited{
+        text-decoration: none;
+        color: #fff;
+        font: 1.5em/1.5 serif;
+    }
+
+    &:hover{
+        color: aqua;
+    }
+
+
 }
 
 .logo{
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 1 1 50%;
+    flex: 1 1 40%;
     font-family: 'Crasher Gear', sans-serif;
     font-size: 3rem;
     letter-spacing: 20px;
     color: #fff;
+    text-shadow: 4px 1px rgba(255, 255, 255, 0.35);
 }
 
 .right{
@@ -75,6 +96,26 @@
     display: flex;
     color: #fff;
     font-size: 1.5em;
+
+    &:hover{
+        color: aqua;
+    }
+}
+
+.dropDown{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    transition: all 1s;
+}
+
+.responsiveNav{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
 }
 
 @media all and (max-width: 1300px){
