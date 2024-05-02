@@ -9,6 +9,7 @@ html,body{
   font: 16px/1.5 sans-serif;
   min-height: 100vh;
   min-width: 100vw;
+  /* max-width: 100vw; */
 }
 
 button{

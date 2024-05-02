@@ -4,15 +4,16 @@
     padding: .3em;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 100vw;
     justify-content: space-evenly;
     background-color: #131313;
     gap: 3em;
+    padding: 0 1.5em;
 }
 
 nav{
     display: flex;
-    width: 100%;
+    width: 99%;
     /* justify-content: space-evenly; */
 }
 
@@ -85,7 +86,7 @@ nav{
     flex: 1 1 25%;
     align-items: center;
     justify-content: center;
-    padding-right: 1em;
+    margin-right: 1.5rem;
 }
 
 #right{
@@ -128,7 +129,7 @@ nav{
 }
 
 
-@media all and (max-width: 990px){
+@media all and (max-width: 1024px){
     .header{
         padding: 1em 0;
     }
