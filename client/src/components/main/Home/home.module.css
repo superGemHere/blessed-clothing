@@ -14,13 +14,13 @@
 .header{
     display: flex;
     width: 100%;
-    height: 60vh;
+    height: 30vh;
     /* align-items: center; */
     justify-content: center;
     background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
     url(https://images.pexels.com/photos/65438/pexels-photo-65438.jpeg);
     background-size:cover;
-    background-position: bottom;
+    background-position: calc(100% - 0%) calc(25% - 0%);
 }
 
 .welcome{
@@ -44,4 +44,29 @@
 #welcomeSlogan{
     text-shadow: 3px 1px rgba(255, 255, 255, 0.2);
     font-size: 2rem;
+}
+
+.genderSections{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    /* background-color: black; */
+}
+
+section.collections{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    background-color: #e2e4e6;
+    color: black;
+    padding: 2rem;
+}
+
+@media all and (max-width: 1024px){
+    .header{
+        background-position: bottom;
+    }
 }

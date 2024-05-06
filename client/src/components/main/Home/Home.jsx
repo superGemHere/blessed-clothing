@@ -1,6 +1,12 @@
 import styles from "./home.module.css";
+import Section from '../Gender Section/Section'
+import sectionImage from "../../../assets/sectionPics/woman-section.jpg"
+
 export default function Home(){
-    
+    let data = {
+        sectionImage: sectionImage,
+        sectionName: "Woman"
+    }
 
     return(
         <main className={styles.main}>
@@ -10,9 +16,19 @@ export default function Home(){
                     <h2 id={styles.welcomeSlogan}>Rare clothing with rare quality.</h2>
                 </div>
             </section>
-            <div className="slider">
-                <h1>Blessed</h1>
+            <div className={styles.genderSections}>
+                <Section 
+                data={data}
+                />
             </div>
+            <section className={styles.collections}>
+                <div className="blessed-angels">
+                    <h1>Blessed Angels</h1>
+                </div>
+                <div className="fallen-angels">
+                    <h1>Fallen Angels</h1>
+                </div>
+            </section>
         </main>
     );
 }
