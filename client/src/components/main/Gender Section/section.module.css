@@ -1,0 +1,10 @@
+.section{
+    display: flex;
+    width:45%;
+    height: 400px;
+    justify-content: center;
+    align-items: center;
+    color: #131313;
+    background-size: cover;
+    background-position: center;
+}
