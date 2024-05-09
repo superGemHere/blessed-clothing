@@ -10,7 +10,7 @@ export default function Header(){
     const [isVisible, setIsVis] = useState(false);
     useEffect(() => {
         const handleResize = () => {
-            if(window.innerWidth > 990){
+            if(window.innerWidth > 1023 & isVisible){
                 setIsVis(false);
             }
         };
@@ -43,7 +43,7 @@ export default function Header(){
                     </li>
                 </ul>
             </div>
-            <h1 className={styles.logo}>Blessed</h1>
+            <h1 className={`${styles.logo}`}>Blessed</h1>
             <div className={styles.right}>
                 <ul className={styles.nav__ul} id={styles.right}>
                         <li className={styles.ul__item}>
