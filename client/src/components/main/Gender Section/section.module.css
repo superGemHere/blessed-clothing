@@ -1,10 +1,46 @@
+@import url('https://fonts.cdnfonts.com/css/im-fell-french-canon-2');
+
 .section{
     display: flex;
-    width:45%;
+    width: 38rem;
     height: 400px;
     justify-content: center;
     align-items: center;
-    color: #131313;
+    color: #fff;
     background-size: cover;
     background-position: center;
+    font-family: 'IM FELL French Canon', sans-serif;
+    text-shadow: 5px 3px 10px rgba(0, 0, 0, 1);
 }
+
+@media all and (max-width: 1865px){
+    .section{
+        width: 35rem;
+    }
+    
+  }
+@media all and (max-width: 1715px){
+    .section{
+        width: 30rem;
+    }
+    
+  }
+@media all and (max-width: 1475px){
+    .section{
+        width: 25rem;
+    }
+    
+  }
+@media all and (max-width: 1475px){
+    .section{
+        width: 23rem;
+        background-position: top;
+    }
+    
+  }
+@media all and (max-width: 1024px){
+    .section{
+        width: 100%;
+    }
+    
+  }

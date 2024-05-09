@@ -8,7 +8,7 @@ export default function section ({
     // `url(${(item.imageLinks)}`
                           
     return(
-        <div className={styles.section} style={{backgroundImage: `url(${data.sectionImage})`}}>
+        <div className={styles.section} style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url(${data.sectionImage})`}}>
             <h1>{data.sectionName}</h1>	
         </div>
     );
