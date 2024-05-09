@@ -3,9 +3,17 @@ import Section from '../Gender Section/Section'
 import sectionImage from "../../../assets/sectionPics/woman-section.jpg"
 
 export default function Home(){
-    let data = {
+    let dataWoman = {
         sectionImage: sectionImage,
-        sectionName: "Woman"
+        sectionName: "Women"
+    }
+    let dataMan = {
+        sectionImage: sectionImage,
+        sectionName: "Men"
+    }
+    let dataKids = {
+        sectionImage: sectionImage,
+        sectionName: "Kids"
     }
 
     return(
@@ -18,7 +26,13 @@ export default function Home(){
             </section>
             <div className={styles.genderSections}>
                 <Section 
-                data={data}
+                data={dataWoman}
+                />
+                <Section 
+                data={dataMan}
+                />
+                <Section 
+                data={dataKids}
                 />
             </div>
             <section className={styles.collections}>
