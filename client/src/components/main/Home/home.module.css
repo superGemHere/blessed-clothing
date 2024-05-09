@@ -29,7 +29,7 @@
     flex-direction: column;
     gap: 2rem;
     margin-top: 4rem;
-    font-family: 'IM FELL French Canon', sans-serif;;
+    font-family: 'IM FELL French Canon', sans-serif;
     font-optical-sizing:auto;
     font-weight: bold;
     font-style: normal;
@@ -47,12 +47,14 @@
 }
 
 .genderSections{
+    padding: 1rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    gap: 1rem;
     width: 100%;
-    height: fit-content;
+    height: auto;
     /* background-color: black; */
 }
 
