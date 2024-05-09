@@ -1,15 +1,22 @@
 @import url('https://fonts.cdnfonts.com/css/crasher-gear');
 
+
+
 .header{
     padding: .3em;
     display: flex;
     flex-direction: column;
+    position: sticky;
+    top: 0;
     width: 100vw;
     justify-content: space-evenly;
+    align-items: center;
     background-color: #131313;
     gap: 3em;
     padding: 0 1.5em;
 }
+
+
 
 nav{
     display: flex;
@@ -109,6 +116,8 @@ nav{
     justify-content: center;
     align-items: center;
     transition: all 1s;
+    padding: 1rem 0;
+    border-top: 1px solid #fff;
 }
 
 .responsiveNav{
