@@ -55,6 +55,7 @@ nav{
 
 .ul__item{
     text-decoration: none;
+    list-style: none;
     width: fit-content;
 }
 
@@ -85,6 +86,7 @@ nav{
     font-size: 3rem;
     letter-spacing: 20px;
     color: #fff;
+    text-decoration: none;
     text-shadow: 4px 1px rgba(255, 255, 255, 0.35);
 }
 
@@ -118,6 +120,7 @@ nav{
     transition: all 1s;
     padding: 1rem 0;
     border-top: 1px solid #fff;
+    text-decoration: none;
 }
 
 .responsiveNav{
@@ -126,6 +129,7 @@ nav{
     justify-content: center;
     align-items: center;
     gap: 1em;
+    text-decoration: none;
 }
 
 @media all and (max-width: 1300px){

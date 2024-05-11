@@ -43,7 +43,7 @@ export default function Header(){
                     </li>
                 </ul>
             </div>
-            <h1 className={`${styles.logo}`}>Blessed</h1>
+            <Link to={"/"}className={`${styles.logo}`}>Blessed</Link>
             <div className={styles.right}>
                 <ul className={styles.nav__ul} id={styles.right}>
                         <li className={styles.ul__item}>
