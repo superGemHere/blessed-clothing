@@ -10,18 +10,20 @@ export default function Header(){
     const [isVisible, setIsVis] = useState(false);
     useEffect(() => {
         const handleResize = () => {
-            if(window.innerWidth > 1023 & isVisible){
+            if(window.innerWidth >= 1023 & isVisible){
                 setIsVis(false);
             }
         };
+        
     
         window.addEventListener('resize', handleResize);
-    
+        
         // Cleanup function to remove event listener when component unmounts
         return () => {
-          window.removeEventListener('resize', handleResize);
+            window.removeEventListener('resize', handleResize);
         };
-      }, [])
+      })
+
 
 
     return(
