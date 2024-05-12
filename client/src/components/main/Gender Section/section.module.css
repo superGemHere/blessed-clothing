@@ -8,9 +8,15 @@
     align-items: center;
     color: #fff;
     background-size: cover;
-    background-position: center;
+    background-position: top;
     font-family: 'IM FELL French Canon', sans-serif;
     text-shadow: 5px 3px 10px rgba(0, 0, 0, 1);
+    cursor: pointer;
+    transition: .5s;
+
+    &:hover{
+      scale: 1.03;
+    }
 }
 
 @media all and (max-width: 1865px){
