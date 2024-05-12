@@ -1,8 +1,11 @@
 import styles from "./home.module.css";
 import Section from '../Gender Section/Section'
+import Collection from "../Collection/Collection";
 import sectionWomenImage from "../../../assets/sectionPics/women-section.jpg"
 import sectionMenImage from "../../../assets/sectionPics/men-section.jpg"
 import sectionKidImage from "../../../assets/sectionPics/kids-section.jpg"
+import collectionBlessedAngel from "../../../assets/collectionPics/blessed-angel.jpg"
+import collectionFallenAngel from "../../../assets/collectionPics/fallen-angel.jpg"
 
 export default function Home(){
     let dataWoman = {
@@ -37,12 +40,11 @@ export default function Home(){
                 data={dataKids}
                 />
             </div>
-            <section className={styles.collections}>
-                <div className="blessed-angels">
-                    <h1>Blessed Angels</h1>
-                </div>
-                <div className="fallen-angels">
-                    <h1>Fallen Angels</h1>
+            <section className={styles.collectionContainer}>
+                <h1>Featured Collections</h1>
+                <div className={styles.collections}>
+                    <Collection collectionData={{name: "Blessed Angels", description: "The Chosen One"}} image={collectionBlessedAngel} />
+                    <Collection collectionData={{name: "Fallen Angels", description: "Me Against The World"} } image={collectionFallenAngel}/>
                 </div>
             </section>
         </main>
