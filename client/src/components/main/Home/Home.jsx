@@ -1,18 +1,20 @@
 import styles from "./home.module.css";
 import Section from '../Gender Section/Section'
-import sectionImage from "../../../assets/sectionPics/woman-section.jpg"
+import sectionWomenImage from "../../../assets/sectionPics/women-section.jpg"
+import sectionMenImage from "../../../assets/sectionPics/men-section.jpg"
+import sectionKidImage from "../../../assets/sectionPics/kids-section.jpg"
 
 export default function Home(){
     let dataWoman = {
-        sectionImage: sectionImage,
+        sectionImage: sectionWomenImage,
         sectionName: "Women"
     }
     let dataMan = {
-        sectionImage: sectionImage,
+        sectionImage: sectionMenImage,
         sectionName: "Men"
     }
     let dataKids = {
-        sectionImage: sectionImage,
+        sectionImage: sectionKidImage,
         sectionName: "Kids"
     }
 
