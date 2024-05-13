@@ -2,17 +2,67 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 20rem;
+    width: 30rem;
     height: auto;
     gap: 1rem;
-    
+    /* backdrop-filter: saturate(100%) blur(16px); */
+    /* backdrop-filter: ; */
+    border-radius: 1rem;
+    /* transition: all .5s; */
+    /* transition: transform 1s ease 0s; */
 }
 
 .imageContainer{
-    width: 99.5%;
-    height: auto;
+    display: flex;
+    width: 90%;
+    height: 40rem;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
     position: relative;
-    box-shadow: 0px 10px 10px 0px #888888;
+    box-shadow: 0px 10px 15px 4px #858282;
+    border-radius: 1rem;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    transition: 1s ease 0s;
+}
+
+.imageContainer:hover{
+    scale: 1.05;
+    filter: grayscale(100%);
+}
+
+.imageContainer:hover .collectionName{
+    transform: translateY(1rem);
+    -webkit-transform: translateY(1rem);
+}
+    
+
+.imageContainer:hover .seeCollectionBtn{
+    transform: translateY(35rem);
+}
+
+
+.collectionName{
+    color: #fff;
+    transform: translateY(-5rem);
+    transition:  ease-in-out .5s;
+}
+
+.seeCollectionBtn{
+    color: #fff;
+    transform: translateY(38rem);
+    transition: all 1s ;
+    backdrop-filter: blur(15px);
+    padding: .1rem;
+    border-radius: 10px;
+    box-shadow: 0px 5px 20px 4px #858282;
+}
+
+.seeCollectionBtn:hover{
+   
 }
 
 .gradient{
@@ -23,11 +73,16 @@
     left: 0;
     background-color: black;
     opacity: 0.2;
+    border-radius: 1rem;
 }
 
-.image{
+.seeCollectionBtn{
+
+}
+
+/* .image{
     width: 100%;
     height: auto;
-    object-fit: cover;
     display: block;
-}
+    border-radius: 1rem;
+} */
