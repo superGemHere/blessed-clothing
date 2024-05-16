@@ -11,7 +11,7 @@ export default function Collection ({collectionData, image}){
             <div className={styles.imageContainer} style={{backgroundImage: `url(${image})`}}>
                 <div className={styles.gradient}>
                 </div>
-                <h1 className={styles.collectionName}>{collectionData.name}</h1>
+                {/* <h1 className={styles.collectionName}>{collectionData.name}</h1> */}
             </div>
                 <div className={styles.info}>
                     <h1>Blessed</h1>
