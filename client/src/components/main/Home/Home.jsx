@@ -42,7 +42,7 @@ export default function Home(){
             </div>
             <section className={styles.collectionContainer}>
                 <h1>Featured Collections</h1>
-                <div className={styles.collections}>
+                <div className={styles.boxContainer}>
                     <Collection collectionData={{name: "Blessed Angels", description: "The Chosen One"}} image={collectionBlessedAngel} />
                     <Collection collectionData={{name: "Fallen Angels", description: "Me Against The World"} } image={collectionFallenAngel}/>
                 </div>
