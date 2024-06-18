@@ -42,9 +42,9 @@ export default function Home(){
             </div>
             <section className={styles.collectionContainer}>
                 <h1>Featured Collections</h1>
-                <div className={styles.boxContainer}>
-                    <Collection collectionData={{name: "Blessed Angels", description: "The Chosen One"}} image={collectionBlessedAngel} />
-                    <Collection collectionData={{name: "Fallen Angels", description: "Me Against The World"} } image={collectionFallenAngel}/>
+                <div className={styles.collections}>
+                    <Collection collectionData={{name: "Blessed Angels", description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit accusamus temporibus voluptates exercitationem, ipsa officiis a animi esse explicabo repudiandae in, blanditiis cum quam magni? Voluptates illum earum praesentium veniam."}} image={collectionBlessedAngel} />
+                    <Collection collectionData={{name: "Fallen Angels", description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit accusamus temporibus voluptates exercitationem, ipsa officiis a animi esse explicabo repudiandae in, blanditiis cum quam magni? Voluptates illum earum praesentium veniam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit accusamus temporibus voluptates exercitationem, ipsa officiis a animi esse explicabo repudiandae in, blanditiis cum quam magni? Voluptates illum earum praesentium veniam."} } image={collectionFallenAngel}/>
                 </div>
             </section>
         </main>
