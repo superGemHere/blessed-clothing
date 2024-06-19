@@ -14,37 +14,34 @@
  .cta {
     background: #333;
     box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2);
-    height: 45rem;
+    height: 50rem;
     overflow: hidden;
     position: relative;
-    width: 26%;
+    width: 32%;
+    transition: 0.5s ease-in-out;
+    background-position: center;
+    background-size: 'contain';
  }
  
- .cta:hover img {
-    top: -10%;
-    filter: brightness(70%);
+ .cta:hover{
+    /* filter: brightness(85%); */
+    filter: grayscale(100%);
  }
  
  .cta:hover .text {
     bottom: 0;
  }
  
- .cta img {
-    bottom: 0;
-    filter: brightness(100%);
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition: 0.5s ease-in-out;
-    width: 115%;
- }
- 
  .text {
-    bottom: -40%;
+   display: flex;
+   flex-direction: column;
+   /* align-items: center; */
+    bottom: -100%;
     padding: 15px;
     position: absolute;
-    transition: 0.5s ease-in-out;
+    transition: 1s ease-in-out;
+    gap: 1rem;
+    backdrop-filter: blur(10px);
  }
  
  .text h2 {
@@ -53,10 +50,64 @@
     font-weight: 300;
     margin-bottom: 5px;
     position: relative;
+    text-align: center;
  }
  
  .text p {
     color: #fff;
     font-weight: 300;
+    /* width: 95%; */
+    text-align: center;
  }
- 
+ .detailsLink{
+   color: #fff;
+   text-decoration: none;
+   border: 1px solid #fff;
+   padding: 5px 10px;
+   border-radius: 5px;
+   width: fit-content;
+   text-align: center;
+   align-self: center;
+ }
+
+ .detailsLink:visited{
+   color: #fff;
+ }
+
+ .detailsLink:hover{
+   color: #131313;
+   background-color: #fff;
+   opacity: .7;
+ }
+
+ @media screen and (max-width: 1400px) {
+   .cta{
+      width: 35%;
+      height: 45rem;
+   }
+ }
+ @media screen and (max-width: 1024px) {
+   .cta{
+      width: 38%;
+   }
+ }
+ @media screen and (max-width: 970px) {
+   .cta{
+      width: 50%;
+   }
+ }
+ @media screen and (max-width: 850px) {
+   .cta{
+      width: 55%;
+   }
+ }
+ @media screen and (max-width: 640px) {
+   .cta{
+      width: 60%;
+   }
+ }
+ @media screen and (max-width: 500px) {
+   .cta{
+      width: 80%;
+   }
+ }
