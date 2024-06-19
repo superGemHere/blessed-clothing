@@ -87,7 +87,7 @@ section.collectionContainer{
     justify-content: center;
 }
 
-@media all and (max-width: 1200px){
+@media all and (max-width: 970px){
     .collections{
         flex-direction: column;
     } 
