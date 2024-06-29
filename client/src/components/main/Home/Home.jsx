@@ -11,6 +11,7 @@ import collectionFallenAngel from "../../../assets/collectionPics/fallen-angel.j
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import ProductCard from "../ProductCard/ProductCard";
+import NewsLetter from "../NewsLetter/NewsLetter";
 
 export default function Home(){
     const responsive = {
@@ -97,6 +98,9 @@ export default function Home(){
                     </Carousel>
                     </div>
                 </div>
+            </section>
+            <section className={styles.newsLetter}>
+                <NewsLetter />
             </section>
         </main>
     );

@@ -121,6 +121,11 @@ section.collectionContainer{
     /* border-right: 2px solid #131313; */
 }
 
+.newsLetter{
+    width: 100%;
+    height: fit-content;
+}
+
 @media all and (max-width: 970px){
     .collections{
         flex-direction: column;
