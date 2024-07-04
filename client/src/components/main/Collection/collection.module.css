@@ -1,16 +1,3 @@
-  /* .ctaBackground {
-    background-size: cover;
-    background-position: center center;
-    bottom: 0;
-    filter: blur(50px);
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-    z-index: -1;
- } */
- 
  .cta {
     background: #333;
     box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.2);
@@ -24,7 +11,6 @@
  }
  
  .cta:hover{
-    /* filter: brightness(85%); */
     filter: grayscale(100%);
  }
  
@@ -35,7 +21,6 @@
  .text {
    display: flex;
    flex-direction: column;
-   /* align-items: center; */
     bottom: -100%;
     padding: 15px;
     position: absolute;
@@ -56,7 +41,6 @@
  .text p {
     color: #fff;
     font-weight: 300;
-    /* width: 95%; */
     text-align: center;
  }
  .detailsLink{
