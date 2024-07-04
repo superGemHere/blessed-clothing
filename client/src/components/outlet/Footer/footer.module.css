@@ -1,0 +1,82 @@
+.container{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    margin-top: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+    background-color: #131313;
+    gap: 1rem;
+}
+
+.links{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+}
+
+.navigation { 
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 33%;
+    align-items: center;
+    gap: .5rem;
+}
+.about { 
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 33%;
+    align-items: center;
+    gap: .5rem;
+}
+.contacts { 
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 33%;
+    align-items: center;
+    gap: .3rem;
+}
+
+.phoneNumber{
+    font-family: sans-serif;
+    font-size: 1rem;
+}
+
+.link{
+    color: #fff;
+    text-decoration: none;
+    text-underline-offset: 5px;
+    font-size: 1.2rem;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.link:visited{
+    color: #fff;
+}
+
+.paragraph{
+    display: flex;
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.github{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+    margin-top: 1.5rem;
+    gap: .5rem;
+    position: relative;
+   /* left: 33%; */
+}
+
+.copyRight{
+    color: #fff;
+    font-size: .7rem;
+}
