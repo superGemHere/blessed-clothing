@@ -45,3 +45,19 @@
     outline-offset: 3px;
     scale: 1.05;
 }
+
+@media all and (max-width: 800px){
+    .input{
+        width: 400px;
+    }
+}
+@media all and (max-width: 450px){
+    .input{
+        width: 350px;
+    }
+}
+@media all and (max-width: 400px){
+    .input{
+        width: 300px;
+    }
+}
