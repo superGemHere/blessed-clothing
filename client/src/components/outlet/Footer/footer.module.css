@@ -2,13 +2,14 @@
     display: flex;
     width: 100%;
     height: fit-content;
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem 0;
+    padding: 1rem 0;
     background-color: #131313;
-    gap: 1rem;
+    /* gap: 1rem; */
+    /* font-size: 0.1rem; */
 }
 
 .links{
@@ -41,7 +42,7 @@
 
 .phoneNumber{
     font-family: sans-serif;
-    font-size: 1rem;
+    font-size: .8rem;
 }
 
 .link{
@@ -79,4 +80,16 @@
 .copyRight{
     color: #fff;
     font-size: .7rem;
+}
+
+.link {
+    font-size: .8rem;
+}
+
+.paragraph{
+    font-size: .8rem;
+}
+
+@media all and (max-width: 800) {
+
 }
