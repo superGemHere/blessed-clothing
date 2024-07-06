@@ -35,7 +35,7 @@ export default function Header(){
                         <Link to="/" className={styles.ul__links}>Home</Link>
                     </li>
                     <li className={styles.ul__item}>
-                        <Link to="#" className={styles.ul__links}>Shop</Link>
+                        <Link to="/products" className={styles.ul__links}>Products</Link>
                     </li>
                     <li className={styles.ul__item}>
                         <Link to="#" className={styles.ul__links}>Sale</Link>
@@ -70,7 +70,7 @@ export default function Header(){
                         <Link to="/" className={styles.ul__links}>Home</Link>
                     </li>
                     <li className={styles.ul__item}>
-                        <Link to="#" className={styles.ul__links}>Shop</Link>
+                        <Link to="/products" className={styles.ul__links}>Products</Link>
                     </li>
                     <li className={styles.ul__item}>
                         <Link to="#" className={styles.ul__links}>Sale</Link>
