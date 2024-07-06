@@ -11,7 +11,7 @@ export default function Footer (){
             <div className={styles.links}>
                 <section className={styles.navigation}>
                     <Link className={styles.link} to={"/"}>Home</Link>
-                    <Link className={styles.link} to={"#"}>Shops</Link>
+                    <Link className={styles.link} to={"/products"}>Products</Link>
                     <Link className={styles.link} to={"#"}>Sale</Link>
                     <Link className={styles.link} to={"#"}>Browse</Link>
                     <Link className={styles.link} to={"#"}>Collections</Link>
@@ -25,11 +25,11 @@ export default function Footer (){
                     <p className={styles.paragraph}>Phone:&nbsp;&nbsp;<span className={styles.phoneNumber}>+878 559 4478</span></p>
                     <p className={styles.paragraph}>E-mail: blessedClothing@gmail.com</p>
                     <p className={styles.paragraph}>Linked in: Blessed</p>
+                    <div className={styles.github}>
+                        <FaGithub color='#fff'size={35}/>
+                        <Link className={styles.link} target="_blank" to={"https://github.com/supergemhere"}>superGemHere</Link>
+                    </div>
                 </section>
-            </div>
-            <div className={styles.github}>
-                <FaGithub color='#fff'size={35}/>
-                <Link className={styles.link} target="_blank" to={"https://github.com/supergemhere"}>superGemHere</Link>
             </div>
             <p className={styles.copyRight}>All rights reserved &copy; - Dzhem Syuleyman</p>
         </div>
