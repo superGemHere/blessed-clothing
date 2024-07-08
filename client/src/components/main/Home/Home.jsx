@@ -10,7 +10,7 @@ import collectionFallenAngel from "../../../assets/collectionPics/fallen-angel.j
 
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import ProductCard from "../ProductCard/ProductCard";
+import CarouselCard from "../CarouselCard/CarouselCard";
 import NewsLetter from "../NewsLetter/NewsLetter";
 
 export default function Home(){
@@ -88,13 +88,13 @@ export default function Home(){
                     <h1>Trending Products</h1>
                     <div className={styles.productsContainer}>
                     <Carousel responsive={responsive} partialVisible={false} itemClass={styles.carouselItems}>
-                        <ProductCard data={trendingData.data1}/>
-                        <ProductCard data={trendingData.data1}/>
-                        <ProductCard data={trendingData.data1}/>
-                        <ProductCard data={trendingData.data1}/>
-                        <ProductCard data={trendingData.data1}/>
-                        <ProductCard data={trendingData.data1}/>
-                        <ProductCard data={trendingData.data1}/>
+                        <CarouselCard data={trendingData.data1}/>
+                        <CarouselCard data={trendingData.data1}/>
+                        <CarouselCard data={trendingData.data1}/>
+                        <CarouselCard data={trendingData.data1}/>
+                        <CarouselCard data={trendingData.data1}/>
+                        <CarouselCard data={trendingData.data1}/>
+                        <CarouselCard data={trendingData.data1}/>
                     </Carousel>
                     </div>
                 </div>
