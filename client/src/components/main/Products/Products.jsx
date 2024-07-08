@@ -7,6 +7,7 @@ import { IoFilter } from "react-icons/io5";
 // import useFetch from "../../../hooks/useFetch";
 
 import ManSection from "../../../assets/sectionPics/men-section.jpg"
+import Product from "../Product/Product";
 
 export default function Products(){
 
@@ -82,7 +83,7 @@ export default function Products(){
                 <div className={styles.right}>
                     <img className={styles.catImg} src={ManSection} alt="Section image" />
                     <div className={styles.cardsContainer}>
-                    
+                        <Product />
                     </div>
                 </div>
             </div>
