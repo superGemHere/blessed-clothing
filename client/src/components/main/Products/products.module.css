@@ -80,6 +80,7 @@ border-color: #808080;
 .cardsContainer{
     display: flex;
     width: 100%;
+    padding: 1rem;
     height: fit-content;
 }
 
