@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 
 
-import styles from "./styles.module.css"
+import styles from "./products.module.css"
 import { useState } from "react";
 import { IoFilter } from "react-icons/io5";
 // import useFetch from "../../../hooks/useFetch";
