@@ -84,6 +84,14 @@ export default function Products(){
                     <img className={styles.catImg} src={ManSection} alt="Section image" />
                     <div className={styles.cardsContainer}>
                         <Product />
+                        <Product />
+                        <Product />
+                        <Product />
+                        <Product />
+                        <Product />
+                        <Product />
+                        <Product />
+                        <Product />
                     </div>
                 </div>
             </div>
