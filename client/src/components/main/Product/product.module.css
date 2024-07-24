@@ -119,4 +119,9 @@
         width: 15rem;
     }
 }
+@media all and (max-width: 370px){
+    .card{
+        width: 25rem;
+    }
+}
 
