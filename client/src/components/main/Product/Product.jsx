@@ -17,8 +17,8 @@ export default function Product (){
                         <p className={styles.model}>Voltaic Evo</p>
                     </div>
                     <div className={styles.priceDiv}>
-                        <p className={styles.newPrice}>$151.99</p>
                         <p className={styles.oldPrice}>$189.99</p>
+                        <p className={styles.newPrice}>$151.99</p>
                     </div>
                     <p className={styles.freeShipping}>Free shipping</p>
                 </div>
