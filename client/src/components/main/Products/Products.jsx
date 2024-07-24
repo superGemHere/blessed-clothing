@@ -92,6 +92,10 @@ export default function Products(){
                         <Product />
                         <Product />
                         <Product />
+                        <Product />
+                        <Product />
+                        <Product />
+                        <Product />
                     </div>
                 </div>
             </div>
