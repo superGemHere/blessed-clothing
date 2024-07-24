@@ -20,6 +20,25 @@ export default function Product (){
                         <p className={styles.oldPrice}>$189.99</p>
                         <p className={styles.newPrice}>$151.99</p>
                     </div>
+                    <p className={styles.colorText}>Available colors:</p>
+                    <div className={styles.colorsDiv}>
+                        <span className={styles.color} style={{backgroundColor: `red`}}></span>
+                        <span className={styles.color} style={{backgroundColor: `black`}}></span>
+                        <span className={styles.color} style={{backgroundColor: `green`}}></span>
+                    </div>
+                    <p className={styles.sizeText}>Available sizes:</p>
+                    <div className={styles.sizesDiv}>
+                        <span className={styles.size}>40</span>
+                        <span className={styles.size}>41</span>
+                        <span className={styles.size}>42</span>
+                        <span className={styles.size}>43</span>
+                        <span className={styles.size}>44</span>
+                        <span className={styles.size}>45</span>
+                        <span className={styles.size}>46</span>
+                        <span className={styles.size}>47</span>
+                        <span className={styles.size}>48</span>
+                        <span className={styles.size}>49</span>
+                    </div>
                     <p className={styles.freeShipping}>Free shipping</p>
                 </div>
         </div>
