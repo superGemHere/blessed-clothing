@@ -1,18 +1,18 @@
-.card{
+.card {
     display: flex;
     flex-direction: column;
-    width: 20rem;
     margin: 0;
     padding: 1rem;
     height: fit-content;
+    transition: all ease-in-out .5s;
 }
 
-.card:hover{
+.card:hover {
     border-radius: 10px;
     box-shadow: 0px 5px 50px rgba(0, 0, 0, .2);
 }
 
-.saleInfo{
+.saleInfo {
     display: flex;
     width: fit-content;
     height: fit-content;
@@ -27,14 +27,15 @@
     padding: .1rem 1rem;
 }
 
-.saleInfo p:first-child{
+.saleInfo p:first-child {
     background-color: red;
 }
-.saleInfo p:last-child{
+
+.saleInfo p:last-child {
     background-color: green;
 }
 
-.imageWrapper{
+.imageWrapper {
     width: 100%;
     height: 60%;
 }
@@ -47,7 +48,7 @@
     image-rendering: -webkit-optimize-contrast;
 }
 
-.productInfo{
+.productInfo {
     display: flex;
     flex-direction: column;
 }
@@ -62,7 +63,7 @@
     font-weight: bold;
 }
 
-.priceDiv{
+.priceDiv {
     font-family: sans-serif;
     display: flex;
     align-items: center;
@@ -79,8 +80,80 @@
     font-family: inherit;
     font-weight: bold;
 }
+.colorText{
+    display: flex;
+    opacity: 0;
+    font-size: 0;
+}
+.card:hover .colorText {
+    opacity: 1;
+    font-size: 1rem;
+}
+.colorsDiv {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: fit-content;
+    gap: 1rem;
+    height: 0;
+    opacity: 0;
+    transition: all ease-in-out .5s;
+}
+.card:hover .colorsDiv {
+    height: 4rem;
+    opacity: 1;
+}
+.color {
+   width: 0;
+   height: 0;
+}
+.card:hover .color {
+    width: 2rem;
+    height: 2rem;
+}
 
-.freeShipping{
+
+.sizeText{
+    display: flex;
+    opacity: 1;
+    font-size: 1rem;
+}
+
+.card:hover .sizeText {
+    opacity: 0;
+    font-size: 0;
+}
+.sizesDiv {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    /* gap: 10px;*/
+    /* padding: .5rem; */
+    height: 4rem;
+    transition: all ease-in-out .5s;
+}
+
+.card:hover .sizesDiv {
+    height: 0;
+}
+
+
+.size {
+    height: 2rem;
+    font-family: sans-serif;
+    text-align: center; 
+    padding: .3rem; 
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    opacity: 1;
+    font-size: 1rem;
+}
+.card:hover .size {
+    opacity: 0;
+    font-size: 0;
+    height: 0;
+}
+
+.freeShipping {
     width: fit-content;
     margin-top: 10px;
     color: #fff;
@@ -88,40 +161,3 @@
     border-radius: 11px;
     padding: 1px 1rem;
 }
-
-@media all and (max-width: 1440px){
-    .card{
-        width: 17rem;
-    }
-}
-/* @media all and (max-width: 1000px){
-    .card{
-        width: 18rem;
-    }
-} */
-@media all and (max-width: 760px){
-    .card{
-        width: 15rem;
-    }
-}
-@media all and (max-width: 600px){
-    .card{
-        width: 13rem;
-    }
-}
-@media all and (max-width: 534px){
-    .card{
-        width: 18rem;
-    }
-}
-@media all and (max-width: 447px){
-    .card{
-        width: 15rem;
-    }
-}
-@media all and (max-width: 370px){
-    .card{
-        width: 25rem;
-    }
-}
-
