@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
 .card {
     display: flex;
     flex-direction: column;
@@ -27,11 +29,11 @@
     padding: .1rem 1rem;
 }
 
-.saleInfo p:first-child {
+.onSaleFlag{
     background-color: red;
 }
 
-.saleInfo p:last-child {
+.newProductFlag{
     background-color: green;
 }
 
@@ -57,10 +59,16 @@
     display: flex;
     align-items: center;
     gap: .8rem;
+    font-family: "Ubuntu", sans-serif;
 }
 
 .name {
     font-weight: bold;
+    font-family: inherit;
+}
+
+.model{
+    font-family: inherit;
 }
 
 .priceDiv {
@@ -75,8 +83,7 @@
     font-family: inherit;
 }
 
-.newPrice {
-    color: red;
+.price {
     font-family: inherit;
     font-weight: bold;
 }
