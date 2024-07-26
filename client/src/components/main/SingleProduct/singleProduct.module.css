@@ -1,1 +1,73 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+.container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    padding: 1rem 3rem;
+    gap: 4rem;
+}
+.imageContainer{
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    gap: .5rem;
+    padding: 1rem;
+}
+
+.upperRow{
+    display: flex;
+    width: 100%;
+    gap: .5rem;
+}
+.bottomRow{
+    display: flex;
+    width: 100%;
+    gap: .5rem;
+}
+
+.imageWrapper{
+    display: flex;
+    width: 100%;
+    border-radius: .8rem;
+    overflow: hidden;
+}
+
+.image{
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+}
+
+.infoContainer{
+    display: flex;
+    width: 30%;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem 2rem;
+}
+
+.aboutProduct{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.productCredentials{
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+}
+
+.productName{
+    font-family: "Ubuntu", sans-serif;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.productModel{
+    font-family: "Ubuntu", sans-serif;
+    font-size: 1.8rem;
+}
+
+
