@@ -20,6 +20,93 @@ export default function Products(){
     const [selectedSubCats, setSelectedSubCats] = useState([]);
     const [isLeftVisible, setIsLeftVisible] = useState(true);
 
+    const data1 = {
+        id: 1,
+        isOnSale: true,
+        isNew: true,
+        productName: 'Puma',
+        imageUrl: "https://www.shopsector.com/uploads/productgalleryfile/images/1200x1200/sportni-obuvki-puma-voltaic-evo-379601-02-1.jpg",
+        productModel: 'Voltaic Evo',
+        oldPrice: 189.99,
+        price: 151.99,
+        colors: ['red', 'black', 'green'],
+        sizes: [40, 41, 42, 43, 44, 45, 46, 47, 48, 49],
+    }
+
+    const data2 = {
+        id: 2,
+        isOnSale: true,
+        isNew: false,
+        productName: 'Guess',
+        imageUrl: "https://www.shopsector.com/uploads/productgalleryfile/images/1200x1200/sportni-obuvki-guess-nowah-fltnowele12-blkpl-1.jpg",
+        productModel: 'Nowah',
+        oldPrice: 143.99,
+        price: 99,
+        colors: ['red', 'gray', 'black'],
+        sizes: [37, 38, 39, 40, 41, 42, 43],
+    }
+    const data3 = {
+        id: 3,
+        isOnSale: false,
+        isNew: true,
+        productName: 'Nike',
+        imageUrl: "https://www.shopsector.com/uploads/productgalleryfile/images/1200x1200/maratonki-nike-air-max-excee-dz0795-102-1.jpg",
+        productModel: 'Air Max Excee',
+        oldPrice: 189.99,
+        price: 200,
+        colors: ['red', 'blue', 'lightblue'],
+        sizes: [ 46, 47, 48, 49],
+    }
+    const data4 = {
+        id: 4,
+        isOnSale: true,
+        isNew: false,
+        productName: 'Nike',
+        imageUrl: "https://www.shopsector.com/uploads/productgalleryfile/images/1200x1200/maratonki-nike-revolution-7-fb2207-102-1.jpg",
+        productModel: 'Revolution 7',
+        oldPrice: 129.99,
+        price: 112.99,
+        colors: ['red', 'blue', 'lightblue'],
+        sizes: [ 40, 41, 42, 43],
+    }
+    const data5 = {
+        id: 5,
+        isOnSale: false,
+        isNew: true,
+        productName: 'Adidas',
+        imageUrl: "https://www.shopsector.com/uploads/productgalleryfile/images/1200x1200/sportni-obuvki-adidas-terrex-ax4-if4867-1.jpg",
+        productModel: 'Terrex AX4',
+        oldPrice: 239.99,
+        price: 199.99,
+        colors: ['red', 'blue', 'lightblue'],
+        sizes: [ 40, 41, 42, 43],
+    }
+    const data6 = {
+        id: 6,
+        isOnSale: false,
+        isNew: true,
+        productName: 'Nike',
+        imageUrl: "https://www.shopsector.com/uploads/productgalleryfile/images/1200x1200/kecove-nike-air-flight-lite-mid-dj2518-102-1.jpg",
+        productModel: 'Air Flight Lite Mid',
+        oldPrice: 269.99,
+        price: 225.99,
+        colors: ['red', 'blue', 'lightblue'],
+        sizes: [ 40, 41, 42, 43],
+    }
+    const data7 = {
+        id: 7,
+        isOnSale: true,
+        isNew: false,
+        productName: 'Puma',
+        imageUrl: "https://www.shopsector.com/uploads/productgalleryfile/images/1200x1200/maratonki-puma-pacer-23-desert-road-107783-01-1.jpg",
+        productModel: 'Pacer 23 Desert Road',
+        oldPrice: 169.99,
+        price: 139.99,
+        colors: ['red', 'blue', 'lightblue'],
+        sizes: [ 40, 41, 42, 43],
+    }
+
+    const products = [data1, data2, data3, data4, data5, data6, data7]
     // const {data, loading, error} = useFetch(`/sub-categories?[filters][categories][id][$eq]=${catId}`);
 
     const handleChange = (e) => {
@@ -83,19 +170,19 @@ export default function Products(){
                 <div className={styles.right}>
                     <img className={styles.catImg} src={ManSection} alt="Section image" />
                     <div className={styles.cardsContainer}>
-                        <Product />
-                        <Product />
-                        <Product />
-                        <Product />
-                        <Product />
-                        <Product />
-                        <Product />
-                        <Product />
-                        <Product />
-                        <Product />
-                        <Product />
-                        <Product />
-                        <Product />
+                        {products.map(product => (
+                            <Product key={product.id} data={product} />
+                        ))}
+                        {products.map(product => (
+                            <Product key={product.id} data={product} />
+                        ))}
+                        {products.map(product => (
+                            <Product key={product.id} data={product} />
+                        ))}
+                        {products.map(product => (
+                            <Product key={product.id} data={product} />
+                        ))}
+                        
                     </div>
                 </div>
             </div>
