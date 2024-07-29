@@ -198,21 +198,23 @@
 }
 
 .deliveryTime{
-    font-size: 1rem;
+    font-size: .8rem;
     opacity: .6;
     font-weight: bold;
+    font-family: sans-serif;
 }
 
 .companyDeliveryPolicy{
     display: flex;
     width: 100%;
-
+    gap: 1rem;
 }
 
 .policyLeft{
     display: flex;
     flex-direction: column;
     width: 50%;
+    gap: 1rem;
 }
 
 .policyWrapper{
@@ -221,11 +223,25 @@
     height: auto;
     align-items: center;
     justify-content: center;
+    gap: 1rem;
 }
 
 .policyWrapper p{
-    font-size: 1rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: .9rem;
+    line-height: .9rem;
 }
 
 .policyIcon{
+}
+
+.policyRight{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 1rem;
+}
+
+.hr{
+    opacity: .5;
 }
