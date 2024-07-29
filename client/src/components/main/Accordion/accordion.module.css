@@ -1,0 +1,55 @@
+.accordion {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    transition: all .5s ease-in-out;
+  }
+  
+  .accordionHeader {
+    background-color:inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .accordionTitle {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1.4rem;
+  }
+  
+  .accordionIcon {
+    font-size: 20px;
+  }
+  
+  .accordionContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: all .5s ease-in-out;
+    background-color: #fff;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+  
+  .accordionContent.open {
+    max-height: 10rem; 
+    padding: 1rem;
+
+  }
+  
+  .accordionContent > div {
+    padding: 10px;
+  }
+   
