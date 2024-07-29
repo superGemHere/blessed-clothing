@@ -5,6 +5,12 @@ import Select from 'react-select';
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOutlined';
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
+import UpdateOutlinedIcon from '@mui/icons-material/UpdateOutlined';
+import PermPhoneMsgOutlinedIcon from '@mui/icons-material/PermPhoneMsgOutlined';
+
 
 
 export default function SingleProduct (){
@@ -132,15 +138,37 @@ export default function SingleProduct (){
                 <div className={styles.companyDeliveryPolicy}>
                     <div className={styles.policyLeft}>
                         <div className={styles.policyWrapper}>
-                            <VisibilityOutlinedIcon sx={{fontSize: '4rem', opacity: .5}} className={styles.policyIcon} />
+                            <VisibilityOutlinedIcon sx={{fontSize: '3rem', opacity: .5}} className={styles.policyIcon} />
                             <p>Test and review before payment</p>
+                        </div>
+                        <div className={styles.policyWrapper}>
+                            <WorkspacePremiumOutlinedIcon sx={{fontSize: '3rem', opacity: .5}} className={styles.policyIcon} />
+                            <p>Only original products</p>
+                        </div>
+                        <div className={styles.policyWrapper}>
+                            <CheckCircleOutlineOutlinedIcon sx={{fontSize: '3rem', opacity: .5}} className={styles.policyIcon} />
+                            <p>Every product on stock</p>
                         </div>
                     </div>
                     <div className={styles.policyRight}>
+                        <div className={styles.policyWrapper}>
+                            <LocalShippingOutlinedIcon sx={{fontSize: '3rem', opacity: .5}} className={styles.policyIcon} />
+                            <p>Free delivery purchases $100</p>
+                        </div>
+                        <div className={styles.policyWrapper}>
+                            <UpdateOutlinedIcon sx={{fontSize: '3rem', opacity: .5}} className={styles.policyIcon} />
+                            <p>30 days free return</p>
+                        </div>
+                        <div className={styles.policyWrapper}>
+                            <PermPhoneMsgOutlinedIcon sx={{fontSize: '3rem', opacity: .5}} className={styles.policyIcon} />
+                            <p>+359 878 955 3470</p>
+                        </div>
 
                     </div>
                     
                 </div>
+                <hr className={styles.hr}/>
+                
             </div>
         </div>
     );
