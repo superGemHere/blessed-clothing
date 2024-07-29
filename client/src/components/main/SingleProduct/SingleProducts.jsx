@@ -50,6 +50,7 @@ export default function SingleProduct (){
             color: '#fff',
         },
         fontFamily: 'sans-serif',
+        textAlign: 'center'
         }),
         menu: (provided) => ({
           ...provided,
