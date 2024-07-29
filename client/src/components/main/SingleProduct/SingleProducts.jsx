@@ -11,6 +11,8 @@ import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined
 import UpdateOutlinedIcon from '@mui/icons-material/UpdateOutlined';
 import PermPhoneMsgOutlinedIcon from '@mui/icons-material/PermPhoneMsgOutlined';
 
+import Accordion from '../Accordion/Accordion';
+
 
 
 export default function SingleProduct (){
@@ -169,7 +171,20 @@ export default function SingleProduct (){
                     
                 </div>
                 <hr className={styles.hr}/>
-                
+                {/* <div className={styles.accordionDiv}>
+                    <div className={styles.accordion}>
+                        <header className={styles.accordionHeader}>
+                            This is accordions header
+                        </header>
+                        <div className={styles.accordionTextContainer}>
+                            <p className={styles.accordionText}>
+
+                            </p>
+                        </div>
+                    </div>
+                </div> */}
+                <Accordion title={"Product Info"} children={"Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque dolorum natus a nobis sit voluptates totam rerum ipsum, fugiat nisi in voluptatibus soluta nihil atque expedita aspernatur enim mollitia porro deleniti facere, odio sint doloribus. Corporis, ducimus. Ratione dicta debitis, earum optio totam voluptatem labore dolor asperiores, iusto voluptate error? Ipsa esse nemo quibusdam assumenda optio maxime excepturi eveniet aliquam. Facere odit cum ducimus architecto voluptatum explicabo excepturi veritatis animi perferendis. Doloribus sint totam delectus nesciunt ipsum ad, alias provident illo, porro atque accusamus, id quasi voluptas libero hic et. Ab repudiandae tenetur exercitationem sequi in provident cupiditate voluptatibus eos."}/>
+                <hr className={styles.hr}/>
             </div>
         </div>
     );
