@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Select from 'react-select';
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
 
 export default function SingleProduct (){
@@ -28,19 +29,19 @@ export default function SingleProduct (){
           ...provided,
           backgroundColor: 'white',
           fontFamily: 'sans-serif',
-          borderColor: state.isFocused ? 'blue' : 'grey',
+          borderColor: state.isFocused ? 'lightblue' : 'grey',
           boxShadow: state.isFocused ? '0 0 0 1px blue' : null,
           '&:hover': {
-            borderColor: state.isFocused ? 'blue' : 'grey',
+            borderColor: state.isFocused ? 'lightblue' : 'grey',
           },
         }),
         option: (provided, state) => ({
           ...provided,
-          backgroundColor: state.isSelected ? 'blue' : state.isFocused ? 'lightgrey' : null,
+          backgroundColor: state.isSelected ? 'lightblue' : state.isFocused ? 'lightgrey' : null,
           color: state.isSelected ? 'white' : 'black',
           '&:hover': {
-            backgroundColor: state.isSelected ? 'blue' : 'lightgrey',
-            color: 'black',
+            backgroundColor: state.isSelected ? 'lightblue' : 'lightgrey',
+            color: '#fff',
         },
         fontFamily: 'sans-serif',
         }),
@@ -121,6 +122,24 @@ export default function SingleProduct (){
                     <button className={styles.addToCartBtn}>
                             <AddShoppingCartIcon className={styles.addToCartIcon}/> Add to cart
                     </button>
+                    <div className={styles.deliverySchedule}>
+                        <div className={styles.greenDot} />
+                        <p className={styles.deliveryTime}>
+                        Delivery time 2-5 work days.
+                        </p>
+                    </div>
+                </div>
+                <div className={styles.companyDeliveryPolicy}>
+                    <div className={styles.policyLeft}>
+                        <div className={styles.policyWrapper}>
+                            <VisibilityOutlinedIcon sx={{fontSize: '4rem', opacity: .5}} className={styles.policyIcon} />
+                            <p>Test and review before payment</p>
+                        </div>
+                    </div>
+                    <div className={styles.policyRight}>
+
+                    </div>
+                    
                 </div>
             </div>
         </div>
