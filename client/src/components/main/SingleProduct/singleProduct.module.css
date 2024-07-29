@@ -181,3 +181,51 @@
 .addToCartIcon{
     color: #f9f9f9;
 }
+
+.deliverySchedule{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.greenDot{
+    width: .8rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background-color: #059212;
+}
+
+.deliveryTime{
+    font-size: 1rem;
+    opacity: .6;
+    font-weight: bold;
+}
+
+.companyDeliveryPolicy{
+    display: flex;
+    width: 100%;
+
+}
+
+.policyLeft{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.policyWrapper{
+    display: flex;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.policyWrapper p{
+    font-size: 1rem;
+}
+
+.policyIcon{
+}
