@@ -171,8 +171,8 @@ export default function SingleProduct (){
                     
                 </div>
                 <hr className={styles.hr}/>
-                {/* <div className={styles.accordionDiv}>
-                    <div className={styles.accordion}>
+                <div className={styles.accordionDiv}>
+                    {/* <div className={styles.accordion}>
                         <header className={styles.accordionHeader}>
                             This is accordions header
                         </header>
@@ -181,10 +181,16 @@ export default function SingleProduct (){
 
                             </p>
                         </div>
-                    </div>
-                </div> */}
+                    </div> */}
                 <Accordion title={"Product Info"} children={"Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque dolorum natus a nobis sit voluptates totam rerum ipsum, fugiat nisi in voluptatibus soluta nihil atque expedita aspernatur enim mollitia porro deleniti facere, odio sint doloribus. Corporis, ducimus. Ratione dicta debitis, earum optio totam voluptatem labore dolor asperiores, iusto voluptate error? Ipsa esse nemo quibusdam assumenda optio maxime excepturi eveniet aliquam. Facere odit cum ducimus architecto voluptatum explicabo excepturi veritatis animi perferendis. Doloribus sint totam delectus nesciunt ipsum ad, alias provident illo, porro atque accusamus, id quasi voluptas libero hic et. Ab repudiandae tenetur exercitationem sequi in provident cupiditate voluptatibus eos."}/>
                 <hr className={styles.hr}/>
+                <Accordion title={"FAQ"} children={"Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque dolorum natus a nobis sit voluptates totam rerum ipsum, fugiat nisi in voluptatibus soluta nihil atque expedita aspernatur enim mollitia porro deleniti facere, odio sint doloribus. Corporis, ducimus. Ratione dicta debitis, earum optio totam voluptatem labore dolor asperiores, iusto voluptate error? Ipsa esse nemo quibusdam assumenda optio maxime excepturi eveniet aliquam. Facere odit cum ducimus architecto voluptatum explicabo excepturi veritatis animi perferendis. Doloribus sint totam delectus nesciunt ipsum ad, alias provident illo, porro atque accusamus, id quasi voluptas libero hic et. Ab repudiandae tenetur exercitationem sequi in provident cupiditate voluptatibus eos."}/>
+                <hr className={styles.hr}/>
+                <Accordion title={"Delivery & Payment"} children={"Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque dolorum natus a nobis sit voluptates totam rerum ipsum, fugiat nisi in voluptatibus soluta nihil atque expedita aspernatur enim mollitia porro deleniti facere, odio sint doloribus. Corporis, ducimus. Ratione dicta debitis, earum optio totam voluptatem labore dolor asperiores, iusto voluptate error? Ipsa esse nemo quibusdam assumenda optio maxime excepturi eveniet aliquam. Facere odit cum ducimus architecto voluptatum explicabo excepturi veritatis animi perferendis. Doloribus sint totam delectus nesciunt ipsum ad, alias provident illo, porro atque accusamus, id quasi voluptas libero hic et. Ab repudiandae tenetur exercitationem sequi in provident cupiditate voluptatibus eos."}/>
+                <hr className={styles.hr}/>
+                <Accordion title={"Contacts"} children={"Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque dolorum natus a nobis sit voluptates totam rerum ipsum, fugiat nisi in voluptatibus soluta nihil atque expedita aspernatur enim mollitia porro deleniti facere, odio sint doloribus. Corporis, ducimus. Ratione dicta debitis, earum optio totam voluptatem labore dolor asperiores, iusto voluptate error? Ipsa esse nemo quibusdam assumenda optio maxime excepturi eveniet aliquam. Facere odit cum ducimus architecto voluptatum explicabo excepturi veritatis animi perferendis. Doloribus sint totam delectus nesciunt ipsum ad, alias provident illo, porro atque accusamus, id quasi voluptas libero hic et. Ab repudiandae tenetur exercitationem sequi in provident cupiditate voluptatibus eos."}/>
+                <hr className={styles.hr}/>
+                </div>
             </div>
         </div>
     );
