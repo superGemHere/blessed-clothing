@@ -39,3 +39,14 @@
     max-width: 100%;
     max-height: 80vh;
 }
+
+@media all and (max-width: 1024px){
+    .modalContent{
+        max-width: 90%;
+        justify-content: space-between;
+    }
+
+    .modalImage{
+        max-width: calc(100% - 7rem);
+    }
+}
