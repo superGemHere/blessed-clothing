@@ -118,14 +118,14 @@ export default function SingleProduct() {
             </div>
             <div className={styles.right}>
                 <div className={styles.infoContainer}>
+                            <div className={styles.logoWrapper}>
+                                <img src="https://i.pinimg.com/originals/b4/75/8a/b4758a1a7917b8bd63639ca6797feddc.png" alt="Brand Logo" className={styles.brandLogo} />
+                            </div>
                     <div className={styles.aboutProduct}>
                         <div className={styles.productCredentials}>
                             <div className={styles.productNameDiv}>
                                 <p className={styles.productName}>{data1.productName}</p>
                                 <p className={styles.productModel}>{data1.productModel}</p>
-                            </div>
-                            <div className={styles.logoWrapper}>
-                                <img src="https://i.pinimg.com/originals/b4/75/8a/b4758a1a7917b8bd63639ca6797feddc.png" alt="Brand Logo" className={styles.brandLogo} />
                             </div>
                         </div>
                         <div className={styles.priceDiv}>
@@ -138,7 +138,7 @@ export default function SingleProduct() {
                     </div>
                 </div>
                 <div className={styles.productActions}>
-                    <Select placeholder={"Choose a size.."} styles={customStyles} options={options} value={selectedOption} onChange={handleSelectChange} />
+                    <Select isSearchable={false} placeholder={"Choose a size.."} styles={customStyles} options={options} value={selectedOption} onChange={handleSelectChange} />
                     <button className={styles.addToCartBtn}>
                         <AddShoppingCartIcon className={styles.addToCartIcon} /> Add to cart
                     </button>
