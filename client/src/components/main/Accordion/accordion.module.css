@@ -25,6 +25,7 @@
   
   .accordionTitle {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
     font-size: 1.4rem;
@@ -35,9 +36,10 @@
   }
   
   .accordionContent {
+    display: flex;
     max-height: 0;
     overflow: hidden;
-    transition: all .5s ease-in-out;
+    transition: all .3s ease-in-out;
     background-color: #fff;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -46,10 +48,10 @@
   .accordionContent.open {
     max-height: 10rem; 
     padding: 1rem;
-
   }
   
   .accordionContent > div {
     padding: 10px;
+    scroll-behavior: smooth;
   }
    
