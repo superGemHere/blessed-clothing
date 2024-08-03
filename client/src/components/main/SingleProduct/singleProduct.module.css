@@ -292,3 +292,12 @@
         align-items: center;
     }
 }
+
+@media all and (max-width: 600px){
+    .upperRow{
+        flex-direction: column;
+    }
+    .bottomRow{
+        flex-direction: column;
+    }
+}
