@@ -16,13 +16,14 @@ export default function Header(){
         };
         
     
+        console.log("Resize")
         window.addEventListener('resize', handleResize);
         
         // Cleanup function to remove event listener when component unmounts
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-      }, [window.innerWidth])
+      }, [])
 
 
 
@@ -45,7 +46,7 @@ export default function Header(){
                     </li>
                 </ul>
             </div>
-            <Link to={"/"}className={`${styles.logo}`}>Blessed</Link>
+            <Link to={"/"}className={`${styles.logo}`}>FootGear</Link>
             <div className={styles.right}>
                 <ul className={styles.nav__ul} id={styles.right}>
                         <li className={styles.ul__item}>
