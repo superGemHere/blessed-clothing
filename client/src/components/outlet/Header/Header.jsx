@@ -22,7 +22,7 @@ export default function Header(){
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-      })
+      }, [window.innerWidth])
 
 
 
