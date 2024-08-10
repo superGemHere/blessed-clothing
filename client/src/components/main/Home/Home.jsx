@@ -61,8 +61,8 @@ export default function Home(){
         <main className={styles.main}>
             <section className={styles.header}>
                 <div className={styles.welcome}>
-                    <h1 id={styles.welcome}>Blessed Clothing <>&#8482;</></h1>
-                    <h2 id={styles.welcomeSlogan}>Rare clothing with rare quality.</h2>
+                    <h1 id={styles.welcome}>FootGear<>&#8482;</></h1>
+                    <h2 id={styles.welcomeSlogan}>Worldwide shop for all Brands and Premium models</h2>
                 </div>
             </section>
             <div className={styles.genderSections}>
