@@ -27,11 +27,11 @@ export default function ImageModal({
     return (
         <div className={styles.modalOverlay} onClick={onClose}>
             <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-                <div className={styles.iconWrapper} onClick={() => previousImage()}>
+                <div className={styles.iconWrapper1} onClick={() => previousImage()}>
                     <ArrowBackIosIcon className={styles.icon} />
                 </div>
                 <img src={image} alt="Large view" className={styles.modalImage} />
-                <div className={styles.iconWrapper}  onClick={() => nextImage()}>
+                <div className={styles.iconWrapper2}  onClick={() => nextImage()}>
                     <ArrowForwardIosIcon />
                 </div>
             </div>
