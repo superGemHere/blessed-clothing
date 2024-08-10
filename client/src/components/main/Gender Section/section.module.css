@@ -31,13 +31,20 @@
     }
     
   }
-@media all and (max-width: 1475px){
+@media all and (max-width: 1500px){
     .section{
-        width: 25rem;
+        width: 28rem;
     }
     
   }
 @media all and (max-width: 1475px){
+    .section{
+        width: 25rem;
+        background-position: top;
+    }
+    
+  }
+@media all and (max-width: 1080px){
     .section{
         width: 23rem;
         background-position: top;
