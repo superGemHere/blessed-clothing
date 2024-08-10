@@ -59,6 +59,51 @@
     /* background-color: black; */
 }
 
+.saleSection{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background-size: contain;
+    width: 100%;
+    aspect-ratio: 2/1;
+    margin-bottom: 1rem;
+    background-repeat: no-repeat;
+}
+
+.saleBtn{
+    display: flex;  
+    width: fit-content;
+    height: fit-content;
+    text-decoration: none;
+    color: #fff;
+    font-size: 2rem;
+    text-transform: uppercase;
+    padding: 1.5rem 5rem;
+    background-color: #131313;
+    margin-bottom: 5rem;
+    border-top: 5px solid #EE4558;
+    border-bottom:5px solid #FFFFFF;
+    background-image: 
+        linear-gradient(#EE4558, #FFFFFF),
+        linear-gradient(#EE4558, #FFFFFF)
+    ;
+    background-size:5px 100%;
+    background-position:0 0, 100% 0;
+    background-repeat:no-repeat;
+    transition: all .2s ease-in-out;
+    transform: rotate(-15deg);
+}
+
+.saleBtn:hover{
+    border-top: 5px solid #FFFFFF;
+    border-bottom:5px solid #EE4558;
+    background-image: 
+        linear-gradient(#FFFFFF, #EE4558),
+        linear-gradient(#FFFFFF, #EE4558)
+    ;
+    transform: rotate(0);
+}
+
 section.collectionContainer{
     display: flex;
     width: 100%;
@@ -97,19 +142,22 @@ section.collectionContainer{
 .trendingContainer{
     display: flex;
     height: fit-content;
-    background-color: #222831;
+    background-color: #FFF;
     flex-direction: column;
     align-items: center;
     /* justify-content: center; */
+    color: #131313;
     padding: 1rem;
     width: 100%;
     height: 100%;
 }
 
 .trendingContainer h1 {
-    font-size: 2rem;
-    margin: 2rem 0;
+    font-size: 2.5rem;
+    margin: 1rem 0;
     align-self: center;
+    font-family: 'IM FELL French Canon', sans-serif;
+    font-weight: bold;
 }
 
 .productsContainer{
@@ -118,7 +166,7 @@ section.collectionContainer{
 }
 
 .carouselItems{
-    /* border-right: 2px solid #131313; */
+    padding: 2rem;
 }
 
 .newsLetter{
@@ -126,15 +174,44 @@ section.collectionContainer{
     height: fit-content;
 }
 
-@media all and (max-width: 970px){
-    .collections{
-        flex-direction: column;
-    } 
-}
 
 
 @media all and (max-width: 1024px){
     .header{
         background-position: bottom;
+    }
+    .saleBtn{
+        font-size: 1.5rem;
+    }
+}
+@media all and (max-width: 970px){
+    .collections{
+        flex-direction: column;
+    } 
+}
+@media all and (max-width: 800px){
+    .saleBtn{
+        font-size: 1.5rem;
+        padding: 1rem 4rem;
+        margin-bottom: 3rem;
+    }
+}
+@media all and (max-width: 700px){
+    .saleBtn{
+        font-size: 1.5rem;
+        padding: 1rem 4rem;
+    }
+}
+@media all and (max-width: 600px){
+    .saleBtn{
+        font-size: 1.2rem;
+        padding: .8rem 4rem;
+    }
+}
+@media all and (max-width: 500px){
+    .saleBtn{
+        font-size: 1.2rem;
+        padding: .6rem 4rem;
+        margin-bottom: 2rem;
     }
 }
