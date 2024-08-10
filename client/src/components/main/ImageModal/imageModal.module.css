@@ -21,7 +21,8 @@
     border-radius: 5px;
 }
 
-.iconWrapper {
+.iconWrapper1,
+.iconWrapper2 {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,7 +32,8 @@
     padding: 1rem;
 }
 
-.iconWrapper:active{
+.iconWrapper1:active, 
+.iconWrapper2:active{
     opacity: 0.5;
 }
 
