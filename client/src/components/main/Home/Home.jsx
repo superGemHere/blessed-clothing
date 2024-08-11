@@ -104,16 +104,9 @@ export default function Home(){
             </section>
             <section className={styles.trendingProducts}>
                 <div className={styles.trendingContainer}>
-                    <h1>Trending Products</h1>
+                    <h1>Trending shoes</h1>
                     <div className={styles.productsContainer}>
                     <Carousel responsive={responsive} partialVisible={false} itemClass={styles.carouselItems}>
-                        {/* <CarouselCard data={trendingData.data1}/>
-                        <CarouselCard data={trendingData.data1}/>
-                        <CarouselCard data={trendingData.data1}/>
-                        <CarouselCard data={trendingData.data1}/>
-                        <CarouselCard data={trendingData.data1}/>
-                        <CarouselCard data={trendingData.data1}/>
-                        <CarouselCard data={trendingData.data1}/> */}
                         <Product data={data1}/>
                         <Product data={data1}/>
                         <Product data={data1}/>
