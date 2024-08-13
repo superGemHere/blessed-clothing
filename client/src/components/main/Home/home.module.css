@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap');
-@import url('https://fonts.cdnfonts.com/css/im-fell-french-canon-2');
+@import url('https://fonts.cdnfonts.com/css/anek-telugu');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
 .main{
     display: flex;
@@ -67,7 +68,6 @@
     width: 100%;
     aspect-ratio: 2/1;
     margin-bottom: 1rem;
-    background-repeat: no-repeat;
 }
 
 .saleBtn{
@@ -102,6 +102,13 @@
         linear-gradient(#FFFFFF, #EE4558)
     ;
     transform: rotate(0);
+}
+
+.chooseSizeDynamic{ 
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    background-color: #e2e4e6;
 }
 
 section.collectionContainer{
@@ -154,10 +161,14 @@ section.collectionContainer{
 
 .trendingContainer h1 {
     font-size: 2.5rem;
-    margin: 1rem 0;
+    margin: .1rem 0;
     align-self: center;
-    font-family: 'IM FELL French Canon', sans-serif;
     font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff;
+    filter: drop-shadow(0 0  0.15rem rgb(0, 0, 0));
+        /* -webkit-text-stroke: .5px black;
+        text-stroke: .5px black; */
 }
 
 .productsContainer{
