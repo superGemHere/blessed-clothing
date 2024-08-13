@@ -1,9 +1,11 @@
 @import url('https://fonts.cdnfonts.com/css/crasher-gear');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
 
 
 
 .header{
-    padding: .3em;
+    padding: .3rem;
     display: flex;
     flex-direction: column;
     position: sticky;
@@ -48,7 +50,7 @@ nav{
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    gap: 1em;
+    gap: 1rem;
     text-decoration:none;
     list-style: none;
     color: #fff;
@@ -63,12 +65,13 @@ nav{
 .ul__links{
     text-decoration: none;
     color: #fff;
-    font: 1.5em/1.5 serif;
+    font: 1.5em/1.5 "Roboto Slab", serif;
+
 
     &:visited{
         text-decoration: none;
         color: #fff;
-        font: 1.5em/1.5 serif;
+        font: 1.5em/1.5 "Roboto Slab", serif;
     }
 
     &:hover{
@@ -133,9 +136,20 @@ nav{
     text-decoration: none;
 }
 
+@media all and (max-width: 1442px){
+    .ul__links{
+        font-size: 1.3rem;
+    }
+}
 @media all and (max-width: 1300px){
+    .header{
+        padding: 0;
+    }
     .nav__ul{
         justify-content: space-evenly;
+    }
+    .ul__links{
+        font-size: 1.2rem;
     }
     .logo{
         font-size: 2.6rem;
