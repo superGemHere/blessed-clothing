@@ -15,6 +15,7 @@ import CarouselCard from "../CarouselCard/CarouselCard";
 import NewsLetter from "../NewsLetter/NewsLetter";
 import { Link } from "react-router-dom";
 import Product from "../Product/Product";
+import ChooseSizeDynamic from "../ChooseSizeDynamic/ChooseSizeDynamic";
 
 export default function Home(){
     const responsive = {
@@ -95,12 +96,15 @@ export default function Home(){
             <section className={styles.saleSection} style={{backgroundImage: `url(${SaleBanner})`}}>
                 <Link to="#" className={styles.saleBtn}>Shop now</Link>
             </section>
-            <section className={styles.collectionContainer}>
+            {/* <section className={styles.collectionContainer}>
                 <h1>Featured Collections</h1>
                 <div className={styles.collections}>
                     <Collection collectionData={{name: "Blessed Angels", description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit accusamus temporibus voluptates exercitationem, ipsa officiis a animi esse explicabo repudiandae in, blanditiis cum quam magni? Voluptates illum earum praesentium veniam."}} image={collectionBlessedAngel} />
                     <Collection collectionData={{name: "Fallen Angels", description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit accusamus temporibus voluptates exercitationem, ipsa officiis a animi esse explicabo repudiandae in, blanditiis cum quam magni? Voluptates illum earum praesentium veniam.Lorem ipsa officiis a animi esse explicabo repudiandae in, blanditiis cum quam magni? Voluptates illum earum praesentium veniam."} } image={collectionFallenAngel}/>
                 </div>
+            </section> */}
+            <section className={styles.chooseSizeDynamic}>
+                <ChooseSizeDynamic />
             </section>
             <section className={styles.trendingProducts}>
                 <div className={styles.trendingContainer}>
