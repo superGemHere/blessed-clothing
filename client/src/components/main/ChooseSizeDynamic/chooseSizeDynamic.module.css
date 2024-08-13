@@ -1,0 +1,182 @@
+.container{
+    display: flex;
+    width: 100%;
+    height: 90vh;
+    align-items: center;
+    padding: 2rem 2rem;
+    justify-content: space-around;
+    position: relative;
+}
+
+.sizeForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.sizeForm h1{
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-weight: normal;
+    filter: drop-shadow(0 0  0.15rem rgb(0, 0, 0));
+}
+
+.sizeForm button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 366px;
+    background-color: #ffffff;
+    border: .5px solid black;
+    outline: none;
+    font-size: 1rem;
+    border-radius: 32px;
+    padding: 2rem 3rem;
+    height: 2rem;
+    align-self: center;
+    gap: 1rem;
+}
+.sizeForm button span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    background-color: #e9e7e7;
+    border: 1px solid #131313;
+    font-weight: bold;
+    border-radius: 16px;
+}
+
+.slidecontainer{
+    width: 80%;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 2px;
+    background: #D8D8D8;
+    border-radius: 6px;
+    outline: none;
+}
+
+/* Track Styling for Webkit browsers */
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 2px;
+    background: #D8D8D8;
+    border-radius: 6px;
+}
+
+/* Thumb styling for Webkit browsers */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 40px;
+    height: 40px;
+    background-image: url('../../../assets/chevron-left-right.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    /* Vertical Alignment */
+    margin-top: -19px; /* Adjust this to perfectly align the thumb */
+    border-radius: 50%;
+}
+
+/* Track styling for Firefox */
+input[type="range"]::-moz-range-track {
+    height: 2px;
+    background: #D8D8D8;
+    border-radius: 6px;
+}
+
+/* Thumb styling for Firefox */
+input[type="range"]::-moz-range-thumb {
+    width: 40px;
+    height: 40px;
+    background-image: url('../../../assets/chevron-left-right.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    /* Vertical Alignment */
+    transform: translateY(-19px); /* Adjust this to perfectly align the thumb */
+    border-radius: 50%;
+}
+
+/* Thumb styling for IE */
+input[type="range"]::-ms-thumb {
+    width: 40px;
+    height: 40px;
+    background-image: url('../../../assets/chevron-left-right.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    /* Vertical Alignment */
+    margin-top: -19px; /* Adjust this to perfectly align the thumb */
+    border-radius: 50%;
+}
+
+.imageContainer{
+    display: flex;
+    width: 70%;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.imageWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+}
+
+.image{
+    height: auto;
+    aspectRatio: 1/1;
+}
+
+@media all and (max-width: 1234px){
+    .sizeForm button{
+        font-size: .9rem;
+        padding: 2rem 1rem;
+    }
+}
+  
+@media all and (max-width: 1024px){
+    .container{
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .sizeForm{
+      order: 1;
+    }
+    .sizeForm h1{
+        position: absolute;
+        top: 0;
+
+    }
+    .imageWrapper{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+        height: auto;
+    }
+
+    .image{
+        position: absolute;
+        bottom: 30%;
+    }
+}
+  
