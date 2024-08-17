@@ -41,17 +41,29 @@
     align-self: center;
     gap: 1rem;
     filter: drop-shadow(0px 0px 3px black);
+    transition: all .2s ease-in-out;
+
 }
-.sizeForm button span{
+
+.sizeForm button:hover{
+    background-color: #D8D8D8;
+}
+.sizeForm button:hover .shoeSize{
+    background-color: #ffffff;
+}
+.shoeSize{
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 6px 10px;
+    font-size: 1.5rem;
+    font-family: Arial, Helvetica, sans-serif;
     background-color: #e9e7e7;
-    border: 1px solid #131313;
-    font-weight: bold;
     border-radius: 16px;
 }
+
+
+
 
 .slidecontainer{
     width: 80%;
@@ -129,11 +141,14 @@ input[type="range"]::-ms-thumb {
 
 .imageContainer{
     display: flex;
+    flex-direction: column;
     width: 70%;
     height: auto;
     align-items: center;
     justify-content: center;
 }
+
+
 
 .imageWrapper{
     display: flex;
