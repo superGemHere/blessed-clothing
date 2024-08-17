@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './chooseSizeDynamic.module.css';
 import chooseSize from '../../../assets/sectionPics/chooseSize.png';
+import chooseSize1 from '../../../assets/sectionPics/chooseSize1.svg';
 
 export default function ChooseSizeDynamic() {
 
@@ -45,12 +46,13 @@ export default function ChooseSizeDynamic() {
                         onChange={(e) => setSize(Number(e.target.value))}
                     />
                 </div>
-                <button type='submit'>Check all models with size <span>{size}</span></button>
+                <button type='submit'>Check all models with size <span className={styles.shoeSize}>{size}</span></button>
+                    
             </form>
             <div className={styles.imageContainer}>
                 <div className={styles.imageWrapper}>
                     <img 
-                        src={chooseSize}  
+                        src={chooseSize1}  
                         className={styles.image} 
                         alt="Choose size sneaker image"  
                         style={{ 
