@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './login.module.css';
+import { Link } from 'react-router-dom';
 
 export default function Login (){
     const [isHovered, setIsHovered] = useState(false);
@@ -14,6 +15,7 @@ export default function Login (){
                 <input type="password" name="password" className={styles.loginInput} id={styles.password} placeholder='*****' />
                 <input type='submit' value={"Login"}  
                     onClick={() => setIsHovered(true)}/>
+                    <p>Don't have an account? Create your account<Link className={styles.navigateLink} to={'/users/register'}>here</Link>.</p>
             </form>
         </div>
     );

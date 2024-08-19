@@ -87,6 +87,16 @@
     width: 10rem;
     transition: all .5s ease-in-out;
     font-weight: bolder;
+    margin-bottom: 2rem;
+}
+
+.loginForm p{
+    display: flex;
+    align-self: center;
+}
+
+.navigateLink{
+    margin-left: .5rem;
 }
 
 .loginForm input[type="submit"]:hover{
@@ -103,7 +113,7 @@
    
 }
 
-@media all and (max-width: 900px){
+/* @media all and (max-width: 900px){
     .loginForm label{
         bottom: -9px;
     }
@@ -122,4 +132,4 @@
    .loginForm{
     width: 26rem;
    }
-}
+} */
