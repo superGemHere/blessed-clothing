@@ -14,7 +14,8 @@ export const register = async (email, password, repeatPassword) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ email, password }),
+            credentials: 'include'
         });
 
         // Check if the response is ok
