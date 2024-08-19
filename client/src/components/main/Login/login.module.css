@@ -1,0 +1,125 @@
+@import url('https://fonts.cdnfonts.com/css/crasher-gear');
+
+
+.container{
+    display: flex;
+    width: 100%;
+    height: 90vh;
+    align-items: center;
+    justify-content: center;
+    background-color: #131313;
+}
+
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 1rem;
+    color: #131313;
+    filter: drop-shadow(1px 1px 10px rgb(255, 255, 255));
+    transition: all .5s ease-in-out;
+}
+
+
+.loginForm h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 40%;
+    /* font-family: 'Crasher Gear', sans-serif; */
+    font-size: 3rem;
+    /* letter-spacing: 20px; */
+    text-decoration: none;
+    text-shadow: 3px 1px rgba(59, 55, 55, 0.35);
+}
+
+.loginLabels{
+    display: flex;
+    width: fit-content;
+    z-index: 10;
+    color: #747373;
+    padding: 0px 5px;
+    /* background-color: #fff; */
+    /* position: relative;
+    left: 10px;
+    bottom: -12px; */
+    transition: all .5s ease-in-out;
+}
+
+.loginLabelsHovered{
+    display: flex;
+    width: fit-content;
+    color: #ffffff;
+    padding: 0px 5px;
+    background-color: none;
+    position: relative;
+    transition: all .5s ease-in-out;
+}
+
+.loginInput{
+    display: flex;
+    padding: .7rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.loginInput:-webkit-autofill{
+    background-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    box-shadow: 0 0 0 1000px #ffffff inset !important;
+    color: #131313 !important; 
+}
+
+.loginForm input[type="submit"]{
+    color: #ffffff;
+    outline: 1px solid #747373;
+    outline-offset: -3px;
+    outline-style: dashed;
+    cursor: pointer;
+    font-size: 1rem;
+    background-color: #131313;
+    align-self: center;
+    padding: .5rem;
+    border-radius: 5px;
+    width: 10rem;
+    transition: all .5s ease-in-out;
+    font-weight: bolder;
+}
+
+.loginForm input[type="submit"]:hover{
+    color: #131313;
+    background-color: #ffffff;
+}
+
+.loginFormHovered {
+    background-color: #131313;
+    color: #ffffff;
+}
+
+#email{
+   
+}
+
+@media all and (max-width: 900px){
+    .loginForm label{
+        bottom: -9px;
+    }
+}
+@media all and (max-width: 700px){
+    .loginForm label{
+        bottom: -10px;
+    }
+}
+@media all and (max-width: 500px){
+    .loginForm label{
+        bottom: -8px;
+    }
+}
+@media all and (max-width: 330px){
+   .loginForm{
+    width: 26rem;
+   }
+}

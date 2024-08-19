@@ -53,7 +53,7 @@ export default function Header(){
                             <Link to="#" className={styles.ul__links}>Browse</Link>
                         </li>
                         <li className={styles.ul__item}>
-                            <Link to="#" className={styles.ul__links}>Collections</Link>
+                            <Link to="/users/login" className={styles.ul__links}>Login</Link>
                         </li>
                         <li className={styles.ul__item}>
                             <Link to="#" className={styles.ul__links}><ShoppingCartIcon  id={styles.cart__button}/></Link>
@@ -83,7 +83,7 @@ export default function Header(){
                             <Link to="#" className={styles.ul__links}>Browse</Link>
                     </li>
                     <li className={styles.ul__item}>
-                            <Link to="#" className={styles.ul__links}>Collections</Link>
+                            <Link to="/users/login" className={styles.ul__links}>Login</Link>
                     </li>
                     <li className={styles.ul__item}>
                         <Link to="#" className={styles.ul__links}><ShoppingCartIcon  id={styles.cart__button}/></Link>
