@@ -39,7 +39,7 @@
     display: flex;
     width: fit-content;
     z-index: 10;
-    color: #747373;
+    color: #131313;
     padding: 0px 5px;
     /* background-color: #fff; */
     /* position: relative;
@@ -97,6 +97,11 @@
 
 .navigateLink{
     margin-left: .5rem;
+    color: blue;
+}
+
+.navigateLink:visited{
+    color: blue;
 }
 
 .loginForm input[type="submit"]:hover{
