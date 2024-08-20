@@ -1,3 +1,4 @@
+import { AuthProvider } from './Context/authContext.jsx'
 import { Routes, Route } from 'react-router-dom'
 
 import Header from './components/outlet/Header/Header.jsx'
@@ -12,16 +13,17 @@ function App() {
 
   return (
     <>
-    <Header />
-    <Routes>
-
-      <Route path="/" element={<Home />} />
-      <Route path="/products" element={<Products />} />
-      <Route path="/products/details/:productId" element={<SingleProduct />} />
-      <Route path="/users/login" element={<Login />} />
-      <Route path="/users/register" element={<Register />} />
-    </Routes>
-    <Footer />
+    <AuthProvider >
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/products/details/:productId" element={<SingleProduct />} />
+        <Route path="/users/login" element={<Login />} />
+        <Route path="/users/register" element={<Register />} />
+      </Routes>
+      <Footer />
+    </AuthProvider>
     </>
   )
 }
