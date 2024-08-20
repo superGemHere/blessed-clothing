@@ -22,7 +22,7 @@ export const register = async (email, password, repeatPassword) => {
         if (!res.ok) {
             // Read the response text for debugging
             const errorText = await res.text();
-            throw new Error(`HTTP error! status: ${res.status}. Message: ${errorText}`);
+            throw new Error(`HTTP error on Register! status: ${res.status}. Message: ${errorText}`);
         }
 
         // Parse and return the result
@@ -34,6 +34,49 @@ export const register = async (email, password, repeatPassword) => {
         throw err.message;
     }
 };
+
+export const login = async (email, password) => {
+    try {
+        const res = await fetch(`${server}/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+            credentials: 'include'
+        });
+
+        if (!res.ok) {
+            const errorText = await res.text();
+            throw new Error(`HTTP error on Login! status: ${res.status}. Message: ${errorText}`);
+        }
+        const data = await res.json();
+        return data;
+    } catch (err) {
+        console.error("Login error:", err);
+        throw err.message;
+    }
+};
+
+export const logout = async () => {
+    try{
+
+        const res =  await fetch(`${server}/logout`, {
+            method: 'GET',
+            credentials: 'include'
+        });
+
+        if (!res.ok) {
+            const errorText = await res.text();
+            throw new Error(`HTTP error on Login! status: ${res.status}. Message: ${errorText}`);
+        }
+
+        const data = await res.json();
+        return data;
+    }catch(err){
+        throw err;
+    }
+}
 
 
 export const getUserInfo = (setUser) => fetch(`${server}/getAccessToken`, {
