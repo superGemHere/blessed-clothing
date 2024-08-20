@@ -27,10 +27,25 @@ export const register = async (email, password, repeatPassword) => {
 
         // Parse and return the result
         const result = await res.json();
-        console.log(result);
+        // console.log(result);
         return result;
     } catch (err) {
         console.error("Registration error:", err);
         throw err.message;
     }
 };
+
+
+export const getUserInfo = (setUser) => fetch(`${server}/getAccessToken`, {
+    method: 'GET',
+    credentials: 'include' // Important to send cookies with the request
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.accessToken) {
+        // Set user info instead of accessToken directly
+        setUser({ email: data.email, userId: data.userId });
+        console.log('Access Token:', data.accessToken);
+      }
+    })
+    .catch((err) => console.error('Error fetching access token:', err.message));
