@@ -4,9 +4,11 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { useEffect, useRef, useState } from "react";
+import { useAuth } from "../../../Context/authContext";
 
 export default function Header(){
     // const responsiveNav = useRef();
+    const {isAuthenticated} = useAuth();
     const [isVisible, setIsVis] = useState(false);
     useEffect(() => {
         const handleResize = () => {
@@ -52,9 +54,16 @@ export default function Header(){
                         <li className={styles.ul__item}>
                             <Link to="#" className={styles.ul__links}>Browse</Link>
                         </li>
-                        <li className={styles.ul__item}>
-                            <Link to="/users/login" className={styles.ul__links}>Login</Link>
-                        </li>
+                        {isAuthenticated 
+                            ? 
+                            <li className={styles.ul__item}>
+                                <Link to="/users/logout" className={styles.ul__links}>Logout</Link>
+                            </li> 
+                            : 
+                            <li className={styles.ul__item}>
+                                <Link to="/users/login" className={styles.ul__links}>Login</Link>
+                            </li> 
+                        }
                         <li className={styles.ul__item}>
                             <Link to="#" className={styles.ul__links}><ShoppingCartIcon  id={styles.cart__button}/></Link>
                         </li>
@@ -82,9 +91,16 @@ export default function Header(){
                     <li className={styles.ul__item}>
                             <Link to="#" className={styles.ul__links}>Browse</Link>
                     </li>
-                    <li className={styles.ul__item}>
+                    {isAuthenticated 
+                        ? 
+                        <li className={styles.ul__item}>
+                            <Link to="/users/logout" className={styles.ul__links}>Logout</Link>
+                        </li> 
+                        : 
+                        <li className={styles.ul__item}>
                             <Link to="/users/login" className={styles.ul__links}>Login</Link>
-                    </li>
+                        </li> 
+                    }
                     <li className={styles.ul__item}>
                         <Link to="#" className={styles.ul__links}><ShoppingCartIcon  id={styles.cart__button}/></Link>
                     </li>
