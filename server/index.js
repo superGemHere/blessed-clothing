@@ -3,11 +3,14 @@ const express = require('express');
 const { constants } = require('./constants');
 const cors = require('cors');
 const mongoose = require('mongoose')
+const cookieParser = require('cookie-parser');
 
 const routes = require('./routes');
-const { auth } = require('./middlewares/authMiddleware')
+const { auth } = require('./middlewares/authMiddleware');
 
 const app = express();
+
+app.use(cookieParser());
 
 mongoose.connect('mongodb://127.0.0.1:27017/footGear')
     .then(() => console.log('Database connected successfuly.'))
