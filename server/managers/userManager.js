@@ -32,6 +32,7 @@ exports.register = async (userData) => {
 };
 
 exports.login = async ({ email, password }) => {
+  try {
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -47,6 +48,10 @@ exports.login = async ({ email, password }) => {
     const result = await getAuthResult(user);
 
     return result;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+    
 };
 
 const getAuthResult = async user => {
