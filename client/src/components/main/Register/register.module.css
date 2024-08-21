@@ -58,6 +58,11 @@
     transition: all .5s ease-in-out;
 }
 
+.errorMessage{
+    color: rgb(255, 61, 61);
+    margin-bottom: 1rem;
+}
+
 .registerInput{
     display: flex;
     padding: .7rem;
