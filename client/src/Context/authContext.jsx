@@ -45,15 +45,16 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const loginSubmitHandler = async (e, email, password) => {
+  const loginSubmitHandler = async (e, email, password, setErrorMessage) => {
     e.preventDefault();
     try {
         const user = await login(email, password);
         getUserInfo(setUser); // Refresh user info after login
         navigate("/");
     } catch (err) {
-        console.log(err.message);
-        throw err.message;
+        // console.log(err.message);
+        setErrorMessage(err.message)
+        // throw err;
     }
   };
 
@@ -82,7 +83,7 @@ export const AuthProvider = ({ children }) => {
     logoutHandler,
   };
 
-  console.log("User:", user);
+  // console.log("User:", user);
 
   return (
     <AuthContext.Provider value={value}>
