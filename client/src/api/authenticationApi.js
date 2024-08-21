@@ -5,7 +5,7 @@ export const register = async (email, password, repeatPassword) => {
     try {
         // Check if passwords match
         if (password !== repeatPassword) {
-            throw new Error("Passwords do not match.");
+            throw new Error("Password's do not match.");
         }
 
         // Perform the fetch request
@@ -33,24 +33,26 @@ export const register = async (email, password, repeatPassword) => {
 
 export const login = async (email, password) => {
     try {
+        // Perform the fetch request
         const res = await fetch(`${server}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ email, password}),
             credentials: 'include'
         });
 
+        const result = await res.json();
+
+        // Check if the response is ok
         if (!res.ok) {
-            const errorText = await res.text();
-            throw new Error(`HTTP error on Login! status: ${res.status}. Message: ${errorText}`);
+            throw result;
         }
-        const data = await res.json();
-        return data;
+
+        return result;
     } catch (err) {
-        console.error("Login error:", err);
-        throw err.message;
+        throw err;
     }
 };
 
