@@ -86,7 +86,6 @@ export const getUserInfo = (setUser) => fetch(`${server}/getAccessToken`, {
       if (data.accessToken) {
         // Set user info instead of accessToken directly
         setUser({ email: data.email, userId: data.userId });
-        console.log('Access Token:', data.accessToken);
       }
     })
     .catch((err) => console.error('Error fetching access token:', err.message));

@@ -48,6 +48,11 @@
     transition: all .5s ease-in-out;
 }
 
+.errorMessage{
+    color: rgb(255, 61, 61);
+    margin-bottom: 1rem;
+}
+
 .loginLabelsHovered{
     display: flex;
     width: fit-content;
