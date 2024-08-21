@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, [user]);
 
-  const registerSubmitHandler = async (e, email, password, rePass) => {
+  const registerSubmitHandler = async (e, email, password, rePass, setErrorMessage) => {
     e.preventDefault();
     try{
         const user = await register(email, password, rePass);
@@ -40,7 +40,8 @@ export const AuthProvider = ({ children }) => {
         getUserInfo(setUser);
         navigate("/");
     }catch(err){
-        throw err.message;
+      setErrorMessage(err.message)
+        // console.log(err.message);
     }
   };
 
