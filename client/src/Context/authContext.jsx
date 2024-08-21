@@ -18,9 +18,9 @@ export const AuthProvider = ({ children }) => {
     getUserInfo(setUser);
   }, []);
 
-  useEffect(()=>{
-    console.log("User is", user)
-  }, [user]);
+  // useEffect(()=>{
+  //   console.log("User is", user)
+  // }, [user]);
 
   // Function to check if user is authenticated
   useEffect(() => {
