@@ -9,6 +9,7 @@ import SingleProduct from './components/main/SingleProduct/SingleProducts.jsx'
 import Login from './components/main/Login/Login.jsx'
 import Register from './components/main/Register/Register.jsx'
 import Logout from './components/main/Logout/Logout.jsx'
+import AdminPanel from './components/main/AdminPanel/AdminPanel.jsx'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/users/login" element={<Login />} />
         <Route path="/users/register" element={<Register />} />
         <Route path="/users/logout" element={<Logout />} />
+        <Route path="/users/admin" element={<AdminPanel />} />
       </Routes>
       <Footer />
     </AuthProvider>
