@@ -34,7 +34,7 @@ export const login = async (email, password) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ email, password}),
             credentials: 'include'
         });
 
@@ -65,7 +65,7 @@ export const logout = async () => {
     } catch (err) {
         throw err;
     }
-};
+}
 
 export const getUserInfo = async (setUser) => {
     try {
@@ -88,7 +88,6 @@ export const getUserInfo = async (setUser) => {
                 });
             } else {
                 console.error('Error refreshing token:', refreshResponse.statusText);
-                return;
             }
         }
 
