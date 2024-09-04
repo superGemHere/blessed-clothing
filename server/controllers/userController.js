@@ -1,75 +1,213 @@
-const router = require('express').Router();
+const router = require("express").Router();
+const jwt = require("../lib/jwt");
+const userManager = require("../managers/userManager");
+const RefreshToken = require("../models/RefreshToken");
 
-const jwt = require('../lib/jwt');
-const userManager = require('../managers/userManager')
+// Utility function to clear cookies
+const clearCookies = res => {
+  res.cookie("accessToken", "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "Strict",
+    expires: new Date(0)
+  });
+  res.cookie("refreshToken", "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "Strict",
+    expires: new Date(0)
+  });
+};
 
-router.post('/register', async (req, res) => {
-    try{
-        // console.log(req.body)
-        const result = await userManager.register(req.body);
-        
-        res.cookie('accessToken', result.accessToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // Use HTTPS in production
-            sameSite: 'Strict', // Controls when cookies are sent with cross-site requests
-            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
-        });
-        
-        res.json(result);
-    }catch(err){
-        res.status(400).json({
-            message: err.message
-        });
-    }
-})
+router.post("/register", async (req, res) => {
+  try {
+    const result = await userManager.register(req.body);
+    const { accessToken, refreshToken } = result;
+    const userId = result._id;
 
-router.post('/login', async(req, res) => {
-    try{
-        const result = await userManager.login(req.body);
+    // Remove any existing refresh tokens for this user
+    await RefreshToken.deleteMany({ userId: userId });
 
-        res.cookie('accessToken', result.accessToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // Use HTTPS in production
-            sameSite: 'Strict', // Controls when cookies are sent with cross-site requests
-            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
-        });
-    
-        res.json(result);
-
-    }catch(err){
-        res.status(400).json({
-            message: err.message
-        })
-    }
-})
-
-router.get('/logout', (req, res) => {
-    // Clear the 'accessToken' cookie by setting its expiration date to the past
-    res.cookie('accessToken', '', {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // Use HTTPS in production
-        sameSite: 'Strict', // Controls when cookies are sent with cross-site requests
-        expires: new Date(0) // Expire the cookie immediately
+    // Store the new refresh token in the database
+    await RefreshToken.create({
+      userId: userId,
+      token: refreshToken,
+      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 7 days
     });
 
-    res.status(200).json({ message: 'Logged out successfully' });
+    res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 15 * 60 * 1000 // 15 minutes
+    });
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+    });
+
+    res.json(result);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 });
 
-router.get('/getAccessToken', async (req, res) => {
-    // Check if the 'accessToken' cookie exists
-    const token = req.cookies.accessToken;
-    
-    if (!token) {
-        return res.status(401).json({ message: 'No access token found' });
+router.post("/login", async (req, res) => {
+  try {
+    const result = await userManager.login(req.body);
+    const { accessToken, refreshToken } = result;
+    const userId = result._id;
+
+    // Remove any existing refresh tokens for this user
+    await RefreshToken.deleteMany({ userId: userId });
+
+    // Store the new refresh token in the database
+    await RefreshToken.create({
+      userId: userId,
+      token: refreshToken,
+      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 7 days
+    });
+
+    res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 15 * 60 * 1000 // 15 minutes
+    });
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+    });
+
+    res.json(result);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+router.get("/logout", async (req, res) => {
+  const { refreshToken } = req.cookies;
+
+  if (refreshToken) {
+    try {
+      // Verify and decode the refresh token
+      const decoded = await jwt.verify(
+        refreshToken,
+        process.env.REFRESH_SECRET_KEY
+      );
+      if (decoded && decoded._id) {
+        // Remove the refresh token from the database
+        await RefreshToken.findOneAndDelete({
+          userId: decoded._id,
+          token: refreshToken
+        });
+        console.log(
+          "Refresh token deleted successfully for user:",
+          decoded._id
+        );
+      } else {
+        console.log("Invalid token payload:", decoded);
+      }
+    } catch (err) {
+      console.error("Error decoding refresh token:", err);
+    }
+  } else {
+    console.log("No refresh token found in cookies.");
+  }
+
+  // Clear cookies
+  clearCookies(res);
+  res.status(200).json({ message: "Logged out successfully" });
+});
+
+router.post("/refresh-token", async (req, res) => {
+  const { refreshToken } = req.cookies;
+  if (!refreshToken)
+    return res.status(401).json({ message: "No refresh token found" });
+
+  try {
+    const decoded = await jwt.verify(
+      refreshToken,
+      process.env.REFRESH_SECRET_KEY
+    );
+    const storedToken = await RefreshToken.findOne({
+      userId: decoded.userId,
+      token: refreshToken
+    });
+
+    if (!storedToken || storedToken.expiresAt < Date.now()) {
+      clearCookies(res); // Clear cookies if the refresh token is invalid or expired
+      return res
+        .status(403)
+        .json({ message: "Invalid or expired refresh token" });
     }
 
-    // Optionally decode and validate the token here if you want
-    // For example, with JWT:
-    const decodedToken = await jwt.verify(token, process.env.SECRET_KEY);
+    // Generate new tokens
+    const newAccessToken = await jwt.sign(
+      { userId: decoded.userId },
+      process.env.SECRET_KEY,
+      { expiresIn: "15m" }
+    );
+    const newRefreshToken = await jwt.sign(
+      { userId: decoded.userId },
+      process.env.REFRESH_SECRET_KEY,
+      { expiresIn: "7d" }
+    );
 
-    // Send the access token or user data back to the frontend
-    res.status(200).json({ accessToken: token, email: decodedToken.email, userId: decodedToken._id });
+    // Update stored refresh token
+    await RefreshToken.findOneAndUpdate(
+      { userId: decoded.userId, token: refreshToken },
+      {
+        token: newRefreshToken,
+        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+      },
+      { new: true }
+    );
+
+    res.cookie("accessToken", newAccessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 15 * 60 * 1000 // 15 minutes
+    });
+
+    res.cookie("refreshToken", newRefreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+    });
+
+    res.json({ accessToken: newAccessToken });
+  } catch (err) {
+    clearCookies(res); // Clear cookies if refresh token verification fails
+    res.status(403).json({ message: "Invalid refresh token" });
+  }
 });
 
+router.get("/getAccessToken", async (req, res) => {
+  const token = req.cookies.accessToken;
+
+  if (!token) return res.status(401).json({ message: "No access token found" });
+
+  try {
+    const decodedToken = await jwt.verify(token, process.env.SECRET_KEY);
+    res
+      .status(200)
+      .json({
+        accessToken: token,
+        email: decodedToken.email,
+        userId: decodedToken.userId
+      });
+  } catch (err) {
+    res.status(401).json({ message: "Invalid access token" });
+  }
+});
 
 module.exports = router;
