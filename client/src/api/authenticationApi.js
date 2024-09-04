@@ -3,12 +3,10 @@ import { post } from '../lib/request';
 
 export const register = async (email, password, repeatPassword) => {
     try {
-        // Check if passwords match
         if (password !== repeatPassword) {
-            throw new Error("Password's do not match.");
+            throw new Error("Passwords do not match.");
         }
 
-        // Perform the fetch request
         const res = await fetch(`${server}/register`, {
             method: 'POST',
             headers: {
@@ -18,14 +16,12 @@ export const register = async (email, password, repeatPassword) => {
             credentials: 'include'
         });
 
-        const result = await res.json();
-
-        // Check if the response is ok
         if (!res.ok) {
+            const result = await res.json();
             throw result;
         }
 
-        return result;
+        return await res.json();
     } catch (err) {
         throw err;
     }
@@ -33,59 +29,76 @@ export const register = async (email, password, repeatPassword) => {
 
 export const login = async (email, password) => {
     try {
-        // Perform the fetch request
         const res = await fetch(`${server}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, password}),
+            body: JSON.stringify({ email, password }),
             credentials: 'include'
         });
 
-        const result = await res.json();
-
-        // Check if the response is ok
         if (!res.ok) {
+            const result = await res.json();
             throw result;
         }
 
-        return result;
+        return await res.json();
     } catch (err) {
         throw err;
     }
 };
 
 export const logout = async () => {
-    try{
-
-        const res =  await fetch(`${server}/logout`, {
+    try {
+        const res = await fetch(`${server}/logout`, {
             method: 'GET',
             credentials: 'include'
         });
 
         if (!res.ok) {
             const errorText = await res.text();
-            throw new Error(`HTTP error on Login! status: ${res.status}. Message: ${errorText}`);
+            throw new Error(`HTTP error on Logout! status: ${res.status}. Message: ${errorText}`);
         }
 
-        const data = await res.json();
-        return data;
-    }catch(err){
+        return await res.json();
+    } catch (err) {
         throw err;
     }
-}
+};
 
+export const getUserInfo = async (setUser) => {
+    try {
+        let response = await fetch(`${server}/getAccessToken`, {
+            method: 'GET',
+            credentials: 'include' // Important to send cookies with the request
+        });
 
-export const getUserInfo = (setUser) => fetch(`${server}/getAccessToken`, {
-    method: 'GET',
-    credentials: 'include' // Important to send cookies with the request
-  })
-    .then(response => response.json())
-    .then(data => {
-      if (data.accessToken) {
-        // Set user info instead of accessToken directly
-        setUser({ email: data.email, userId: data.userId });
-      }
-    })
-    .catch((err) => console.error('Error fetching access token:', err.message));
+        if (response.status === 401) { // Access token expired
+            const refreshResponse = await fetch(`${server}/refresh-token`, {
+                method: 'POST',
+                credentials: 'include' // Include cookies in the request
+            });
+
+            if (refreshResponse.ok) {
+                const refreshData = await refreshResponse.json();
+                response = await fetch(`${server}/getAccessToken`, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+            } else {
+                console.error('Error refreshing token:', refreshResponse.statusText);
+                return;
+            }
+        }
+
+        if (response.ok) {
+            const data = await response.json();
+            setUser({ email: data.email, userId: data.userId });
+        } else {
+            console.error('Error fetching access token:', response.statusText);
+        }
+    } catch (err) {
+        console.error('Error:', err.message);
+    }
+};
