@@ -1,4 +1,4 @@
-const server = `${import.meta.env.VITE_SERVER_URL}users`;
+const server = `${import.meta.env.VITE_BACKEND_URL}users`;
 import { post } from '../lib/request'; 
 
 export const register = async (email, password, repeatPassword) => {
