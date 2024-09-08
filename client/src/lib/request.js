@@ -1,27 +1,32 @@
-const getCookie = (name) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-};
+// const getCookie = (name) => {
+//     const value = `; ${document.cookie}`;
+//     const parts = value.split(`; ${name}=`);
+//     if (parts.length === 2) return parts.pop().split(';').shift();
+// };
 
 const buildOptions = (data) => {
-    const options = {};
+    const options = {
+        headers: {
+            credentials: 'include',
+        },
+    };
 
     if (data) {
         options.body = JSON.stringify(data);
         options.headers = {
-            'content-type': 'application/json'
-        };
-    }
-
-    const token = getCookie('accessToken'); // Change here to get token from cookies
-
-    if (token){
-        options.headers = {
+            'content-type': 'application/json',
             ...options.headers,
-            'X-Authorization': token,
         };
     }
+
+    // const token = getCookie('accessToken'); // Change here to get token from cookies
+
+    // if (token){
+    //     options.headers = {
+    //         ...options.headers,
+    //         'X-Authorization': token,
+    //     };
+    // }
 
     return options;
 };
@@ -39,6 +44,7 @@ const request = async (method, url, data) => {
     const result = await response.json();
 
     if (!response.ok) {
+        console.log('Error on request:', result)
         throw result;
     }
 
