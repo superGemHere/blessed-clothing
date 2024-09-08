@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './adminPanel.module.css';
+import * as request from '../../../lib/request';
 
 export default function AdminPanel() {
     const [productName, setProductName] = useState('');
@@ -7,7 +8,7 @@ export default function AdminPanel() {
     const [isNew, setIsNew] = useState(false);
     const [isOnSale, setIsOnSale] = useState(false);
     const [oldPrice, setOldPrice] = useState('');
-    const [newPrice, setNewPrice] = useState(0);
+    const [newPrice, setNewPrice] = useState('');
     const [colors, setColors] = useState('');
     const [gender, setGender] = useState('');
     const [age, setAge] = useState('');
@@ -18,9 +19,9 @@ export default function AdminPanel() {
         image2: '',
         image3: '',
         image4: '',
-    }); // New state for images
+    }); 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
     
         const colorsArray = colors
@@ -28,10 +29,9 @@ export default function AdminPanel() {
             .map((color) => color.trim())
             .filter((color) => color !== '');
     
-        // Convert images object into an array and filter out empty values
         const imagesArray = Object.values(images).filter((url) => url !== '');
     
-        // Check if gender and age are selected
+        
         if (!gender) {
             alert('Please select a gender');
             return;
@@ -42,7 +42,7 @@ export default function AdminPanel() {
             return;
         }
     
-        // Check if at least one size is selected
+       
         if (sizes.length === 0) {
             alert('Please select at least one size');
             return;
@@ -60,12 +60,17 @@ export default function AdminPanel() {
             gender,
             age,
             description,
-            images: imagesArray, // Pass images as an array of strings
+            imageUrl: imagesArray[0],
+            images: imagesArray, 
         };
-    
-        console.log(product);
-    
-        // Here, you'd typically send the `product` object to the database
+        const server = import.meta.env.VITE_BACKEND_URL;
+        try {
+            const data = await request.post(`${server}products/create`, product);
+            console.log(data.message)
+        } catch (err) {
+            console.log("error", err);
+        }
+        
     };
     
 
@@ -108,7 +113,6 @@ export default function AdminPanel() {
         <div className={styles['adminPanel-container']}>
             <h1 className={styles['adminPanel-header']}>Admin Panel</h1>
             <form className={styles['adminPanel-form']} onSubmit={handleSubmit}>
-                {/* Existing fields */}
                 <div className={styles['adminPanel-formGroup']}>
                     <label className={styles['adminPanel-formGroup-label']}>Product Name:</label>
                     <input
@@ -131,7 +135,6 @@ export default function AdminPanel() {
                     />
                 </div>
 
-                {/* New image inputs */}
                 <div className={styles['adminPanel-formGroup']}>
                     <label className={styles['adminPanel-formGroup-label']}>Image 1 URL:</label>
                     <input
@@ -180,7 +183,6 @@ export default function AdminPanel() {
                     />
                 </div>
 
-                {/* Other fields */}
                 <div className={styles['adminPanel-formGroup']}>
                     <label>
                         <input
