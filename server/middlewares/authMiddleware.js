@@ -4,14 +4,19 @@ exports.auth = async (req, res, next) => {
   const accessToken = req.cookies.accessToken;
   const refreshToken = req.cookies.refreshToken;
 
-  if (!accessToken && !refreshToken) {
-    // No access token and no refresh token, proceed without authentication
+  // if (!accessToken && !refreshToken) {
+  //   // No access token and no refresh token, proceed without authentication
+  //   return next();
+  // }
+  console.log("req.path",req.path)
+  if (req.path === '/users/login' || req.path === '/users/register') {
     return next();
   }
 
   // If no access token but refresh token exists, create a new access token
   if (!accessToken && refreshToken) {
     try {
+      console.log("refreshToken but no accessToken", refreshToken);
       // Verify the refresh token
       const decodedRefreshToken = await jwt.verify(refreshToken, process.env.REFRESH_SECRET_KEY);
       console.log("refreshToken but no accessToken", decodedRefreshToken);
@@ -54,6 +59,7 @@ exports.auth = async (req, res, next) => {
   } catch (err) {
     if (err.name === "TokenExpiredError" && refreshToken) {
       // If the access token has expired but refresh token exists, try to refresh the access token
+      console.log("TokenExpiredError but refreshToken", refreshToken);
       try {
         const decodedRefreshToken = await jwt.verify(refreshToken, process.env.REFRESH_SECRET_KEY);
 
