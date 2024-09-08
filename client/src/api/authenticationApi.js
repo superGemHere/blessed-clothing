@@ -69,35 +69,39 @@ export const logout = async () => {
 
 export const getUserInfo = async (setUser) => {
     try {
-        let response = await fetch(`${server}/getAccessToken`, {
-            method: 'GET',
-            credentials: 'include' // Important to send cookies with the request
+      let response = await fetch(`${server}/getAccessToken`, {
+        method: 'GET',
+        credentials: 'include'
+      });
+  
+      if (response.status === 401) { // Access token expired
+        console.log('Access token expired. Refreshing token...');
+        const refreshResponse = await fetch(`${server}/refresh-token`, {
+          method: 'POST',
+          credentials: 'include'
         });
-
-        if (response.status === 401) { // Access token expired
-            const refreshResponse = await fetch(`${server}/refresh-token`, {
-                method: 'POST',
-                credentials: 'include' // Include cookies in the request
-            });
-
-            if (refreshResponse.ok) {
-                const refreshData = await refreshResponse.json();
-                response = await fetch(`${server}/getAccessToken`, {
-                    method: 'GET',
-                    credentials: 'include'
-                });
-            } else {
-                console.error('Error refreshing token:', refreshResponse.statusText);
-            }
-        }
-
-        if (response.ok) {
-            const data = await response.json();
-            setUser({ email: data.email, userId: data.userId });
+  
+        if (refreshResponse.ok) {
+          const refreshData = await refreshResponse.json();
+          console.log('Refreshed token:', refreshData.accessToken);
+          response = await fetch(`${server}/getAccessToken`, {
+            method: 'GET',
+            credentials: 'include'
+          });
         } else {
-            console.error('Error fetching access token:', response.statusText);
+          console.error('Error refreshing token authApi:', refreshResponse.statusText);
+          // Optionally handle logout or user redirection here
         }
+      }
+  
+      if (response.ok) {
+        const data = await response.json();
+        setUser({ email: data.email, userId: data.userId });
+      } else {
+        console.error('Error fetching access token authApi:', response.statusText);
+      }
     } catch (err) {
-        console.error('Error:', err.message);
+      console.error('Error:', err.message);
     }
-};
+  };
+  
