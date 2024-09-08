@@ -65,12 +65,12 @@ exports.login = async ({ email, password }) => {
 
 const getAuthResult = async user => {
   const payload = {
-    _id: user._id,
+    userId: user._id,
     email: user.email
   };
 
   const accessToken = await jwt.sign(payload, process.env.SECRET_KEY, {
-    expiresIn: "15m"
+    expiresIn: "1m"
   });
   const refreshToken = await jwt.sign(payload, process.env.REFRESH_SECRET_KEY, {
     expiresIn: "7d"
