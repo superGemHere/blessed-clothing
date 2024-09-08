@@ -11,12 +11,12 @@ const clearCookies = res => {
     sameSite: "Strict",
     expires: new Date(0)
   });
-  res.cookie("refreshToken", "", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "Strict",
-    expires: new Date(0)
-  });
+  // res.cookie("refreshToken", "", {
+  //   httpOnly: true,
+  //   secure: process.env.NODE_ENV === "production",
+  //   sameSite: "Strict",
+  //   expires: new Date(0)
+  // });
 };
 
 router.post("/register", async (req, res) => {
@@ -39,7 +39,7 @@ router.post("/register", async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "Strict",
-      maxAge: 15 * 60 * 1000 // 15 minutes
+      maxAge: 60000 // 15 minutes
     });
 
     res.cookie("refreshToken", refreshToken, {
@@ -75,7 +75,7 @@ router.post("/login", async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "Strict",
-      maxAge: 15 * 60 * 1000 // 15 minutes
+      maxAge: 60000 // 15 minutes
     });
 
     res.cookie("refreshToken", refreshToken, {
@@ -93,7 +93,7 @@ router.post("/login", async (req, res) => {
 
 router.get("/logout", async (req, res) => {
   const { refreshToken } = req.cookies;
-
+  
   if (refreshToken) {
     try {
       // Verify and decode the refresh token
@@ -127,46 +127,32 @@ router.get("/logout", async (req, res) => {
 });
 
 router.post("/refresh-token", async (req, res) => {
-  const { refreshToken } = req.cookies;
-  if (!refreshToken)
-    return res.status(401).json({ message: "No refresh token found" });
+  const refreshToken = req.cookies.refreshToken;
+  console.log("RefreshToken endpoint", refreshToken);
+  
+  if (!refreshToken) return res.status(401).json({ message: "No refresh token found" });
 
   try {
-    const decoded = await jwt.verify(
-      refreshToken,
-      process.env.REFRESH_SECRET_KEY
-    );
-    const storedToken = await RefreshToken.findOne({
-      userId: decoded.userId,
-      token: refreshToken
-    });
+    const decoded = await jwt.verify(refreshToken, process.env.REFRESH_SECRET_KEY);
+    const storedToken = await RefreshToken.findOne({ userId: decoded.userId, token: refreshToken });
+    console.log("decoded user id", decoded.userId);
+    console.log("Decoded Token", decoded);
+    console.log("Stored Token", storedToken);
 
     if (!storedToken || storedToken.expiresAt < Date.now()) {
       clearCookies(res); // Clear cookies if the refresh token is invalid or expired
-      return res
-        .status(403)
-        .json({ message: "Invalid or expired refresh token" });
+      return res.status(403).json({ message: "Invalid or expired refresh token" });
     }
 
+
     // Generate new tokens
-    const newAccessToken = await jwt.sign(
-      { userId: decoded.userId },
-      process.env.SECRET_KEY,
-      { expiresIn: "15m" }
-    );
-    const newRefreshToken = await jwt.sign(
-      { userId: decoded.userId },
-      process.env.REFRESH_SECRET_KEY,
-      { expiresIn: "7d" }
-    );
+    const newAccessToken = await jwt.sign({ userId: decoded.userId }, process.env.SECRET_KEY, { expiresIn: "1m" });
+    const newRefreshToken = await jwt.sign({ userId: decoded.userId }, process.env.REFRESH_SECRET_KEY, { expiresIn: "7d" });
 
     // Update stored refresh token
     await RefreshToken.findOneAndUpdate(
       { userId: decoded.userId, token: refreshToken },
-      {
-        token: newRefreshToken,
-        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-      },
+      { token: newRefreshToken, expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) },
       { new: true }
     );
 
@@ -174,7 +160,7 @@ router.post("/refresh-token", async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "Strict",
-      maxAge: 15 * 60 * 1000 // 15 minutes
+      maxAge: 60000 // 15 minutes
     });
 
     res.cookie("refreshToken", newRefreshToken, {
@@ -186,13 +172,14 @@ router.post("/refresh-token", async (req, res) => {
 
     res.json({ accessToken: newAccessToken });
   } catch (err) {
-    clearCookies(res); // Clear cookies if refresh token verification fails
+    // clearCookies(res); // Clear cookies if refresh token verification fails
     res.status(403).json({ message: "Invalid refresh token" });
   }
 });
 
 router.get("/getAccessToken", async (req, res) => {
   const token = req.cookies.accessToken;
+  // console.log("AccessToken Get",accessToken)
 
   if (!token) return res.status(401).json({ message: "No access token found" });
 
