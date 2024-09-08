@@ -123,6 +123,12 @@ router.get("/logout", async (req, res) => {
 
   // Clear cookies
   clearCookies(res);
+  res.cookie("refreshToken", "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "Strict",
+    expires: new Date(0)
+  });
   res.status(200).json({ message: "Logged out successfully" });
 });
 
