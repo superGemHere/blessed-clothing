@@ -7,7 +7,7 @@ export default function AdminPanel() {
     const [isNew, setIsNew] = useState(false);
     const [isOnSale, setIsOnSale] = useState(false);
     const [oldPrice, setOldPrice] = useState('');
-    const [newPrice, setNewPrice] = useState('');
+    const [newPrice, setNewPrice] = useState(0);
     const [colors, setColors] = useState('');
     const [gender, setGender] = useState('');
     const [age, setAge] = useState('');
@@ -22,15 +22,32 @@ export default function AdminPanel() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+    
         const colorsArray = colors
             .split(',')
-            .map((color) => color.trim()) 
+            .map((color) => color.trim())
             .filter((color) => color !== '');
-
+    
         // Convert images object into an array and filter out empty values
         const imagesArray = Object.values(images).filter((url) => url !== '');
-
+    
+        // Check if gender and age are selected
+        if (!gender) {
+            alert('Please select a gender');
+            return;
+        }
+    
+        if (!age) {
+            alert('Please select an age group');
+            return;
+        }
+    
+        // Check if at least one size is selected
+        if (sizes.length === 0) {
+            alert('Please select at least one size');
+            return;
+        }
+    
         const product = {
             productName,
             productModel,
@@ -45,11 +62,12 @@ export default function AdminPanel() {
             description,
             images: imagesArray, // Pass images as an array of strings
         };
-
+    
         console.log(product);
-
+    
         // Here, you'd typically send the `product` object to the database
     };
+    
 
     const resetForm = () => {
         setProductName('');
