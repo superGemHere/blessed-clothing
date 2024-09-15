@@ -160,6 +160,7 @@ export default function Products() {
                 type="range"
                 min={0}
                 max={1000}
+                defaultValue={1000}
                 onChange={e => setMaxPrice(e.target.value)}
               />
               <span>
