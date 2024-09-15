@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const productManager = require('../managers/productManager');
-const {auth} = require('../middlewares/authMiddleware'); // Import your middleware
+const {auth, isAdmin} = require('../middlewares/authMiddleware'); // Import your middleware
 
 // Apply the verifyToken middleware to the product creation route
-router.post('/create', auth, async (req, res) => {
+router.post('/create', isAdmin, async (req, res) => {
     try {
         const response = await productManager.create(req.body);
         res.status(201).json({
