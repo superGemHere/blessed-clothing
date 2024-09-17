@@ -114,6 +114,8 @@
 .color {
    width: 0;
    height: 0;
+   filter: drop-shadow(0 0 0.15rem black);
+
 }
 .card:hover .color {
     width: 2rem;
