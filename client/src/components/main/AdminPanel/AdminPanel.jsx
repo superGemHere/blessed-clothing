@@ -23,6 +23,9 @@ export default function AdminPanel() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setProductName(productName.trim());
+        setProductModel(productModel.trim());
     
         const colorsArray = colors
             .split(',')
@@ -67,6 +70,7 @@ export default function AdminPanel() {
         try {
             const data = await request.post(`${server}products/create`, product);
             console.log(data.message)
+            alert(data.message);
         } catch (err) {
             console.log("error", err);
         }
