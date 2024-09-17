@@ -5,7 +5,13 @@ exports.auth = async (req, res, next) => {
   const refreshToken = req.cookies.refreshToken;
   console.log("Request cookies", req.cookies);
 
-  if (req.path === '/users/login' || req.path === '/users/register') {
+  if (
+    req.path === '/users/login' 
+    || 
+    req.path === '/users/register'
+    ||
+    req.path === '/products'
+  ) {
     console.log("inside req path");
     return next();
   }
@@ -76,7 +82,7 @@ exports.auth = async (req, res, next) => {
       }
     }
   } else {
-    next();
+    res.status(401).json({ message: "Unauthorized, please log in." });
   }
 };
 
