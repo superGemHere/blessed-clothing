@@ -1,14 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import styles from "./product.module.css"
 
 export default function Product ({
     data
 }){
+    const navigate = useNavigate();
                             
     return(
-        <div className={styles.card}>
+        <div className={styles.card} onClick={() => navigate(`/products/details/${data._id}`)}>
             	<header className={styles.saleInfo}>
                     {data.isOnSale ? <p className={styles.onSaleFlag}>Sale</p> : null}
-                    {data.isNew ? <p className={styles.newProductFlag}>New</p> : null}
+                    {data.isNewProduct ? <p className={styles.newProductFlag}>New</p> : null}
                 </header>
                 <div className={styles.imageWrapper}>
                     <img src={data.imageUrl} alt="Product image" />
@@ -20,7 +22,7 @@ export default function Product ({
                     </div>
                     <div className={styles.priceDiv}>
                         <p className={styles.oldPrice}>{ data.isOnSale ? `$${data.oldPrice}` : null }</p>
-                        <p className={styles.price} style={{ color: data.isOnSale ? 'red' : 'black' }}>${data.price}</p>
+                        <p className={styles.price} style={{ color: data.isOnSale ? 'red' : 'black' }}>${data.newPrice}</p>
                     </div>
                     <p className={styles.colorText}>Available colors:</p>
                     <div className={styles.colorsDiv}>
