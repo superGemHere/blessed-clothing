@@ -38,14 +38,14 @@ const request = async (method, url, data) => {
         return {};
     }
 
-    const result = await response.json();
+    // const result = await response.json();
 
     if (!response.ok) {
         console.log('Error on request:', result)
         throw result;
     }
 
-    return result;
+    return response;
 };
 
 export const get = request.bind(null, 'GET');
