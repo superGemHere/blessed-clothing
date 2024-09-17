@@ -1,6 +1,10 @@
 import styles from './singleProduct.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Select from 'react-select';
+import { getSingleProduct } from '../../../api/productsApi';
+
+
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOutlined';
@@ -18,6 +22,16 @@ export default function SingleProduct() {
     const [selectedOption, setSelectedOption] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
+    const [product, setProduct] = useState({});
+    const {productId} = useParams();
+
+
+    useEffect(() => {
+        console.log(productId);
+        getSingleProduct(productId)
+        .then(res => setProduct(res))
+        .catch(err => console.log(err));
+    }, []);
 
     const data1 = {
         id: 1,
@@ -37,8 +51,12 @@ export default function SingleProduct() {
         colors: ['red', 'black', 'green'],
         sizes: [40, 41, 42, 43, 44, 45, 46, 47, 48, 49],
     };
-
-    const options = data1.sizes.map(size => ({ value: size, label: ` № ${size} EU ` }));
+    let options = [];
+    if(product && product.sizes) {
+        options = product.sizes.map(size => ({ value: size, label: ` № ${size} EU ` }));
+    }
+    
+    console.log(product);
     const customStyles = {
         control: (provided, state) => ({
             ...provided,
@@ -95,45 +113,48 @@ export default function SingleProduct() {
 
     return (
         <div className={styles.container}>
-            {modalVisible && <ImageModal setSelected={setSelectedImage} imageArray={data1.images} image={selectedImage} onClose={closeModal} />}
+            {modalVisible && <ImageModal setSelected={setSelectedImage} imageArray={product?.images} image={selectedImage} onClose={closeModal} />}
             <div className={styles.left}>
+                {product.images 
+                && 
                 <div className={styles.imageContainer}>
                     <div className={styles.upperRow}>
-                        <div className={styles.imageWrapper} onClick={() => handleImageClick(data1.images[0])}>
-                            <img src={data1.images[0]} alt="Product image" className={styles.image} />
+                        <div className={styles.imageWrapper} onClick={() => handleImageClick(product?.images[0])}>
+                            <img src={product?.images[0]} alt="Product image" className={styles.image} />
                         </div>
-                        <div className={styles.imageWrapper} onClick={() => handleImageClick(data1.images[1])}>
-                            <img src={data1.images[1]} alt="Product image" className={styles.image} />
+                        <div className={styles.imageWrapper} onClick={() => handleImageClick(product?.images[1])}>
+                            <img src={product?.images[1]} alt="Product image" className={styles.image} />
                         </div>
                     </div>
                     <div className={styles.bottomRow}>
-                        <div className={styles.imageWrapper} onClick={() => handleImageClick(data1.images[2])}>
-                            <img src={data1.images[2]} alt="Product image" className={styles.image} />
+                        <div className={styles.imageWrapper} onClick={() => handleImageClick(product?.images[2])}>
+                            <img src={product?.images[2]} alt="Product image" className={styles.image} />
                         </div>
-                        <div className={styles.imageWrapper} onClick={() => handleImageClick(data1.images[3])}>
-                            <img src={data1.images[3]} alt="Product image" className={styles.image} />
+                        <div className={styles.imageWrapper} onClick={() => handleImageClick(product?.images[3])}>
+                            <img src={product?.images[3]} alt="Product image" className={styles.image} />
                         </div>
                     </div>
                 </div>
+                }
             </div>
             <div className={styles.right}>
                 <div className={styles.infoContainer}>
-                            <div className={styles.logoWrapper}>
+                            {/* <div className={styles.logoWrapper}>
                                 <img src="https://i.pinimg.com/originals/b4/75/8a/b4758a1a7917b8bd63639ca6797feddc.png" alt="Brand Logo" className={styles.brandLogo} />
-                            </div>
+                            </div> */}
                     <div className={styles.aboutProduct}>
                         <div className={styles.productCredentials}>
                             <div className={styles.productNameDiv}>
-                                <p className={styles.productName}>{data1.productName}</p>
-                                <p className={styles.productModel}>{data1.productModel}</p>
+                                <p className={styles.productName}>{product?.productName}</p>
+                                <p className={styles.productModel}>{product?.productModel}</p>
                             </div>
                         </div>
                         <div className={styles.priceDiv}>
                             <div className={styles.prices}>
-                                <p className={styles.price} style={{ color: data1.isOnSale ? 'red' : 'black' }}>${data1.price}</p>
-                                <p className={styles.oldPrice}>{data1.isOnSale ? `$${data1.oldPrice}` : null}</p>
+                                <p className={styles.price} style={{ color: product?.isOnSale ? 'red' : 'black' }}>${product?.newPrice}</p>
+                                <p className={styles.oldPrice}>{product?.isOnSale ? `$${product?.oldPrice}` : null}</p>
                             </div>
-                            <p className={styles.priceDiff}>You are saving ${(data1.oldPrice - data1.price).toFixed(2)}</p>
+                            <p className={styles.priceDiff}>You are saving ${(product?.oldPrice - product?.newPrice).toFixed(2)}</p>
                         </div>
                     </div>
                 </div>
@@ -179,7 +200,7 @@ export default function SingleProduct() {
                 </div>
                 <hr className={styles.hr}/>
                 <div className={styles.accordionDiv}>
-                <Accordion title={"Product Info"} children={"Lorem ipsum dolor sit amet consectetur adipisicing elit. "} />
+                <Accordion title={"Product Info"} children={product?.description} />
                 <hr className={styles.hr}/>
                 <Accordion title={"FAQ"} children={"Lorem ipsum dolor sit amet consectetur adipisicing elit. "} />
                 <hr className={styles.hr}/>
