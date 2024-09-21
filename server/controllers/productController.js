@@ -35,9 +35,10 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/create', isAdmin, async (req, res) => {
+router.post('/create', isAuth, isAdmin, async (req, res) => {
     try {
         const response = await productManager.create(req.body);
+        console.log("response on create",response);
         res.status(201).json({
             message: 'Product created successfully.'
         });
