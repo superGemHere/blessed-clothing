@@ -66,6 +66,7 @@ router.post("/login", async (req, res) => {
 
     // Store the new refresh token in the database
     await RefreshToken.create({
+      email: result.email,
       userId: userId,
       token: refreshToken,
       expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 7 days
@@ -141,9 +142,9 @@ router.post("/refresh-token", async (req, res) => {
   try {
     const decoded = await jwt.verify(refreshToken, process.env.REFRESH_SECRET_KEY);
     const storedToken = await RefreshToken.findOne({ userId: decoded.userId, token: refreshToken });
-    console.log("decoded user id", decoded.userId);
-    console.log("Decoded Token", decoded);
-    console.log("Stored Token", storedToken);
+    // console.log("decoded user id", decoded.userId);
+    // console.log("Decoded Token", decoded);
+    // console.log("Stored Token", storedToken);
 
     if (!storedToken || storedToken.expiresAt < Date.now()) {
       clearCookies(res); // Clear cookies if the refresh token is invalid or expired
@@ -152,8 +153,8 @@ router.post("/refresh-token", async (req, res) => {
 
 
     // Generate new tokens
-    const newAccessToken = await jwt.sign({ userId: decoded.userId }, process.env.SECRET_KEY, { expiresIn: "1m" });
-    const newRefreshToken = await jwt.sign({ userId: decoded.userId }, process.env.REFRESH_SECRET_KEY, { expiresIn: "7d" });
+    const newAccessToken = await jwt.sign({ userId: decoded.userId, email: decoded.email }, process.env.SECRET_KEY, { expiresIn: "1m" });
+    const newRefreshToken = await jwt.sign({ userId: decoded.userId, email: decoded.email  }, process.env.REFRESH_SECRET_KEY, { expiresIn: "7d" });
 
     // Update stored refresh token
     await RefreshToken.findOneAndUpdate(

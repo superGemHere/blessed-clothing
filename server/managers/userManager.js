@@ -46,11 +46,14 @@ exports.login = async ({ email, password }) => {
     const { accessToken, refreshToken } = await getAuthResult(user);
 
     // Store the refresh token in MongoDB
-    await RefreshToken.create({
+    const refToken = await RefreshToken.create({
+      email: user.email,
       userId: user._id,
       token: refreshToken,
       expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 7 days
     });
+
+    console.log("reftokne", refToken);
 
     return {
       _id: user._id,
