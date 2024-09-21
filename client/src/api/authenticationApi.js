@@ -67,7 +67,7 @@ export const logout = async () => {
     }
 }
 
-export const getUserInfo = async (setUser) => {
+export const getUserInfo = async () => {
     try {
       let response = await fetch(`${server}/getAccessToken`, {
         method: 'GET',
@@ -96,7 +96,7 @@ export const getUserInfo = async (setUser) => {
   
       if (response.ok) {
         const data = await response.json();
-        setUser({ email: data.email, userId: data.userId });
+        return { email: data.email, userId: data.userId };
       } else {
         console.error('Error fetching access token authApi:', response.statusText);
       }
