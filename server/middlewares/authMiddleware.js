@@ -3,7 +3,6 @@ const jwt = require("../lib/jwt");
 exports.auth = async (req, res, next) => {
   const accessToken = req.cookies.accessToken;
   const refreshToken = req.cookies.refreshToken;
-  console.log("Request cookies", req.cookies);
 
   if (!accessToken && refreshToken) {
     try {
@@ -13,10 +12,11 @@ exports.auth = async (req, res, next) => {
       console.log("Decoded refresh token", decodedRefreshToken);
 
       const newAccessToken = await jwt.sign(
-        { id: decodedRefreshToken.id, email: decodedRefreshToken.email },
+        { userId: decodedRefreshToken.userId, email: decodedRefreshToken.email },
         process.env.SECRET_KEY,
         { expiresIn: "15m" }
       );
+      const decodedAccessToken = await jwt.verify(newAccessToken, process.env.SECRET_KEY);
 
       res.cookie("accessToken", newAccessToken, {
         httpOnly: true,
@@ -25,7 +25,7 @@ exports.auth = async (req, res, next) => {
         maxAge: 900000
       });
 
-      res.locals.user = decodedRefreshToken;
+      res.locals.user = refreshToken;
       return next();
     } catch (refreshError) {
       res.clearCookie("accessToken");
@@ -38,6 +38,7 @@ exports.auth = async (req, res, next) => {
     try {
       const decodedToken = await jwt.verify(accessToken, process.env.SECRET_KEY);
       res.locals.user = decodedToken;
+      console.log("Decoded access token", decodedToken);
       return next();
     } catch (err) {
       if (err.name === "TokenExpiredError" && refreshToken) {
@@ -47,7 +48,7 @@ exports.auth = async (req, res, next) => {
           const decodedRefreshToken = await jwt.verify(refreshToken, process.env.REFRESH_SECRET_KEY);
 
           const newAccessToken = await jwt.sign(
-            { id: decodedRefreshToken.id, email: decodedRefreshToken.email },
+            { userId: decodedRefreshToken.userId, email: decodedRefreshToken.email },
             process.env.SECRET_KEY,
             { expiresIn: "15m" }
           );
@@ -89,7 +90,7 @@ exports.isAuth = (req, res, next) => {
 
 exports.isAdmin = (req, res, next) => {
   const user = res.locals.user;
-
+  console.log("User", user);
   if (!user) {
     return res.status(401).json({ message: "Unauthorized, please log in." });
   }
