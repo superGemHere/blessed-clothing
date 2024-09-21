@@ -53,7 +53,11 @@ const productSchema = new mongoose.Schema({
     description: {
         type: String,
         required: [true, "Description is required."],
-    }
+    },
+    trending: {
+        type: Boolean,
+        required: [true, "Trending is required."],
+    },
 
  
 })
