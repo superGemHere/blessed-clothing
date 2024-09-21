@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
 
   // Get the user info on component mount
   useEffect(() => {
-    getUserInfo(setUser);
+    setUser(getUserInfo());
   }, []);
 
   // useEffect(()=>{
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
     try{
         const user = await register(email, password, rePass);
 
-        getUserInfo(setUser);
+        setUser(getUserInfo());
         navigate("/");
     }catch(err){
       setErrorMessage(err.message)
@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
     e.preventDefault();
     try {
         const user = await login(email, password);
-        getUserInfo(setUser); // Refresh user info after login
+        setUser(getUserInfo()); // Refresh user info after login
         navigate("/");
     } catch (err) {
         // console.log(err.message);
