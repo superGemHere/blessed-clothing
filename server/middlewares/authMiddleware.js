@@ -5,17 +5,6 @@ exports.auth = async (req, res, next) => {
   const refreshToken = req.cookies.refreshToken;
   console.log("Request cookies", req.cookies);
 
-  if (
-    req.path === '/users/login' 
-    || 
-    req.path === '/users/register'
-    ||
-    req.path === '/products'
-  ) {
-    console.log("inside req path");
-    return next();
-  }
-
   if (!accessToken && refreshToken) {
     try {
       console.log("refreshToken but no accessToken", refreshToken);
@@ -82,11 +71,22 @@ exports.auth = async (req, res, next) => {
       }
     }
   } else {
-    res.status(401).json({ message: "Unauthorized, please log in." });
+    // res.status(401).json({ message: "Unauthorized, please log in." });
+    return next();
   }
 };
 
 // Middleware to check if the user is an admin
+exports.isAuth = (req, res, next) => {
+  const user = res.locals.user;
+
+  if (!user) {
+    return res.status(401).json({ message: "Unauthorized, please log in." });
+  }
+
+  return next();  // User is authenticated, proceed to the next middleware or route handler
+};
+
 exports.isAdmin = (req, res, next) => {
   const user = res.locals.user;
 
