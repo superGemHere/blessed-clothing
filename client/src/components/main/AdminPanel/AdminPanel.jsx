@@ -12,6 +12,7 @@ export default function AdminPanel() {
     const [colors, setColors] = useState('');
     const [gender, setGender] = useState('');
     const [age, setAge] = useState('');
+    const [trending, setTrending] = useState("false");
     const [description, setDescription] = useState('');
     const [sizes, setSizes] = useState([]);
     const [images, setImages] = useState({
@@ -23,6 +24,12 @@ export default function AdminPanel() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        let isTrending;
+        if(trending === "true") {
+            isTrending = true;
+        }else{
+            isTrending = false;
+        }
 
         setProductName(productName.trim());
         setProductModel(productModel.trim());
@@ -65,6 +72,7 @@ export default function AdminPanel() {
             description,
             imageUrl: imagesArray[0],
             images: imagesArray, 
+            trending: isTrending,
         };
         const server = import.meta.env.VITE_BACKEND_URL;
         try {
@@ -295,6 +303,31 @@ export default function AdminPanel() {
                             className={styles['adminPanel-radio']}
                         />
                         Child
+                    </label>
+                </div>
+                <div className={styles['adminPanel-formGroup-radio']}>
+                    <label className={styles['adminPanel-formGroup-label']}>Trending:</label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="trending"
+                            value={"true"}
+                            checked={trending === "true"}
+                            onChange={(e) => setTrending(e.target.value)}
+                            className={styles['adminPanel-radio']}
+                        />
+                        It's trending
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="trending"
+                            value={"false"}
+                            checked={trending === "false"}
+                            onChange={(e) => setTrending(e.target.value)}
+                            className={styles['adminPanel-radio']}
+                        />
+                        It's not trending
                     </label>
                 </div>
 
