@@ -6,9 +6,17 @@ const {isAuth, isAdmin} = require('../middlewares/authMiddleware'); // Import yo
 router.get('/', async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
+    const sort = req.query.sort || 'asc';
+    const maxPrice = parseInt(req.query.maxPrice) || 1000;
+    const gender = req.query.gender || '';
+    const age = req.query.age || '';
+    const trending = req.query.trending === 'true';
+    const sale = req.query.sale === 'true';
+    
     console.log("query", req.query);
+    
     try {
-        const products = await productManager.getPaginatedProducts(page, limit);
+        const products = await productManager.getPaginatedProducts(page, limit, sort, maxPrice, gender, age, trending, sale);
         res.status(200).json(products);
     } catch (err) {
         res.status(400).json({ 

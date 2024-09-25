@@ -2,9 +2,9 @@ import * as requester from "../lib/request";
 
 const server = `${import.meta.env.VITE_BACKEND_URL}products`;
 
-export const getPaginatedProducts = async (page = 1, limit = 10) => {
+export const getPaginatedProducts = async (page = 1, limit = 10, sort = "asc", maxPrice = 1000, gender = "", age = "", trending = false, sale = false) => {
     try {
-        const res = await requester.get(`${server}?page=${page}&limit=${limit}`);
+        const res = await requester.get(`${server}?page=${page}&limit=${limit}&sort=${sort}&maxPrice=${maxPrice}&gender=${gender}&age=${age}&trending=${trending}&sale=${sale}`);
 
         if (!res.ok) {
             const result = await res.json();
