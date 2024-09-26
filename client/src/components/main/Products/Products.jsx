@@ -24,6 +24,7 @@ export default function Products() {
   const initialAge = searchParams.get("age") || "";
   const initialTrending = searchParams.get("trending") === "true";
   const initialSale = searchParams.get("sale") === "true";
+  const initialSizes = searchParams.get("sizes") ? searchParams.get("sizes").split(",").map(Number) : [];
 
   const [page, setPage] = useState(initialPage);
   const [limit, setLimit] = useState(initialLimit);
@@ -33,8 +34,10 @@ export default function Products() {
   const [age, setAge] = useState(initialAge);
   const [trending, setTrending] = useState(initialTrending);
   const [sale, setSale] = useState(initialSale);
+  const [sizes, setSizes] = useState(initialSizes);
   const [selectedSubCats, setSelectedSubCats] = useState([]);
   const [isLeftVisible, setIsLeftVisible] = useState(false);
+  const [isSizeDropdownVisible, setIsSizeDropdownVisible] = useState(false);
   const [data, setData] = useState({ products: [], currentPage: 1, totalPages: 1 });
 
   // Local state for filters
@@ -44,19 +47,20 @@ export default function Products() {
   const [tempAge, setTempAge] = useState(initialAge);
   const [tempTrending, setTempTrending] = useState(initialTrending);
   const [tempSale, setTempSale] = useState(initialSale);
+  const [tempSizes, setTempSizes] = useState(initialSizes);
 
   // Fetch products based on the current filters
-  useEffect(() => {
-    getPaginatedProducts(page, limit, sort, maxPrice, gender, age, trending, sale)
+   useEffect(() => {
+    getPaginatedProducts(page, limit, sort, maxPrice, gender, age, trending, sale, sizes)
       .then(res => {
-        setData(res); 
+        setData(res);
       })
       .catch(err => console.log(err));
-  }, [page, limit, sort, maxPrice, gender, age, trending, sale]);
+  }, [page, limit, sort, maxPrice, gender, age, trending, sale, sizes]);
 
   const handlePageChange = (event, value) => {
     setPage(value);
-    updateURL(value, limit, sort, maxPrice, gender, age, trending, sale);
+    updateURL(value, limit, sort, maxPrice, gender, age, trending, sale, sizes);
   };
 
   const handleSortChange = (newSort) => {
@@ -83,6 +87,14 @@ export default function Products() {
     setTempSale(!tempSale);
   };
 
+  const handleSizeChange = (size) => {
+    if (tempSizes.includes(size)) {
+      setTempSizes(tempSizes.filter(s => s !== size));
+    } else {
+      setTempSizes([...tempSizes, size]);
+    }
+  };
+
   const clearFilters = () => {
     setTempSort("asc");
     setTempMaxPrice(1000);
@@ -90,27 +102,31 @@ export default function Products() {
     setTempAge("");
     setTempTrending(false);
     setTempSale(false);
+    setTempSizes([]);
     setSort("asc");
     setMaxPrice(1000);
     setGender("");
     setAge("");
     setTrending(false);
     setSale(false);
-    updateURL(1, limit, "asc", 1000, "", "", false, false);
+    setSizes([]);
+    updateURL(1, limit, "asc", 1000, "", "", false, false, []);
   };
 
   const applyFilters = () => {
+    setPage(1);
     setSort(tempSort);
     setMaxPrice(tempMaxPrice);
     setGender(tempGender);
     setAge(tempAge);
     setTrending(tempTrending);
     setSale(tempSale);
-    updateURL(page, limit, tempSort, tempMaxPrice, tempGender, tempAge, tempTrending, tempSale);
+    setSizes(tempSizes);
+    updateURL(1, limit, tempSort, tempMaxPrice, tempGender, tempAge, tempTrending, tempSale, tempSizes);
   };
 
-  const updateURL = (page, limit, sort, maxPrice, gender, age, trending, sale) => {
-    navigate(`?page=${page}&limit=${limit}&sort=${sort}&maxPrice=${maxPrice}&gender=${gender}&age=${age}&trending=${trending}&sale=${sale}`);
+  const updateURL = (page, limit, sort, maxPrice, gender, age, trending, sale, sizes) => {
+    navigate(`?page=${page}&limit=${limit}&sort=${sort}&maxPrice=${maxPrice}&gender=${gender}&age=${age}&trending=${trending}&sale=${sale}&sizes=${sizes.join(",")}`);
   };
 
   // Toggle visibility of the left filters section
@@ -118,6 +134,10 @@ export default function Products() {
     setIsLeftVisible(!isLeftVisible);
   };
 
+  // Toggle visibility of the size dropdown
+  const toggleSizeDropdownVisibility = () => {
+    setIsSizeDropdownVisible(!isSizeDropdownVisible);
+  };
 
   return (
     <div className={styles.products}>
@@ -130,99 +150,105 @@ export default function Products() {
         {/* Left Filters Section */}
         <div className={`${styles.left} ${isLeftVisible ? "" : styles.hidden}`}>
           <div className={styles.filterItem}>
-            <h1>Filters</h1>
+            <h1>Categories</h1>
             <hr style={{marginBottom: "20px"}}/>
             <div className={styles.filterItem}>
-            <h2>Gender</h2>
-            <div className={styles.inputItem}>
-              <input
-                type="radio"
-                id="male"
-                value="male"
-                name="gender"
-                checked={tempGender === "male"}
-                onChange={(e) => handleGenderChange(e.target.value)}
-              />
-              <label htmlFor="male">Men</label>
-            </div>
-            <div className={styles.inputItem}>
-              <input
-                type="radio"
-                id="female"
-                value="female"
-                name="gender"
-                checked={tempGender === "female"}
-                onChange={(e) => handleGenderChange(e.target.value)}
-              />
-              <label htmlFor="female">Women</label>
-            </div>
-          </div>
-          <div className={styles.filterItem}>
-            <h2>Age</h2>
-            <div className={styles.inputItem}>
-              <input
-                type="radio"
-                id="adult"
-                value="adult"
-                name="age"
-                checked={tempAge === "adult"}
-                onChange={(e) => handleAgeChange(e.target.value)}
-              />
-              <label htmlFor="adult">Adult</label>
-            </div>
-            <div className={styles.inputItem}>
-              <input
-                type="radio"
-                id="child"
-                value="child"
-                name="age"
-                checked={tempAge === "child"}
-                onChange={(e) => handleAgeChange(e.target.value)}
-              />
-              <label htmlFor="child">Child</label>
-            </div>
-          </div>
-          </div>
-          <div className={styles.filterItem}>
-              <h2>Trending</h2>
+              <h2>Gender</h2>
               <div className={styles.inputItem}>
                 <input
-                  type="checkbox"
-                  id="trending"
-                  checked={tempTrending}
-                  onChange={handleTrendingChange}
+                  type="radio"
+                  id="male"
+                  value="male"
+                  name="gender"
+                  checked={tempGender === "male"}
+                  onChange={(e) => handleGenderChange(e.target.value)}
                 />
-                <label htmlFor="trending">Trending</label>
+                <label htmlFor="male">Men</label>
+              </div>
+              <div className={styles.inputItem}>
+                <input
+                  type="radio"
+                  id="female"
+                  value="female"
+                  name="gender"
+                  checked={tempGender === "female"}
+                  onChange={(e) => handleGenderChange(e.target.value)}
+                />
+                <label htmlFor="female">Women</label>
               </div>
             </div>
             <div className={styles.filterItem}>
-              <h2>Sale</h2>
+              <h2>Age</h2>
               <div className={styles.inputItem}>
                 <input
-                  type="checkbox"
-                  id="sale"
-                  checked={tempSale}
-                  onChange={handleSaleChange}
+                  type="radio"
+                  id="adult"
+                  value="adult"
+                  name="age"
+                  checked={tempAge === "adult"}
+                  onChange={(e) => handleAgeChange(e.target.value)}
                 />
-                <label htmlFor="sale">Sale</label>
+                <label htmlFor="adult">Adult</label>
+              </div>
+              <div className={styles.inputItem}>
+                <input
+                  type="radio"
+                  id="child"
+                  value="child"
+                  name="age"
+                  checked={tempAge === "child"}
+                  onChange={(e) => handleAgeChange(e.target.value)}
+                />
+                <label htmlFor="child">Child</label>
               </div>
             </div>
-          <div className={styles.filterItem}>
-            <h2>Filter by price</h2>
+            <div className={styles.filterItem}>
+            <h2>Trending</h2>
             <div className={styles.inputItem}>
-              <span>0</span>
+              <input
+                type="checkbox"
+                id="trending"
+                checked={tempTrending}
+                onChange={handleTrendingChange}
+              />
+              <label htmlFor="trending">Trending</label>
+            </div>
+          </div>
+          <div className={styles.filterItem}>
+            <h2>Sale</h2>
+            <div className={styles.inputItem}>
+              <input
+                type="checkbox"
+                id="sale"
+                checked={tempSale}
+                onChange={handleSaleChange}
+              />
+              <label htmlFor="sale">Sale</label>
+            </div>
+          </div>
+          </div>
+          <div className={styles.filterItem}>
+            <h1>Other</h1>
+            <hr style={{marginBottom: "20px"}}/>
+          <div className={styles.filterItem}>
+            <h2>Price range</h2>
+            <div className={styles.inputItem}>
               <input
                 type="range"
+                className={styles.priceRangeSlider}
                 min={0}
                 max={1000}
                 defaultValue={initialMaxPrice}
                 onChange={(e) => handleMaxPriceChange(e.target.value)}
-              />
-              <span>{tempMaxPrice}</span>
+                />
+              <div className={styles.priceRangeLabels}>
+                <span>$ 0</span>
+                <span>$ {tempMaxPrice}</span>
+              </div>
             </div>
           </div>
           <div className={styles.filterItem}>
-            <h2>Sort by</h2>
+            <h2>Sort</h2>
             <div className={styles.inputItem}>
               <input
                 type="radio"
@@ -245,13 +271,43 @@ export default function Products() {
               />
               <label htmlFor="asc">Price {arrowDown}(0-9)</label>
             </div>
+            <div className={styles.filterItem}>
+            <h2>Size</h2>
+            <div className={styles.dropdown}>
+              <button className={styles.dropdownBtn} onClick={toggleSizeDropdownVisibility}>
+                {isSizeDropdownVisible ? "Hide Sizes" : "Show Sizes"}
+              </button>
+              {isSizeDropdownVisible && (
+                <div className={styles.dropdownContent}>
+                  {[...Array(31).keys()].map(i => {
+                    const size = i + 19;
+                    return (
+                      <div key={size} className={styles.inputItem}>
+                        <input
+                          type="checkbox"
+                          id={`size-${size}`}
+                          value={size}
+                          checked={tempSizes.includes(size)}
+                          onChange={() => handleSizeChange(size)}
+                        />
+                        <label htmlFor={`size-${size}`}>{size}</label>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </div>
-          <button className={styles.applyFiltersBtn} onClick={applyFilters}>
-            Apply
-          </button>
-          <button className={styles.clearFiltersBtn} onClick={clearFilters}>
-            Clear
-          </button>
+          </div>
+          </div>
+          <div className={styles.filterBtns}>
+            <button className={styles.applyFiltersBtn} onClick={applyFilters}>
+              Apply
+            </button>
+            <button className={styles.clearFiltersBtn} onClick={clearFilters}>
+              Clear
+            </button>
+          </div>
         </div>
 
         {/* Right Products Section */}

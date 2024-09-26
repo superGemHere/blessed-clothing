@@ -12,11 +12,12 @@ router.get('/', async (req, res) => {
     const age = req.query.age || '';
     const trending = req.query.trending === 'true';
     const sale = req.query.sale === 'true';
+    const sizes = req.query.sizes ? req.query.sizes.split(',').map(Number) : [];
     
     console.log("query", req.query);
     
     try {
-        const products = await productManager.getPaginatedProducts(page, limit, sort, maxPrice, gender, age, trending, sale);
+        const products = await productManager.getPaginatedProducts(page, limit, sort, maxPrice, gender, age, trending, sale, sizes);
         res.status(200).json(products);
     } catch (err) {
         res.status(400).json({ 

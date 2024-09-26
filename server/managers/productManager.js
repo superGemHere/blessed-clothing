@@ -4,13 +4,11 @@ exports.getAll = () => Product.find();
 exports.getById = productId => Product.findById(productId);
 exports.create = productData => Product.create(productData);
 
-exports.getPaginatedProducts = async (page = 1, limit = 10, sort = 'asc', maxPrice = 1000, gender = '', age = '', trending = false, sale = false) => {
+exports.getPaginatedProducts = async (page = 1, limit = 10, sort = 'asc', maxPrice = 1000, gender = '', age = '', trending = false, sale = false, sizes = []) => {
   try {
     // Calculate the number of documents to skip
     const skip = (page - 1) * limit;
 
-    // Build the query object
-    console.log("sale:", sale)
     const query = { newPrice: { $lte: maxPrice } };
     if (gender) {
       query.gender = gender;
@@ -24,13 +22,12 @@ exports.getPaginatedProducts = async (page = 1, limit = 10, sort = 'asc', maxPri
     if (sale) {
       query.isOnSale = true;
     }
-    console.log("Query object:", query);
-
-    // Determine the sort order
+    if (sizes.length) {
+      console.log("Sizes:", sizes);
+      query.sizes = { $in: sizes };
+    }
     const sortOrder = sort === 'asc' ? 1 : -1;
-    console.log("Sort order:", sortOrder);
-
-    // Fetch the paginated products with sorting and filtering
+    
     const products = await Product.find(query)
       .sort({ newPrice: sortOrder })
       .skip(skip)
