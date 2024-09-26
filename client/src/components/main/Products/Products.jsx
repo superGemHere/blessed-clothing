@@ -50,7 +50,30 @@ export default function Products() {
   const [tempSizes, setTempSizes] = useState(initialSizes);
 
   // Fetch products based on the current filters
-   useEffect(() => {
+  useEffect(() => {
+    const newPage = parseInt(searchParams.get("page")) || 1;
+    const newLimit = parseInt(searchParams.get("limit")) || 10;
+    const newSort = searchParams.get("sort") || "asc";
+    const newMaxPrice = parseInt(searchParams.get("maxPrice")) || 1000;
+    const newGender = searchParams.get("gender") || "";
+    const newAge = searchParams.get("age") || "";
+    const newTrending = searchParams.get("trending") === "true";
+    const newSale = searchParams.get("sale") === "true";
+    const newSizes = searchParams.get("sizes") ? searchParams.get("sizes").split(",").map(Number) : [];
+
+    setPage(newPage);
+    setLimit(newLimit);
+    setSort(newSort);
+    setMaxPrice(newMaxPrice);
+    setGender(newGender);
+    setAge(newAge);
+    setTrending(newTrending);
+    setSale(newSale);
+    setSizes(newSizes);
+  }, [searchParams]);
+
+  // Fetch products whenever the state changes
+  useEffect(() => {
     getPaginatedProducts(page, limit, sort, maxPrice, gender, age, trending, sale, sizes)
       .then(res => {
         setData(res);
