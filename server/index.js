@@ -12,7 +12,7 @@ const app = express();
 
 app.use(cookieParser());
 
-mongoose.connect('mongodb://127.0.0.1:27017/footGear')
+mongoose.connect(process.env.MONGO_DB_URL)
     .then(() => console.log('Database connected successfuly.'))
     .catch((err) => console.log(err));
 
