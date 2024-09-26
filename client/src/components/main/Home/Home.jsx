@@ -83,18 +83,18 @@ export default function Home(){
                 </div>
             </section>
             <div className={styles.genderSections}>
-                <Section 
+                <Section path={`products?page=1&limit=10&sort=asc&maxPrice=1000&gender=female&age=&trending=false&sale=false&sizes=`}
                 data={dataWoman}
                 />
-                <Section 
+                <Section path={`products?page=1&limit=10&sort=asc&maxPrice=1000&gender=male&age=&trending=false&sale=false&sizes=`}
                 data={dataMan}
                 />
-                <Section 
+                <Section path={`products?page=1&limit=10&sort=asc&maxPrice=1000&gender=&age=child&trending=false&sale=false&sizes=`}
                 data={dataKids}
                 />
             </div>
             <section className={styles.saleSection} style={{backgroundImage: `url(${SaleBanner})`}}>
-                <Link to="#" className={styles.saleBtn}>Shop now</Link>
+                <Link to={`${import.meta.env.VITE_FRONTEND_URL}products?page=1&limit=10&sort=asc&maxPrice=1000&gender=&age=&trending=false&sale=true&sizes=`} className={styles.saleBtn}>Shop now</Link>
             </section>
             {/* <section className={styles.collectionContainer}>
                 <h1>Featured Collections</h1>
