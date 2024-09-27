@@ -188,7 +188,7 @@ router.get("/getAccessToken", async (req, res) => {
   const token = req.cookies.accessToken;
   // console.log("AccessToken Get",accessToken)
 
-  // if (!token) return res.status(401).json({ message: "No access token found" });
+  if (!token) return res.status(401).json({ message: "No access token found" });
 
   try {
     const decodedToken = await jwt.verify(token, process.env.SECRET_KEY);
