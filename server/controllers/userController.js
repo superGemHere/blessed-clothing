@@ -8,13 +8,13 @@ const clearCookies = res => {
   res.cookie("accessToken", "", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "Strict",
+    sameSite: "None",
     expires: new Date(0)
   });
   // res.cookie("refreshToken", "", {
   //   httpOnly: true,
   //   secure: process.env.NODE_ENV === "production",
-  //   sameSite: "Strict",
+  //   sameSite: "None",
   //   expires: new Date(0)
   // });
 };
@@ -38,14 +38,14 @@ router.post("/register", async (req, res) => {
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      sameSite: "None",
       maxAge: 900000 // 15 minutes
     });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      sameSite: "None",
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     });
 
@@ -75,14 +75,14 @@ router.post("/login", async (req, res) => {
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      sameSite: "None",
       maxAge: 900000 // 15 minutes
     });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      sameSite: "None",
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     });
 
@@ -127,7 +127,7 @@ router.get("/logout", async (req, res) => {
   res.cookie("refreshToken", "", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "Strict",
+    sameSite: "None",
     expires: new Date(0)
   });
   res.status(200).json({ message: "Logged out successfully" });
@@ -166,14 +166,14 @@ router.post("/refresh-token", async (req, res) => {
     res.cookie("accessToken", newAccessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      sameSite: "None",
       maxAge: 900000 // 15 minutes
     });
 
     res.cookie("refreshToken", newRefreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      sameSite: "None",
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     });
 
