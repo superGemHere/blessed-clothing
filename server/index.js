@@ -34,9 +34,9 @@ app.use(auth);
 //     next();
 // })
 
-app.get('/', (req, res) => {
-    res.send('Hello World.')
-})
+// app.get('/', (req, res) => {
+//     res.send('Hello World.')
+// })
 
 app.use(routes);
 
