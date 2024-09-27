@@ -18,7 +18,12 @@ mongoose.connect(process.env.MONGO_DB_URL)
 
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: 'https://blessed-clothing-ggs9.vercel.app',  // Allow specific origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],  // Allow specific HTTP methods, including OPTIONS
+    credentials: true,  // Allow credentials (cookies, etc.)
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],  // Allowed headers
+  }));
 app.use(auth);
 
 
