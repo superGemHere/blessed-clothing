@@ -21,7 +21,7 @@ exports.auth = async (req, res, next) => {
       res.cookie("accessToken", newAccessToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "Strict",
+        sameSite: "None",
         maxAge: 900000
       });
 
@@ -56,7 +56,7 @@ exports.auth = async (req, res, next) => {
           res.cookie("accessToken", newAccessToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            sameSite: "Strict",
+            sameSite: "None",
             maxAge: 900000
           });
 
