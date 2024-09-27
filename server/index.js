@@ -19,7 +19,7 @@ mongoose.connect(process.env.MONGO_DB_URL)
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cors({
-    origin: ['http://localhost:5173', "https://blessed-clothing-7b3m855fn-supergemheres-projects.vercel.app/"],
+    origin: ['http://localhost:5173', process.env.CLIENT_URL],
     credentials: true
 }));
 app.use(auth);
@@ -34,11 +34,10 @@ app.use(auth);
 //     next();
 // })
 
-// app.get('/', (req, res) => {
-//     res.send('Hello World.')
-// })
+app.get('/', (req, res) => {
+    res.send('Hello World.')
+})
 
 app.use(routes);
 
-// app.listen(constants.SERVER_PORT, () => console.log(`RESTful server is listening on port ${constants.SERVER_PORT}..`))
-module.exports = app;
+app.listen(constants.SERVER_PORT, () => console.log(`RESTful server is listening on port ${constants.SERVER_PORT}..`))
