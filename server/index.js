@@ -19,7 +19,7 @@ mongoose.connect(process.env.MONGO_DB_URL)
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cors({
-    origin: "*",
+    origin: ['http://localhost:5173', 'https://foot-gear-e-store.vercel.app/'],
     credentials: true
 }));
 app.use(auth);
