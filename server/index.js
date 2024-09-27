@@ -40,4 +40,5 @@ app.use(auth);
 
 app.use(routes);
 
-app.listen(constants.SERVER_PORT, () => console.log(`RESTful server is listening on port ${constants.SERVER_PORT}..`))
+// app.listen(constants.SERVER_PORT, () => console.log(`RESTful server is listening on port ${constants.SERVER_PORT}..`))
+module.exports = app;
