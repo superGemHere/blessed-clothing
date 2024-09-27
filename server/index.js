@@ -19,10 +19,11 @@ mongoose.connect(process.env.MONGO_DB_URL)
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cors({
-    origin: ['http://localhost:5173', process.env.CLIENT_URL],
+    origin: "*",
     credentials: true
 }));
 app.use(auth);
+
 
 // app.use((req, res, next) => {
 
