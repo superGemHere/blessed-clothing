@@ -19,7 +19,7 @@ mongoose.connect(process.env.MONGO_DB_URL)
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', "https://blessed-clothing-7b3m855fn-supergemheres-projects.vercel.app/"],
     credentials: true
 }));
 app.use(auth);
