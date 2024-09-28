@@ -6,7 +6,7 @@ import ManSection from "../../../assets/sectionPics/men-section.jpg";
 import Product from "../Product/Product";
 import { getPaginatedProducts } from "../../../api/productsApi";
 import Pagination from "../Pagination/Pagination";
-import { Spinner } from "../../Widgets/Spinner";
+import ScaleLoader from "../../Widgets/Spinner";
 
 export default function Products() {
   const arrowDown = String.fromCodePoint(8595);
@@ -352,7 +352,7 @@ export default function Products() {
           />
           {/* Products Cards */}
           <div className={styles.cardsContainer}>
-            {isLoading ? <Spinner /> : data?.products?.length && data.products.map((product) => (
+            {isLoading ? <ScaleLoader /> : data?.products?.length && data.products.map((product) => (
               <Product key={product._id} data={product} />
             ))}
           </div>
