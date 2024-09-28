@@ -6,7 +6,7 @@ import ManSection from "../../../assets/sectionPics/men-section.jpg";
 import Product from "../Product/Product";
 import { getPaginatedProducts } from "../../../api/productsApi";
 import Pagination from "../Pagination/Pagination";
-import { Spinner } from "../Widgets/Spinner";
+import { Spinner } from "../../Widgets/Spinner";
 
 export default function Products() {
   const arrowDown = String.fromCodePoint(8595);
