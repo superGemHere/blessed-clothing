@@ -6,6 +6,7 @@ import ManSection from "../../../assets/sectionPics/men-section.jpg";
 import Product from "../Product/Product";
 import { getPaginatedProducts } from "../../../api/productsApi";
 import Pagination from "../Pagination/Pagination";
+import { Spinner } from "../Widgets/Spinner";
 
 export default function Products() {
   const arrowDown = String.fromCodePoint(8595);
@@ -48,6 +49,7 @@ export default function Products() {
   const [tempTrending, setTempTrending] = useState(initialTrending);
   const [tempSale, setTempSale] = useState(initialSale);
   const [tempSizes, setTempSizes] = useState(initialSizes);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Fetch products based on the current filters
   useEffect(() => {
@@ -74,11 +76,13 @@ export default function Products() {
 
   // Fetch products whenever the state changes
   useEffect(() => {
+    setIsLoading(true);
     getPaginatedProducts(page, limit, sort, maxPrice, gender, age, trending, sale, sizes)
       .then(res => {
         setData(res);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => setIsLoading(false));
   }, [page, limit, sort, maxPrice, gender, age, trending, sale, sizes]);
 
   const handlePageChange = (event, value) => {
@@ -348,7 +352,7 @@ export default function Products() {
           />
           {/* Products Cards */}
           <div className={styles.cardsContainer}>
-            {data?.products?.length && data.products.map((product) => (
+            {isLoading ? <Spinner /> : data?.products?.length && data.products.map((product) => (
               <Product key={product._id} data={product} />
             ))}
           </div>
