@@ -52,7 +52,7 @@ export default function ScaleLoader({
           }}
         />
       ))}
-      <Box className="sr-only">Loading...</Box>
+      {/* <Box className="sr-only">Loading...</Box> */}
     </Box>
   )
 }
