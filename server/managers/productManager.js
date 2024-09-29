@@ -32,11 +32,11 @@ exports.getPaginatedProducts = async (page = 1, limit = 10, sort = 'asc', maxPri
       .sort({ newPrice: sortOrder })
       .skip(skip)
       .limit(limit);
-    console.log("Fetched products:", products);
+    // console.log("Fetched products:", products);
 
     // Get the total count of documents in the collection that match the query
     const totalCount = await Product.countDocuments(query);
-    console.log("Total count:", totalCount);
+    // console.log("Total count:", totalCount);
 
     return {
       products,

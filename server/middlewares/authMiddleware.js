@@ -6,10 +6,10 @@ exports.auth = async (req, res, next) => {
 
   if (!accessToken && refreshToken) {
     try {
-      console.log("refreshToken but no accessToken", refreshToken);
+      // console.log("refreshToken but no accessToken", refreshToken);
 
       const decodedRefreshToken = await jwt.verify(refreshToken, process.env.REFRESH_SECRET_KEY);
-      console.log("Decoded refresh token", decodedRefreshToken);
+      // console.log("Decoded refresh token", decodedRefreshToken);
 
       const newAccessToken = await jwt.sign(
         { userId: decodedRefreshToken.userId, email: decodedRefreshToken.email },
@@ -38,11 +38,11 @@ exports.auth = async (req, res, next) => {
     try {
       const decodedToken = await jwt.verify(accessToken, process.env.SECRET_KEY);
       res.locals.user = decodedToken;
-      console.log("Decoded access token", decodedToken);
+      // console.log("Decoded access token", decodedToken);
       return next();
     } catch (err) {
       if (err.name === "TokenExpiredError" && refreshToken) {
-        console.log("TokenExpiredError but refreshToken", refreshToken);
+        // console.log("TokenExpiredError but refreshToken", refreshToken);
 
         try {
           const decodedRefreshToken = await jwt.verify(refreshToken, process.env.REFRESH_SECRET_KEY);
@@ -90,7 +90,7 @@ exports.isAuth = (req, res, next) => {
 
 exports.isAdmin = (req, res, next) => {
   const user = res.locals.user;
-  console.log("User", user);
+  // console.log("User", user);
   if (!user) {
     return res.status(401).json({ message: "Unauthorized, please log in." });
   }
