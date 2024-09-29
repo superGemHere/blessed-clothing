@@ -38,10 +38,10 @@ export default function Header(){
                         <Link to="/" className={styles.ul__links}>Home</Link>
                     </li>
                     <li className={styles.ul__item}>
-                        <Link to={`${import.meta.env.VITE_FRONTEND_URL}products?page=1&limit=10&sort=asc&maxPrice=1000&gender=&age=&trending=false&sale=false&sizes=`} className={styles.ul__links}>Products</Link>
+                        <Link to={`${import.meta.env.MODE === 'development' ? import.meta.env.VITE_LOCAL_FRONTEND_URL : import.meta.env.VITE_FRONTEND_URL}products?page=1&limit=10&sort=asc&maxPrice=1000&gender=&age=&trending=false&sale=false&sizes=`} className={styles.ul__links}>Products</Link>
                     </li>
                     <li className={styles.ul__item}>
-                        <Link to={`${import.meta.env.VITE_FRONTEND_URL}products?page=1&limit=10&sort=asc&maxPrice=1000&gender=&age=&trending=false&sale=true&sizes=`} className={styles.ul__links}>Sale</Link>
+                        <Link to={`${import.meta.env.MODE === 'development' ? import.meta.env.VITE_LOCAL_FRONTEND_URL : import.meta.env.VITE_FRONTEND_URL}products?page=1&limit=10&sort=asc&maxPrice=1000&gender=&age=&trending=false&sale=true&sizes=`} className={styles.ul__links}>Sale</Link>
                     </li>
                     <li className={styles.ul__item}>
                         <Link to="#" className={styles.ul__links}>About Us</Link>
@@ -80,10 +80,10 @@ export default function Header(){
                         <Link to="/" className={styles.ul__links}>Home</Link>
                     </li>
                     <li className={styles.ul__item}>
-                        <Link to={`${import.meta.env.VITE_FRONTEND_URL}products?page=1&limit=10&sort=asc&maxPrice=1000&gender=&age=&trending=false&sale=false&sizes=`} className={styles.ul__links}>Products</Link>
+                        <Link to={`${import.meta.env.MODE === 'development' ? import.meta.env.VITE_LOCAL_FRONTEND_URL : import.meta.env.VITE_FRONTEND_URL}products?page=1&limit=10&sort=asc&maxPrice=1000&gender=&age=&trending=false&sale=false&sizes=`} className={styles.ul__links}>Products</Link>
                     </li>
                     <li className={styles.ul__item}>
-                        <Link to={`${import.meta.env.VITE_FRONTEND_URL}products?page=1&limit=10&sort=asc&maxPrice=1000&gender=&age=&trending=false&sale=true&sizes=`} className={styles.ul__links}>Sale</Link>
+                        <Link to={`${import.meta.env.MODE === 'development' ? import.meta.env.VITE_LOCAL_FRONTEND_URL : import.meta.env.VITE_FRONTEND_URL}products?page=1&limit=10&sort=asc&maxPrice=1000&gender=&age=&trending=false&sale=true&sizes=`} className={styles.ul__links}>Sale</Link>
                     </li>
                     <li className={styles.ul__item}>
                         <Link to="#" className={styles.ul__links}>About Us</Link>
