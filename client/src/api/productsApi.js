@@ -1,6 +1,6 @@
 import * as requester from "../lib/request";
 
-const server = `${import.meta.env.VITE_BACKEND_URL}products`;
+const server = `${import.meta.env.MODE === 'development' ? import.meta.env.VITE_LOCAL_BACKEND_URL : import.meta.env.VITE_BACKEND_URL}products`;
 
 export const getPaginatedProducts = async (page = 1, limit = 10, sort = "asc", maxPrice = 1000, gender = "", age = "", trending = false, sale = false, sizes = []) => {
     try {
