@@ -18,6 +18,22 @@ export const getPaginatedProducts = async (page = 1, limit = 10, sort = "asc", m
     }
 };
 
+export const getTrendingProducts = async (limit = 30, trending = true) => {
+    try {
+       
+        const res = await requester.get(`${server}?limit=${limit}&trending=${trending}`);
+
+        if (!res.ok) {
+            const result = await res.json();
+            throw result;
+        }
+        const result = await res.json();
+        return result;
+    } catch (err) {
+        throw err;
+    }
+};
+
 export const getAllProducts = async () => {
     try {
         const res = await requester.get(server);
