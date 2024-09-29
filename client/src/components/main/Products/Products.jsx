@@ -351,11 +351,11 @@ export default function Products() {
             showLastButton={true}
           />
           {/* Products Cards */}
-          <div className={styles.cardsContainer}>
-            {isLoading ? <ScaleLoader /> : data?.products?.length && data.products.map((product) => (
+         { isLoading ? <ScaleLoader /> : (<div className={styles.cardsContainer}>
+            {data?.products?.length && data.products.map((product) => (
               <Product key={product._id} data={product} />
             ))}
-          </div>
+          </div>)}
           {/* Pagination Component */}
           <Pagination
             shape="rounded"
