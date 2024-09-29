@@ -1,23 +1,43 @@
 import styles from "./home.module.css";
+import 'react-multi-carousel/lib/styles.css';
+
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { getTrendingProducts } from "../../../api/productsApi";
+import Carousel from 'react-multi-carousel';
+
 import Section from '../Gender Section/Section'
-import Collection from "../Collection/Collection";
 import sectionWomenImage from "../../../assets/sectionPics/women-section.jpg"
 import sectionMenImage from "../../../assets/sectionPics/men-section.jpg"
 import sectionKidImage from "../../../assets/sectionPics/kids-section.jpg"
 import SaleBanner from "../../../assets/sectionPics/SaleBanner.png"
+import Collection from "../Collection/Collection";
 import collectionBlessedAngel from "../../../assets/collectionPics/blessed-angel.jpg"
 import collectionFallenAngel from "../../../assets/collectionPics/fallen-angel.jpg"
 
 
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
-import CarouselCard from "../CarouselCard/CarouselCard";
+
+
 import NewsLetter from "../NewsLetter/NewsLetter";
-import { Link } from "react-router-dom";
+
 import Product from "../Product/Product";
 import ChooseSizeDynamic from "../ChooseSizeDynamic/ChooseSizeDynamic";
+import ScaleLoader from "../../Widgets/Spinner";
+
 
 export default function Home(){
+    const [trendingProducts, setTrendingProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    useEffect(() => {
+        getTrendingProducts()
+        .then(res => {
+            setTrendingProducts(res.products)
+        })
+        .catch(err => console.log(err))
+        .finally(() => setIsLoading(false));
+    },
+    []);
+
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
@@ -111,20 +131,7 @@ export default function Home(){
                     <h1>Trending shoes</h1>
                     <div className={styles.productsContainer}>
                     <Carousel responsive={responsive} partialVisible={false} itemClass={styles.carouselItems}>
-                        <Product data={data1}/>
-                        <Product data={data1}/>
-                        <Product data={data1}/>
-                        <Product data={data1}/>
-                        <Product data={data1}/>
-                        <Product data={data1}/>
-                        <Product data={data1}/>
-                        <Product data={data1}/>
-                        <Product data={data1}/>
-                        <Product data={data1}/>
-                        <Product data={data1}/>
-                        <Product data={data1}/>
-                        <Product data={data1}/>
-                        <Product data={data1}/>
+                        {trendingProducts.length !== 0 ? trendingProducts.map(product => <Product key={product._id} data={product} />) : < ScaleLoader />}
                     </Carousel>
                     </div>
                 </div>
