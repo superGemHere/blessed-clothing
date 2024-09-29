@@ -43,4 +43,4 @@ app.get('/', (req, res) => {
 
 app.use(routes);
 
-app.listen(constants.SERVER_PORT, () => console.log(`RESTful server is listening on port ${constants.SERVER_PORT}..`))
+app.listen(process.env.LOCAL_SERVER_PORT, () => console.log(`RESTful server is listening on port ${process.env.LOCAL_SERVER_PORT}..`))
