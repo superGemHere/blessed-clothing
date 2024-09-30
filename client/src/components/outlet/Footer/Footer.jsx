@@ -23,7 +23,7 @@ export default function Footer (){
                 </section>	
                 <section className={styles.contacts}>
                     <p className={styles.paragraph}>Phone:&nbsp;&nbsp;<span className={styles.phoneNumber}>+878 559 4478</span></p>
-                    <p className={styles.paragraph}>E-mail: blessedClothing@gmail.com</p>
+                    <p className={styles.paragraph}>E-mail: foot_gear@gmail.com</p>
                     <p className={styles.paragraph}>Linked in: Blessed</p>
                     <div className={styles.github}>
                         <FaGithub color='#fff'size={35}/>
@@ -31,7 +31,7 @@ export default function Footer (){
                     </div>
                 </section>
             </div>
-            <p className={styles.copyRight}>All rights reserved &copy; - Dzhem Syuleyman</p>
+            <p className={styles.copyRight}>Copyright &copy; 2024 All rights reserved by Dzhem Syuleyman / superGemHere</p>
         </div>
     );
 }
