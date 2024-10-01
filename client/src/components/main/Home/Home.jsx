@@ -70,30 +70,7 @@ export default function Home(){
         sectionImage: sectionKidImage,
         sectionName: "Kids"
     }
-
-    let trendingData = {
-        data1: {
-            image: 'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/9e970183-c03c-4250-ae91-b238aefd47df/air-max-90-shoes-VFMgbv.png',
-            model: 'Air Max',
-            brand: 'Nike',
-            sizes: '40, 41, 42, 43',
-            price: '219,99',
-            type: 'Sneakers'
-        },
-    }
-
-    const data1 = {
-        id: 1,
-        isOnSale: true,
-        isNew: true,
-        productName: 'Puma',
-        imageUrl: "https://www.shopsector.com/uploads/productgalleryfile/images/1200x1200/sportni-obuvki-puma-voltaic-evo-379601-02-1.jpg",
-        productModel: 'Voltaic Evo',
-        oldPrice: 189.99,
-        price: 151.99,
-        colors: ['red', 'black', 'green'],
-        sizes: [40, 41, 42, 43, 44, 45, 46, 47, 48, 49],
-    }
+    
     return(
         <main className={styles.main}>
             <section className={styles.header}>
