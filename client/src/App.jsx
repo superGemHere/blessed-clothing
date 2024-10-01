@@ -11,12 +11,14 @@ import Register from './components/main/Register/Register.jsx'
 import Logout from './components/main/Logout/Logout.jsx'
 import AdminPanel from './components/main/AdminPanel/AdminPanel.jsx'
 import NotFound from './components/main/404NotFound/NotFound.jsx'
+import WelcomeModal from './components/Widgets/WelcomeModal/WelcomeModal.jsx'
 
 function App() {
 
   return (
     <>
     <AuthProvider >
+      <WelcomeModal />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
