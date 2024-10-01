@@ -1,0 +1,101 @@
+.overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background-color: rgba(0, 0, 0, 0.7);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 1000;
+ }
+ .modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+   background-color: #ffffff;
+   border-radius: 12px;
+   padding: 1rem;
+   width: 90%;
+   max-width: 500px;
+   max-height: 90%;
+   overflow: auto;
+   position: relative;
+ }
+ .closeButton {
+   position: absolute;
+   top: 10px;
+   right: 10px;
+   background: none;
+   border: none;
+   cursor: pointer;
+ }
+ .closeIcon {
+   font-size: 2rem;
+   color: #333;
+ }
+ .title {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: .5rem,;
+   font-size: 1.5rem;
+   margin-bottom: 15px;
+   color: #333;
+ }
+ .constructionIcon {
+   margin-right: 10px;
+   color: #ffa500;
+ }
+ .subtitle {
+   font-size: 1.1rem;
+   margin-bottom: 10px;
+   color: #555;
+ }
+ .list {
+   list-style-type: none;
+   padding: 0;
+   margin: 0 0 20px 0;
+ }
+ .listItem {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+   font-size: 1rem;
+   margin-bottom: 8px;
+   padding-left: 20px;
+   position: relative;
+   color: #444;
+ }
+ .footer {
+   font-size: 1rem;
+   font-style: italic;
+   color: #666;
+ }
+
+ .continueButton {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: fit-content;
+   gap: .5rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  margin: 0 auto;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: all 0.3s;
+  margin-top: 1rem;
+
+  &:hover{
+    background-color: #45a049;
+  }
+};
+
+.arrowIcon {
+  margin-left: 10px;
+}
