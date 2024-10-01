@@ -3,26 +3,35 @@ import { Close, Construction, ShoppingCartTwoTone, AttachMoneyTwoTone, SavedSear
 import styles from './welcomeModal.module.css';
 
 export default function WelcomeModal() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const isVisited = sessionStorage.getItem('isVisited') ;
+    if (!isVisited) {
       setIsOpen(true);
-    }, 1000);
+      sessionStorage.setItem('isVisited', true);
+    }
+  }, [])
 
-    return () => clearTimeout(timer);
-  }, []);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setIsOpen(true);
+  //   }, 1000);
 
-  const closeModal = () => {
-    setIsOpen(false);
-  };
+  //   return () => clearTimeout(timer);
+  // }, []);
+
+  // const closeModal = () => {
+  //   setIsOpen(false);
+  //   sessionStorage.setItem('isVisited', true);
+  // };
 
   if (!isOpen) return null;
 
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <button className={styles.closeButton} onClick={closeModal}>
+        <button className={styles.closeButton} onClick={() => setIsOpen(false)}>
           <Close className={styles.closeIcon} />
         </button>
         <h2 className={styles.title}>
@@ -38,7 +47,7 @@ export default function WelcomeModal() {
           <li className={styles.listItem}><EngineeringTwoTone style={{color: '#0F6292'}}/>And fixing some already existing features.</li>
         </ul>
         <p className={styles.footer}>Thank you for your visit and have a nice look around!</p>
-        <button className={styles.continueButton} onClick={closeModal}>
+        <button className={styles.continueButton} onClick={() => setIsOpen(false)}>
           Continue to the Project <ArrowForward className={styles.arrowIcon} />
         </button>
       </div>
