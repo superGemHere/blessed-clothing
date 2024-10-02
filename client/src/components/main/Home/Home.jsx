@@ -56,6 +56,10 @@ export default function Home(){
         mobile: {
             breakpoint: { max: 600, min: 0 },
             items: 2
+        },
+        mobileS: {
+            breakpoint: { max: 400, min: 0 },
+            items: 1
         }
     };
 

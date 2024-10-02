@@ -66,3 +66,8 @@
         width: 300px;
     }
 }
+@media all and (max-width: 350px){
+    .input{
+        width: 250px;
+    }
+}

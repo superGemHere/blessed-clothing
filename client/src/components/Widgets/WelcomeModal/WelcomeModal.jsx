@@ -43,7 +43,7 @@ export default function WelcomeModal() {
           <li className={styles.listItem}><AttachMoneyTwoTone style={{color: 'green'}}/>Checkout payment portal.</li>
           <li className={styles.listItem}><SavedSearchTwoTone style={{color: 'greenyellow'}} />Advanced search functionality.</li>
           <li className={styles.listItem}><BrushTwoTone style={{color: 'purple'}}/>Working on the design.</li>
-          <li className={styles.listItem}><AppSettingsAltTwoTone style={{color: '#FFEB00'}} />Optimizing the App.</li>
+          <li className={styles.listItem}><AppSettingsAltTwoTone style={{color: '#D91656'}} />Optimizing the App.</li>
           <li className={styles.listItem}><EngineeringTwoTone style={{color: '#0F6292'}}/>And fixing some already existing features.</li>
         </ul>
         <p className={styles.footer}>Thank you for your visit and have a nice look around!</p>

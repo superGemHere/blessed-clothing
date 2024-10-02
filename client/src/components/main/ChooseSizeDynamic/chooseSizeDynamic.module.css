@@ -223,6 +223,9 @@
     .imageWrapper{
         height: 295px;
     }
+    .sizeForm button{
+        width: 240px;
+    }
 }
 
 

@@ -21,3 +21,18 @@
 .scrollToTopBtn:hover {
   opacity: 1;
 }
+
+@media screen and (max-width: 768px) {
+  .scrollToTopBtn {
+    right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+   
+}
+@media screen and (max-width: 500px) {
+  .scrollToTopBtn {
+   bottom: 20%;
+  }
+   
+}
