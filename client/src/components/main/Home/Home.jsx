@@ -22,6 +22,7 @@ import NewsLetter from "../NewsLetter/NewsLetter";
 
 import Product from "../Product/Product";
 import ChooseSizeDynamic from "../ChooseSizeDynamic/ChooseSizeDynamic";
+import ScrollToTopButton from "../../Widgets/ScrollTop/ScrollTop";
 import ScaleLoader from "../../Widgets/Spinner";
 
 
@@ -93,13 +94,6 @@ export default function Home(){
             <section className={styles.saleSection} style={{backgroundImage: `url(${SaleBanner})`}}>
                 <Link to={`${import.meta.env.VITE_FRONTEND_URL}products?page=1&limit=10&sort=asc&maxPrice=1000&gender=&age=&trending=false&sale=true&sizes=`} className={styles.saleBtn}>Shop now</Link>
             </section>
-            {/* <section className={styles.collectionContainer}>
-                <h1>Featured Collections</h1>
-                <div className={styles.collections}>
-                    <Collection collectionData={{name: "Blessed Angels", description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit accusamus temporibus voluptates exercitationem, ipsa officiis a animi esse explicabo repudiandae in, blanditiis cum quam magni? Voluptates illum earum praesentium veniam."}} image={collectionBlessedAngel} />
-                    <Collection collectionData={{name: "Fallen Angels", description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit accusamus temporibus voluptates exercitationem, ipsa officiis a animi esse explicabo repudiandae in, blanditiis cum quam magni? Voluptates illum earum praesentium veniam.Lorem ipsa officiis a animi esse explicabo repudiandae in, blanditiis cum quam magni? Voluptates illum earum praesentium veniam."} } image={collectionFallenAngel}/>
-                </div>
-            </section> */}
             <section className={styles.chooseSizeDynamic}>
                 <ChooseSizeDynamic />
             </section>
@@ -107,15 +101,22 @@ export default function Home(){
                 <div className={styles.trendingContainer}>
                     <h1>Trending shoes</h1>
                     <div className={styles.productsContainer}>
-                    <Carousel responsive={responsive} partialVisible={false} itemClass={styles.carouselItems}>
-                        {trendingProducts.length !== 0 ? trendingProducts.map(product => <Product key={product._id} data={product} />) : < ScaleLoader />}
-                    </Carousel>
+                    {isLoading ? (
+                            <div className={styles.loaderContainer}>
+                                <ScaleLoader />
+                            </div>
+                        ) : (
+                            <Carousel responsive={responsive} partialVisible={false} itemClass={styles.carouselItems}>
+                                {trendingProducts.length !== 0 ? trendingProducts.map(product => <Product key={product._id} data={product} />) : <ScaleLoader />}
+                            </Carousel>
+                        )}
                     </div>
                 </div>
             </section>
             <section className={styles.newsLetter}>
                 <NewsLetter />
             </section>
+            <ScrollToTopButton />
         </main>
     );
 }
