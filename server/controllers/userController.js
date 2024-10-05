@@ -106,15 +106,15 @@ router.get("/logout", async (req, res) => {
         refreshToken,
         process.env.REFRESH_SECRET_KEY
       );
-      if (decoded && decoded._id) {
+      if (decoded && decoded.userId) {
         // Remove the refresh token from the database
         await RefreshToken.findOneAndDelete({
-          userId: decoded._id,
+          userId: decoded.userId,
           token: refreshToken
         });
         console.log(
           "Refresh token deleted successfully for user:",
-          decoded._id
+          decoded.userId
         );
       } else {
         console.log("Invalid token payload:", decoded);
