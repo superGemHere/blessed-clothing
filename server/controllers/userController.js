@@ -23,6 +23,7 @@ router.post("/register", async (req, res) => {
   try {
     const result = await userManager.register(req.body);
     const { accessToken, refreshToken } = result;
+    const isProduction = process.env.NODE_ENV === 'production';
     const userId = result._id;
 
     // Remove any existing refresh tokens for this user
@@ -37,15 +38,15 @@ router.post("/register", async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "None",
+      secure: isProduction,   // Use `secure` only in production (for HTTPS)
+      sameSite: isProduction ? "None" : "Lax",
       maxAge: 900000 // 15 minutes
     });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "None",
+      secure: isProduction,   // Use `secure` only in production (for HTTPS)
+      sameSite: isProduction ? "None" : "Lax",
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     });
 
@@ -59,6 +60,7 @@ router.post("/login", async (req, res) => {
   try {
     const result = await userManager.login(req.body);
     const { accessToken, refreshToken } = result;
+    const isProduction = process.env.NODE_ENV === 'production';
     const userId = result._id;
 
     // Remove any existing refresh tokens for this user
@@ -74,15 +76,15 @@ router.post("/login", async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "None",
+      secure: isProduction,   // Use `secure` only in production (for HTTPS)
+      sameSite: isProduction ? "None" : "Lax",
       maxAge: 900000 // 15 minutes
     });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "None",
+      secure: isProduction,   // Use `secure` only in production (for HTTPS)
+      sameSite: isProduction ? "None" : "Lax",
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     });
 
@@ -94,6 +96,8 @@ router.post("/login", async (req, res) => {
 
 router.get("/logout", async (req, res) => {
   const { refreshToken } = req.cookies;
+
+  const isProduction = process.env.NODE_ENV === 'production';
   
   if (refreshToken) {
     try {
@@ -123,19 +127,27 @@ router.get("/logout", async (req, res) => {
   }
 
   // Clear cookies
-  clearCookies(res);
+  // clearCookies(res);
+  res.cookie("accessToken", "", {
+    httpOnly: true,
+    secure: isProduction,   // Use `secure` only in production (for HTTPS)
+    sameSite: isProduction ? "None" : "Lax", // Use "None" in production (if cross-site) and "Lax" for local development
+    expires: new Date(0)    // Token expiration (clear the cookie)
+  });
   res.cookie("refreshToken", "", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "None",
-    expires: new Date(0)
+    secure: isProduction,   // Use `secure` only in production (for HTTPS)
+    sameSite: isProduction ? "None" : "Lax", // Use "None" in production (if cross-site) and "Lax" for local development
+    expires: new Date(0)    // Token expiration (clear the cookie)
   });
   res.status(200).json({ message: "Logged out successfully" });
 });
 
 router.post("/refresh-token", async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
-  console.log("RefreshToken endpoint", refreshToken);
+
+  const isProduction = process.env.NODE_ENV === 'production';
+  // console.log("RefreshToken endpoint", refreshToken);
   
   if (!refreshToken) return res.status(401).json({ message: "No refresh token found" });
 
@@ -147,7 +159,12 @@ router.post("/refresh-token", async (req, res) => {
     // console.log("Stored Token", storedToken);
 
     if (!storedToken || storedToken.expiresAt < Date.now()) {
-      clearCookies(res); // Clear cookies if the refresh token is invalid or expired
+      res.cookie("accessToken", "", {
+        httpOnly: true,
+        secure: isProduction,   // Use `secure` only in production (for HTTPS)
+        sameSite: isProduction ? "None" : "Lax", // Use "None" in production (if cross-site) and "Lax" for local development
+        expires: new Date(0)    // Token expiration (clear the cookie)
+      }); // Clear cookies if the refresh token is invalid or expired
       return res.status(403).json({ message: "Invalid or expired refresh token" });
     }
 
@@ -165,15 +182,15 @@ router.post("/refresh-token", async (req, res) => {
 
     res.cookie("accessToken", newAccessToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "None",
+      secure: isProduction,   // Use `secure` only in production (for HTTPS)
+      sameSite: isProduction ? "None" : "Lax",
       maxAge: 900000 // 15 minutes
     });
 
     res.cookie("refreshToken", newRefreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "None",
+      secure: isProduction,   // Use `secure` only in production (for HTTPS)
+      sameSite: isProduction ? "None" : "Lax",
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     });
 
