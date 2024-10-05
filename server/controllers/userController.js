@@ -36,6 +36,10 @@ router.post("/register", async (req, res) => {
       expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 7 days
     });
 
+    // Prevent caching
+    res.set('Cache-Control', 'no-store');
+
+    // Set cookies
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
       secure: isProduction,   // Use `secure` only in production (for HTTPS)
@@ -74,6 +78,10 @@ router.post("/login", async (req, res) => {
       expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 7 days
     });
 
+    // Prevent caching
+    res.set('Cache-Control', 'no-store');
+
+    // Set cookies
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
       secure: isProduction,   // Use `secure` only in production (for HTTPS)
@@ -98,15 +106,24 @@ router.get("/logout", async (req, res) => {
   const { refreshToken } = req.cookies;
 
   const isProduction = process.env.NODE_ENV === 'production';
-
+  
   if (refreshToken) {
     try {
       // Verify and decode the refresh token
-      const decoded = await jwt.verify(refreshToken, process.env.REFRESH_SECRET_KEY);
+      const decoded = await jwt.verify(
+        refreshToken,
+        process.env.REFRESH_SECRET_KEY
+      );
       if (decoded && decoded.userId) {
         // Remove the refresh token from the database
-        await RefreshToken.findOneAndDelete({ userId: decoded.userId, token: refreshToken });
-        console.log("Refresh token deleted successfully for user:", decoded.userId);
+        await RefreshToken.findOneAndDelete({
+          userId: decoded.userId,
+          token: refreshToken
+        });
+        console.log(
+          "Refresh token deleted successfully for user:",
+          decoded.userId
+        );
       } else {
         console.log("Invalid token payload:", decoded);
       }
@@ -117,24 +134,22 @@ router.get("/logout", async (req, res) => {
     console.log("No refresh token found in cookies.");
   }
 
-  // Forcefully clear cookies
-  res.clearCookie("accessToken", {
-    httpOnly: true,
-    secure: isProduction,
-    sameSite: isProduction ? "None" : "Lax"
-  });
-  res.clearCookie("refreshToken", {
-    httpOnly: true,
-    secure: isProduction,
-    sameSite: isProduction ? "None" : "Lax"
-  });
+  // Prevent caching
+  res.set('Cache-Control', 'no-store');
 
-  // Send a non-cacheable response to make sure the browser processes it
-  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
-  res.setHeader("Pragma", "no-cache");
-  res.setHeader("Expires", "0");
-  res.setHeader("Surrogate-Control", "no-store");
-
+  // Clear cookies
+  res.cookie("accessToken", "", {
+    httpOnly: true,
+    secure: isProduction,   // Use `secure` only in production (for HTTPS)
+    sameSite: isProduction ? "None" : "Lax", // Use "None" in production (if cross-site) and "Lax" for local development
+    expires: new Date(0)    // Token expiration (clear the cookie)
+  });
+  res.cookie("refreshToken", "", {
+    httpOnly: true,
+    secure: isProduction,   // Use `secure` only in production (for HTTPS)
+    sameSite: isProduction ? "None" : "Lax", // Use "None" in production (if cross-site) and "Lax" for local development
+    expires: new Date(0)    // Token expiration (clear the cookie)
+  });
   res.status(200).json({ message: "Logged out successfully" });
 });
 
@@ -142,18 +157,17 @@ router.post("/refresh-token", async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
 
   const isProduction = process.env.NODE_ENV === 'production';
-  // console.log("RefreshToken endpoint", refreshToken);
   
   if (!refreshToken) return res.status(401).json({ message: "No refresh token found" });
 
   try {
     const decoded = await jwt.verify(refreshToken, process.env.REFRESH_SECRET_KEY);
     const storedToken = await RefreshToken.findOne({ userId: decoded.userId, token: refreshToken });
-    // console.log("decoded user id", decoded.userId);
-    // console.log("Decoded Token", decoded);
-    // console.log("Stored Token", storedToken);
 
     if (!storedToken || storedToken.expiresAt < Date.now()) {
+      // Prevent caching
+      res.set('Cache-Control', 'no-store');
+
       res.cookie("accessToken", "", {
         httpOnly: true,
         secure: isProduction,   // Use `secure` only in production (for HTTPS)
@@ -162,7 +176,6 @@ router.post("/refresh-token", async (req, res) => {
       }); // Clear cookies if the refresh token is invalid or expired
       return res.status(403).json({ message: "Invalid or expired refresh token" });
     }
-
 
     // Generate new tokens
     const newAccessToken = await jwt.sign({ userId: decoded.userId, email: decoded.email }, process.env.SECRET_KEY, { expiresIn: "1m" });
@@ -175,6 +188,10 @@ router.post("/refresh-token", async (req, res) => {
       { new: true }
     );
 
+    // Prevent caching
+    res.set('Cache-Control', 'no-store');
+
+    // Set cookies
     res.cookie("accessToken", newAccessToken, {
       httpOnly: true,
       secure: isProduction,   // Use `secure` only in production (for HTTPS)
@@ -191,6 +208,9 @@ router.post("/refresh-token", async (req, res) => {
 
     res.json({ accessToken: newAccessToken });
   } catch (err) {
+    // Prevent caching
+    res.set('Cache-Control', 'no-store');
+    
     // clearCookies(res); // Clear cookies if refresh token verification fails
     res.status(403).json({ message: "Invalid refresh token" });
   }
@@ -198,12 +218,15 @@ router.post("/refresh-token", async (req, res) => {
 
 router.get("/getAccessToken", async (req, res) => {
   const token = req.cookies.accessToken;
-  // console.log("AccessToken Get",accessToken)
 
   if (!token) return res.status(401).json({ message: "No access token found" });
 
   try {
     const decodedToken = await jwt.verify(token, process.env.SECRET_KEY);
+
+    // Prevent caching
+    res.set('Cache-Control', 'no-store');
+    
     res
       .status(200)
       .json({
