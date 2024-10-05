@@ -98,24 +98,15 @@ router.get("/logout", async (req, res) => {
   const { refreshToken } = req.cookies;
 
   const isProduction = process.env.NODE_ENV === 'production';
-  
+
   if (refreshToken) {
     try {
       // Verify and decode the refresh token
-      const decoded = await jwt.verify(
-        refreshToken,
-        process.env.REFRESH_SECRET_KEY
-      );
+      const decoded = await jwt.verify(refreshToken, process.env.REFRESH_SECRET_KEY);
       if (decoded && decoded.userId) {
         // Remove the refresh token from the database
-        await RefreshToken.findOneAndDelete({
-          userId: decoded.userId,
-          token: refreshToken
-        });
-        console.log(
-          "Refresh token deleted successfully for user:",
-          decoded.userId
-        );
+        await RefreshToken.findOneAndDelete({ userId: decoded.userId, token: refreshToken });
+        console.log("Refresh token deleted successfully for user:", decoded.userId);
       } else {
         console.log("Invalid token payload:", decoded);
       }
@@ -126,8 +117,7 @@ router.get("/logout", async (req, res) => {
     console.log("No refresh token found in cookies.");
   }
 
-  // Clear cookies
-  // clearCookies(res);
+  // Forcefully clear cookies
   res.clearCookie("accessToken", {
     httpOnly: true,
     secure: isProduction,
@@ -138,6 +128,13 @@ router.get("/logout", async (req, res) => {
     secure: isProduction,
     sameSite: isProduction ? "None" : "Lax"
   });
+
+  // Send a non-cacheable response to make sure the browser processes it
+  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
+  res.setHeader("Surrogate-Control", "no-store");
+
   res.status(200).json({ message: "Logged out successfully" });
 });
 
