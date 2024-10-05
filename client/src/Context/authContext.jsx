@@ -15,12 +15,19 @@ export const AuthProvider = ({ children }) => {
 
   // Get the user info on component mount
   useEffect(() => {
-    setUser(getUserInfo());
+    const fetchUserInfo = async () => {
+      try {
+        const userInfo = await getUserInfo();
+        console.log("User is", userInfo);
+        setUser(userInfo);
+      } catch (error) {
+        console.error("Failed to fetch user info:", error);
+      }
+    };
+
+    fetchUserInfo();
   }, []);
 
-  // useEffect(()=>{
-  //   console.log("User is", user)
-  // }, [user]);
 
   // Function to check if user is authenticated
   useEffect(() => {
