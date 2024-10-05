@@ -128,17 +128,15 @@ router.get("/logout", async (req, res) => {
 
   // Clear cookies
   // clearCookies(res);
-  res.cookie("accessToken", "", {
+  res.clearCookie("accessToken", {
     httpOnly: true,
-    secure: isProduction,   // Use `secure` only in production (for HTTPS)
-    sameSite: isProduction ? "None" : "Lax", // Use "None" in production (if cross-site) and "Lax" for local development
-    expires: new Date(0)    // Token expiration (clear the cookie)
+    secure: isProduction,
+    sameSite: isProduction ? "None" : "Lax"
   });
-  res.cookie("refreshToken", "", {
+  res.clearCookie("refreshToken", {
     httpOnly: true,
-    secure: isProduction,   // Use `secure` only in production (for HTTPS)
-    sameSite: isProduction ? "None" : "Lax", // Use "None" in production (if cross-site) and "Lax" for local development
-    expires: new Date(0)    // Token expiration (clear the cookie)
+    secure: isProduction,
+    sameSite: isProduction ? "None" : "Lax"
   });
   res.status(200).json({ message: "Logged out successfully" });
 });
