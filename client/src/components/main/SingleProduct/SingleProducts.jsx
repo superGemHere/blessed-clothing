@@ -14,7 +14,7 @@ import UpdateOutlinedIcon from '@mui/icons-material/UpdateOutlined';
 import PermPhoneMsgOutlinedIcon from '@mui/icons-material/PermPhoneMsgOutlined';
 
 
-import Accordion from '../Accordion/Accordion';
+import Accordion from '../../Widgets/Accordion/Accordion';
 import ImageModal from '../ImageModal/ImageModal';
 import ScaleLoader from '../../Widgets/Spinner';
 
