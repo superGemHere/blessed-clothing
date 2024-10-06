@@ -16,6 +16,7 @@ import PermPhoneMsgOutlinedIcon from '@mui/icons-material/PermPhoneMsgOutlined';
 
 import Accordion from '../Accordion/Accordion';
 import ImageModal from '../ImageModal/ImageModal';
+import ScaleLoader from '../../Widgets/Spinner';
 
 export default function SingleProduct() {
     const [isDisabled, setIsDisabled] = useState(false);
@@ -24,39 +25,23 @@ export default function SingleProduct() {
     const [selectedImage, setSelectedImage] = useState(null);
     const [product, setProduct] = useState({});
     const {productId} = useParams();
+    const [loading, setLoading] = useState(true);
 
 
     useEffect(() => {
-        console.log(productId);
         getSingleProduct(productId)
-        .then(res => setProduct(res))
+        .then(res => {
+            setProduct(res)
+            setLoading(false);
+        })
         .catch(err => console.log(err));
     }, []);
 
-    const data1 = {
-        id: 1,
-        isOnSale: true,
-        isNew: true,
-        productName: 'Kappa',
-        imageUrl: "https://www.shopsector.com/uploads/productgalleryfile/images/1200x1200/kecove-kappa-logo-maserta-32193cw-a2c-1.jpg",
-        images: [
-            "https://www.shopsector.com/uploads/productgalleryfile/images/1200x1200/kecove-kappa-logo-maserta-32193cw-a2c-1.jpg",
-            "https://www.shopsector.com/uploads/productgalleryfile/images/1200x1200/kecove-kappa-logo-maserta-32193cw-a2c-2.jpg",
-            "https://www.shopsector.com/uploads/productgalleryfile/images/1200x1200/kecove-kappa-logo-maserta-32193cw-a2c-3.jpg",
-            "https://www.shopsector.com/uploads/productgalleryfile/images/1200x1200/kecove-kappa-logo-maserta-32193cw-a2c-4.jpg"
-        ],
-        productModel: 'Logo Maserta',
-        oldPrice: 84.99,
-        price: 47.99,
-        colors: ['red', 'black', 'green'],
-        sizes: [40, 41, 42, 43, 44, 45, 46, 47, 48, 49],
-    };
     let options = [];
     if(product && product.sizes) {
         options = product.sizes.map(size => ({ value: size, label: ` № ${size} EU ` }));
     }
     
-    console.log(product);
     const customStyles = {
         control: (provided, state) => ({
             ...provided,
@@ -113,6 +98,8 @@ export default function SingleProduct() {
 
     return (
         <div className={styles.container}>
+            {loading ? <ScaleLoader /> 
+            :<>
             {modalVisible && <ImageModal setSelected={setSelectedImage} imageArray={product?.images} image={selectedImage} onClose={closeModal} />}
             <div className={styles.left}>
                 {product.images 
@@ -214,6 +201,9 @@ export default function SingleProduct() {
                 <hr className={styles.hr}/>
                 </div>
             </div>
+            </>
+    }
+            
         </div>
     );
 }
