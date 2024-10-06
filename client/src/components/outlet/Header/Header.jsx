@@ -10,15 +10,15 @@ export default function Header(){
     // const responsiveNav = useRef();
     const {isAuthenticated} = useAuth();
     const [isVisible, setIsVis] = useState(false);
+    const [showNavbar, setShowNavbar] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
     useEffect(() => {
         const handleResize = () => {
             if(window.innerWidth >= 1023 & isVisible){
                 setIsVis(false);
             }
         };
-        
     
-        console.log("Resize")
         window.addEventListener('resize', handleResize);
         
         // Cleanup function to remove event listener when component unmounts
@@ -27,10 +27,35 @@ export default function Header(){
         };
       }, [window.innerWidth])
 
+    
+
+    useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+    };
+    }, [lastScrollY]);
+
+    // Scroll event handler
+
+    const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > lastScrollY  && currentScrollY > 200) {
+        // Scrolling down, hide navbar
+        setShowNavbar(false);
+    } else {
+        // Scrolling up, show navbar
+        setShowNavbar(true);
+    }
+
+    setLastScrollY(currentScrollY);
+    };
 
 
     return(
-        <header className={styles.header}>
+        <header className={`${styles.header} ${showNavbar ? styles.visible : styles.hidden}`}>
             <nav>
             <div className={styles.left}>
                 <ul className={styles.nav__ul}  id={styles.left}>
