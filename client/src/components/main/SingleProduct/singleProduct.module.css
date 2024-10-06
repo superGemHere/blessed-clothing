@@ -306,4 +306,8 @@
     .bottomRow{
         flex-direction: column;
     }
+    .policyWrapper p{
+        font-size: 1.2rem;
+        line-height: normal;
+    }
 }
