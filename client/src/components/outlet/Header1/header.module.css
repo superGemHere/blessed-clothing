@@ -1,0 +1,132 @@
+@import url('https://fonts.cdnfonts.com/css/crasher-gear');
+
+.navbar {
+   display: flex;
+   width: 100%;
+   background-color: #ffffff;
+   /* box-shadow: 0 7px 4px rgba(0, 0, 0, 0.1); */
+   filter: drop-shadow(0 0 0.75rem #000);
+   position: sticky;
+   top: 0;
+   left: 0;
+   right: 0;
+   z-index: 9999;
+   box-shadow: inset 0 7px 20px -7px rgba(0,0,0,0.4);
+ }
+ 
+ .navbarContainer {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 1rem 2rem;
+   width: 100%;
+   margin: 0 auto;
+ }
+ 
+ .navbarLogo a {
+   font-size: 2rem;
+   font-weight: bold;
+   color: #333;
+   text-decoration: none;
+   font-family: 'Crasher Gear', sans-serif;
+   letter-spacing: 7px;
+    text-shadow: 3px 1px rgba(78, 100, 77, 0.4);
+ }
+ 
+ .navbarMenu ul {
+   display: flex;
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+ }
+ 
+ .navbarMenu li {
+   margin-left: 1.5rem;
+ }
+ 
+ .navbarMenu a {
+   color: #333;
+   text-decoration: none;
+   font-size: 1rem;
+   transition: color 0.3s ease;
+ }
+ 
+ .navbarMenu a:hover {
+   color: #ff4500;
+ }
+ 
+ .navbarIcons {
+   display: flex;
+   align-items: center;
+ }
+ 
+ .cartIcon {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 1rem;
+   position: relative;
+   color: #131313
+ }
+ .cartIcon:hover {
+   opacity:  .7;
+ }
+
+ .cartIcon span{
+   position: absolute;
+   top: -5px;
+   left: 23px;
+   width: 20px;
+   height: 20px;
+   text-align: center;
+   line-height: 20px;
+   background-color: #ff4500;
+   border-radius: 50%;
+   color: #fff;
+ }
+ 
+ .menuIcon {
+   display: none;
+   cursor: pointer;
+   margin-left: 4rem;
+   color: #333;
+ }
+ 
+ @media (max-width: 768px) {
+   .navbarMenu {
+     position: fixed;
+     top: 50px;
+     left: -100%;
+     width: 70%;
+     height: calc(100vh - 60px);
+     background-color: #ffffff;
+     transition: left 0.3s ease;
+     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+   }
+ 
+   .navbarMenu.active {
+     left: 0;
+   }
+ 
+   .navbarMenu ul {
+     flex-direction: column;
+     padding: 2rem;
+   }
+ 
+   .navbarMenu li {
+     margin: 1rem 0;
+   }
+
+   .cartIcon span{
+      top: -10px;
+      left: 15px;
+      width: 15px;
+      height: 15px;
+      text-align: center;
+      line-height: 15px;
+    }
+
+   .menuIcon {
+     display: block;
+   }
+ }
