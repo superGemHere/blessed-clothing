@@ -1,7 +1,8 @@
 import { AuthProvider } from './Context/authContext.jsx'
 import { Routes, Route } from 'react-router-dom'
 
-import Header from './components/outlet/Header/Header.jsx'
+import Header from './components/outlet/Header2/Header.jsx'
+import Navbar from './components/outlet/Header1/Header.jsx'
 import Home from './components/main/Home/Home.jsx'
 import Footer from './components/outlet/Footer/Footer.jsx'
 import Products from './components/main/Products/Products.jsx'
@@ -19,7 +20,8 @@ function App() {
     <>
     <AuthProvider >
       <WelcomeModal />
-      <Header />
+      {/* <Header /> */}
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
