@@ -1,8 +1,11 @@
 import styles from './singleProduct.module.css';
+
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Select from 'react-select';
 import { getSingleProduct } from '../../../api/productsApi';
+import { useDispatch } from 'react-redux'; // To send actions to Redux
+import { addToCart } from '../../../actions/cartActions'; // Our action to add items
+import Select from 'react-select';
 
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -19,6 +22,8 @@ import ImageModal from '../ImageModal/ImageModal';
 import ScaleLoader from '../../Widgets/Spinner';
 
 export default function SingleProduct() {
+    const dispatch = useDispatch();
+
     const [isDisabled, setIsDisabled] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
@@ -96,6 +101,10 @@ export default function SingleProduct() {
         setSelectedImage(null);
     };
 
+    const handleAddToCart = () => {
+        dispatch(addToCart(product)); // Dispatch the add to cart action
+      };
+
     return (
         <div className={styles.container}>
             {loading ? <ScaleLoader /> 
@@ -147,7 +156,7 @@ export default function SingleProduct() {
                 </div>
                 <div className={styles.productActions}>
                     <Select isSearchable={false} placeholder={"Choose a size.."} styles={customStyles} options={options} value={selectedOption} onChange={handleSelectChange} />
-                    <button className={styles.addToCartBtn}>
+                    <button className={styles.addToCartBtn} onClick={handleAddToCart}>
                         <AddShoppingCartIcon className={styles.addToCartIcon} /> Add to cart
                     </button>
                     <div className={styles.deliverySchedule}>
