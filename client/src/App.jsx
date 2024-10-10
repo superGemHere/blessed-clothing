@@ -1,5 +1,7 @@
 import { AuthProvider } from './Context/authContext.jsx'
 import { Routes, Route } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import store from './store.js'
 
 import Header from './components/outlet/Header2/Header.jsx'
 import Navbar from './components/outlet/Header1/Header.jsx'
@@ -13,28 +15,30 @@ import Logout from './components/main/Logout/Logout.jsx'
 import AdminPanel from './components/main/AdminPanel/AdminPanel.jsx'
 import NotFound from './components/main/404NotFound/NotFound.jsx'
 import WelcomeModal from './components/Widgets/WelcomeModal/WelcomeModal.jsx'
+import Cart from './components/main/Cart/Cart.jsx'
 
 function App() {
 
   return (
-    <>
-    <AuthProvider >
-      <WelcomeModal />
-      {/* <Header /> */}
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/products/details/:productId" element={<SingleProduct />} />
-        <Route path="/users/login" element={<Login />} />
-        <Route path="/users/register" element={<Register />} />
-        <Route path="/users/logout" element={<Logout />} />
-        <Route path="/users/admin" element={<AdminPanel />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
-    </AuthProvider>
-    </>
+    <Provider store={store}>
+      <AuthProvider >
+        <WelcomeModal />
+        {/* <Header /> */}
+        <Navbar />
+        <Cart />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/details/:productId" element={<SingleProduct />} />
+          <Route path="/users/login" element={<Login />} />
+          <Route path="/users/register" element={<Register />} />
+          <Route path="/users/logout" element={<Logout />} />
+          <Route path="/users/admin" element={<AdminPanel />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </AuthProvider>
+    </Provider>
   )
 }
 
