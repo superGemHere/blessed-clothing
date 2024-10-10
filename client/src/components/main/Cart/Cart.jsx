@@ -1,3 +1,4 @@
+import styles from './cart.module.css';
 import React, { useState } from 'react';
 import { 
   ShoppingCart, 
@@ -5,7 +6,8 @@ import {
   Add as AddIcon, 
   Remove as RemoveIcon 
 } from '@mui/icons-material';
-import styles from './cart.module.css';
+import { useSelector, useDispatch } from 'react-redux'; // Import hooks for Redux
+import { addToCart, removeFromCart } from '../../../actions/cartActions'; // Import Redux actions
 
 // Sample products
 const sampleProducts = [
@@ -15,79 +17,73 @@ const sampleProducts = [
 ];
 
 export default function ModalCart() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([
-    { ...sampleProducts[0], quantity: 2 },
-    { ...sampleProducts[1], quantity: 1 },
-  ]);
+  // Get the cart from Redux state
+  const cart = useSelector(state => state.cart);  // Access the cart from the Redux store
+  const dispatch = useDispatch();  // To dispatch actions
 
-  const addToCart = (product) => {
-    setCartItems(prevItems => {
-      const existingItem = prevItems.find(item => item.id === product.id);
-      if (existingItem) {
-        return prevItems.map(item =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
-      }
-      return [...prevItems, { ...product, quantity: 1 }];
-    });
+  const [isOpen, setIsOpen] = useState(true);  // Local state for controlling cart modal visibility
+
+  // Handle quantity update (add/remove items) via Redux actions
+  const updateQuantity = (product, delta) => {
+    const newQuantity = product.quantity + delta;
+    if (newQuantity <= 0) {
+      dispatch(removeFromCart(product.id));  // If quantity is less than 1, remove the item
+    } else {
+      dispatch(addToCart({ ...product, quantity: newQuantity }));  // Update item quantity in the cart
+    }
   };
 
-  const removeFromCart = (productId) => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
-  };
-
-  const updateQuantity = (productId, newQuantity) => {
-    if (newQuantity < 1) return;
-    setCartItems(prevItems =>
-      prevItems.map(item =>
-        item.id === productId ? { ...item, quantity: newQuantity } : item
-      )
-    );
-  };
-
-  const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const totalPrice = cart.items.reduce((sum, item) => sum + item.newPrice, 0); // Calculate total price
+  const totalItems = cart.items.reduce((sum, item) => sum + item.quantity, 0);  // Calculate total items in the cart
 
   return (
     <>
+      {/* Cart button
       <button className={styles.cartButton} onClick={() => setIsOpen(true)}>
         <ShoppingCart />
         {totalItems > 0 && <span className={styles.cartCount}>{totalItems}</span>}
-      </button>
+      </button> */}
+
+      {/* Modal overlay */}
       <div className={`${styles.modalOverlay} ${isOpen ? styles.modalOverlayOpen : ''}`} onClick={() => setIsOpen(false)}>
         <div className={`${styles.modalContent} ${isOpen ? styles.modalContentOpen : ''}`} onClick={e => e.stopPropagation()}>
+          {/* Close button */}
           <button className={styles.closeButton} onClick={() => setIsOpen(false)}>
             <CloseIcon />
           </button>
           <h2 className={styles.title}>Your Cart</h2>
+
+          {/* Cart Items */}
           <div className={styles.cartItems}>
-            {cartItems.map(item => (
-              <div key={item.id} className={styles.cartItem}>
-                <img src={item.image} alt={item.name} className={styles.cartItemImage} />
-                <div className={styles.itemDetails}>
-                  <h3 className={styles.itemName}>{item.name}</h3>
-                  <p className={styles.itemPrice}>${item.price.toFixed(2)}</p>
-                  <div className={styles.quantityControls}>
-                    <button className={styles.quantityButton} onClick={() => updateQuantity(item.id, item.quantity - 1)}>
-                      <RemoveIcon />
-                    </button>
-                    <span>{item.quantity}</span>
-                    <button className={styles.quantityButton} onClick={() => updateQuantity(item.id, item.quantity + 1)}>
-                      <AddIcon />
-                    </button>
+            {cart.items.length === 0 ? (
+              <p className={styles.emptyCart}>Your cart is empty</p>
+            ) : (
+              cart.items.map(item => (
+                <div key={item.id} className={styles.cartItem}>
+                  <img src={item.imageUrl} alt={`${item.productName} ${item.productModel}`} className={styles.cartItemImage} />
+                  <div className={styles.itemDetails}>
+                    <h3 className={styles.itemName}>{`${item.productName} ${item.productModel}`}</h3>
+                    <p className={styles.itemPrice}>${item.newPrice.toFixed(2)}</p>
+                    <div className={styles.quantityControls}>
+                      <button className={styles.quantityButton} onClick={() => updateQuantity(item, -1)}>
+                        <RemoveIcon />
+                      </button>
+                      <span>{item.quantity}</span>
+                      <button className={styles.quantityButton} onClick={() => updateQuantity(item, 1)}>
+                        <AddIcon />
+                      </button>
+                    </div>
                   </div>
+                  <button className={styles.removeButton} onClick={() => dispatch(removeFromCart(item.id))}>
+                    <CloseIcon />
+                  </button>
                 </div>
-                <button className={styles.removeButton} onClick={() => removeFromCart(item.id)}>
-                  <CloseIcon />
-                </button>
-              </div>
-            ))}
+              ))
+            )}
           </div>
-          {cartItems.length === 0 && (
-            <p className={styles.emptyCart}>Your cart is empty</p>
-          )}
-          {cartItems.length > 0 && (
+
+          {/* Cart Summary */}
+          {cart.items.length > 0 && (
             <div className={styles.cartSummary}>
               <div className={styles.total}>
                 <span>Total:</span>
@@ -96,11 +92,13 @@ export default function ModalCart() {
               <button className={styles.checkoutButton}>Checkout</button>
             </div>
           )}
+
+          {/* Quick Add Products */}
           <div className={styles.quickAdd}>
             <h3 className={styles.quickAddTitle}>Quick Add:</h3>
             <div className={styles.quickAddButtons}>
               {sampleProducts.map(product => (
-                <button key={product.id} className={styles.quickAddButton} onClick={() => addToCart(product)}>
+                <button key={product.id} className={styles.quickAddButton} onClick={() => dispatch(addToCart(product))}>
                   {product.name}
                 </button>
               ))}
