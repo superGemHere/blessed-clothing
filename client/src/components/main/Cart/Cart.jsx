@@ -16,7 +16,9 @@ const sampleProducts = [
   { id: 3, name: "Elegant Watch", price: 199.99, image: "/placeholder.svg?height=100&width=100" },
 ];
 
-export default function ModalCart() {
+export default function ModalCart({
+  navbarHeight
+}) {
   // Get the cart from Redux state
   const cart = useSelector(state => state.cart);  // Access the cart from the Redux store
   const dispatch = useDispatch();  // To dispatch actions
@@ -46,7 +48,7 @@ export default function ModalCart() {
 
       {/* Modal overlay */}
       <div className={`${styles.modalOverlay} ${isOpen ? styles.modalOverlayOpen : ''}`} onClick={() => setIsOpen(false)}>
-        <div className={`${styles.modalContent} ${isOpen ? styles.modalContentOpen : ''}`} onClick={e => e.stopPropagation()}>
+        <div className={`${styles.modalContent} ${isOpen ? styles.modalContentOpen : ''}`} style={{ top: `${navbarHeight + 1}px` }} onClick={e => e.stopPropagation()}>
           {/* Close button */}
           <button className={styles.closeButton} onClick={() => setIsOpen(false)}>
             <CloseIcon />
