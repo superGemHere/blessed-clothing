@@ -6,7 +6,9 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CloseIcon from '@mui/icons-material/Close';
 import styles from './header.module.css';
 
-export default function Navbar() {
+export default function Navbar({
+  navbarHeight
+}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -19,7 +21,7 @@ export default function Navbar() {
         <div className={styles.navbarLogo}>
           <a href="/">FootGear</a>
         </div>
-        <div className={`${styles.navbarMenu} ${isMenuOpen ? styles.active : ''}`}>
+        <div className={`${styles.navbarMenu} ${isMenuOpen ? styles.active : ''}`} style={{top: `${navbarHeight + 1}px`}}>
           <ul>
             <li><Link onClick={toggleMenu} to="/">Home</Link></li>
             <li><Link onClick={toggleMenu} to={`${import.meta.env.MODE === 'development' ? import.meta.env.VITE_LOCAL_FRONTEND_URL : import.meta.env.VITE_FRONTEND_URL}products?page=1&limit=10&sort=asc&maxPrice=1000&gender=&age=&trending=false&sale=false&sizes=`}>Products</Link></li>
