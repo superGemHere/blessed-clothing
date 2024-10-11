@@ -7,7 +7,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import styles from './header.module.css';
 
 export default function Navbar({
-  navbarHeight
+  navbarHeight,
+  setIsCartOpen
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -31,7 +32,7 @@ export default function Navbar({
             <li><Link onClick={toggleMenu} to="/kids">Kids</Link></li>
           </ul>
         </div>
-        <div className={styles.navbarIcons}>
+        <div className={styles.navbarIcons} onClick={() => setIsCartOpen((prevState) => !prevState)}>
          <div className={styles.cartIcon}>
             <ShoppingCartOutlinedIcon style={{fontSize: '2.5rem', cursor: 'pointer',}} />
             <span>3</span>

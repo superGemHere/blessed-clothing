@@ -17,7 +17,8 @@ const sampleProducts = [
 ];
 
 export default function ModalCart({
-  navbarHeight
+  navbarHeight,
+  visibilityState
 }) {
   // Get the cart from Redux state
   const cart = useSelector(state => state.cart);  // Access the cart from the Redux store
@@ -47,10 +48,10 @@ export default function ModalCart({
       </button> */}
 
       {/* Modal overlay */}
-      <div className={`${styles.modalOverlay} ${isOpen ? styles.modalOverlayOpen : ''}`} onClick={() => setIsOpen(false)}>
-        <div className={`${styles.modalContent} ${isOpen ? styles.modalContentOpen : ''}`} style={{ top: `${navbarHeight + 1}px` }} onClick={e => e.stopPropagation()}>
+      <div className={`${styles.modalOverlay} ${visibilityState.isCartOpen ? styles.modalOverlayOpen : ''}`} onClick={() => visibilityState.setIsCartOpen(false)}>
+        <div className={`${styles.modalContent} ${visibilityState.isCartOpen ? styles.modalContentOpen : ''}`} style={{ top: `${navbarHeight + 1}px` }} onClick={e => e.stopPropagation()}>
           {/* Close button */}
-          <button className={styles.closeButton} onClick={() => setIsOpen(false)}>
+          <button className={styles.closeButton} onClick={() => visibilityState.setIsCartOpen(false)}>
             <CloseIcon />
           </button>
           <h2 className={styles.title}>Your Cart</h2>

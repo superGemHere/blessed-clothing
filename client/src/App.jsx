@@ -20,6 +20,7 @@ import Cart from './components/main/Cart/Cart.jsx'
 
 function App() {
   const navbarRef = useRef(null); 
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const [navbarHeight, setNavbarHeight] = useState(0);
 
   // Getting the height of the navbar so I can dynamically set cart's top position 
@@ -29,8 +30,9 @@ function App() {
       setNavbarHeight(height); 
     }
   };
+  
 
-  // Measure the height of the navbar after it renders and on window resize
+  // Measuring the height of the navbar after it renders and on window resize
   useEffect(() => {
     updateNavbarHeight();
     
@@ -46,9 +48,9 @@ function App() {
       <AuthProvider >
         <WelcomeModal />
         <div ref={navbarRef}>
-          <Navbar navbarHeight={navbarHeight}/>
+          <Navbar navbarHeight={navbarHeight} setIsCartOpen={setIsCartOpen}/>
         </div>
-        <Cart navbarHeight={navbarHeight}/>
+        <Cart navbarHeight={navbarHeight} visibilityState={{isCartOpen, setIsCartOpen}}/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
