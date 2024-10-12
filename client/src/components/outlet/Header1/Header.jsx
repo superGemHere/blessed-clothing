@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
@@ -12,12 +12,18 @@ export default function Navbar({
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  useEffect(() => {
+    if (visibilityState.isCartOpen ) {
+      setIsMenuOpen(false);
+    }
+  }, [visibilityState.isCartOpen]);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <nav className={styles.navbar} style={{position: visibilityState.isCartOpen ? 'fixed' : ''}}>
+    <nav className={styles.navbar} >
       <div className={styles.navbarContainer}>
         <div className={styles.navbarLogo}>
           <Link to="/">FootGear</Link>
@@ -32,8 +38,8 @@ export default function Navbar({
             <li><Link onClick={toggleMenu} to="/kids">Kids</Link></li>
           </ul>
         </div>
-        <div className={styles.navbarIcons} onClick={() => visibilityState.setIsCartOpen((prevState) => !prevState)}>
-         <div className={styles.cartIcon}>
+        <div className={styles.navbarIcons} >
+         <div className={styles.cartIcon} onClick={() => visibilityState.setIsCartOpen((prevState) => !prevState)}>
             <ShoppingCartOutlinedIcon style={{fontSize: '2.5rem', cursor: 'pointer',}} />
             <span>3</span>
          </div>
