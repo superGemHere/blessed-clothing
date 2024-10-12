@@ -48,7 +48,7 @@ function App() {
       <AuthProvider >
         <WelcomeModal />
         <div ref={navbarRef}>
-          <Navbar navbarHeight={navbarHeight} setIsCartOpen={setIsCartOpen}/>
+          <Navbar navbarHeight={navbarHeight} visibilityState={{isCartOpen, setIsCartOpen}}/>
         </div>
         <Cart navbarHeight={navbarHeight} visibilityState={{isCartOpen, setIsCartOpen}}/>
         <Routes>
