@@ -8,7 +8,7 @@ import styles from './header.module.css';
 
 export default function Navbar({
   navbarHeight,
-  setIsCartOpen
+  visibilityState
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -17,10 +17,10 @@ export default function Navbar({
   };
 
   return (
-    <nav className={styles.navbar}>
+    <nav className={styles.navbar} style={{position: visibilityState.isCartOpen ? 'fixed' : ''}}>
       <div className={styles.navbarContainer}>
         <div className={styles.navbarLogo}>
-          <a href="/">FootGear</a>
+          <Link to="/">FootGear</Link>
         </div>
         <div className={`${styles.navbarMenu} ${isMenuOpen ? styles.active : ''}`} style={{top: `${navbarHeight + 1}px`}}>
           <ul>
@@ -32,7 +32,7 @@ export default function Navbar({
             <li><Link onClick={toggleMenu} to="/kids">Kids</Link></li>
           </ul>
         </div>
-        <div className={styles.navbarIcons} onClick={() => setIsCartOpen((prevState) => !prevState)}>
+        <div className={styles.navbarIcons} onClick={() => visibilityState.setIsCartOpen((prevState) => !prevState)}>
          <div className={styles.cartIcon}>
             <ShoppingCartOutlinedIcon style={{fontSize: '2.5rem', cursor: 'pointer',}} />
             <span>3</span>
