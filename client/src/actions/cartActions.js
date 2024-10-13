@@ -7,10 +7,10 @@ export const addToCart = (item) => {
 };
 
 // This action tells Redux to remove an item from the cart
-export const removeFromCart = (id) => {
+export const removeFromCart = (_id) => {
   return {
     type: 'REMOVE_FROM_CART',
-    payload: { id },
+    payload: { _id },
   };
 };
 
