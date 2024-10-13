@@ -19,6 +19,7 @@ import PermPhoneMsgOutlinedIcon from '@mui/icons-material/PermPhoneMsgOutlined';
 
 import Accordion from '../../Widgets/Accordion/Accordion';
 import ImageModal from '../ImageModal/ImageModal';
+import AddedToCartModal from '../AddedToCartModal/AddedToCartModal';
 import ScaleLoader from '../../Widgets/Spinner';
 
 export default function SingleProduct() {
@@ -31,6 +32,7 @@ export default function SingleProduct() {
     const [product, setProduct] = useState({});
     const {productId} = useParams();
     const [loading, setLoading] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
 
     useEffect(() => {
@@ -102,8 +104,21 @@ export default function SingleProduct() {
     };
 
     const handleAddToCart = () => {
-        dispatch(addToCart(product)); // Dispatch the add to cart action
+        dispatch(addToCart(product)); 
+        setIsModalOpen(true);
       };
+
+
+    const handleContinueShopping = () => {
+    setIsModalOpen(false);
+    };
+
+    const handleGoToCart = () => {
+    // Here will be navigating to the cart page but first I must create it..
+    console.log('Navigating to cart page');
+    setIsModalOpen(false);
+    };
+
 
     return (
         <div className={styles.container}>
@@ -212,7 +227,12 @@ export default function SingleProduct() {
             </div>
             </>
     }
-            
+        <AddedToCartModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onContinueShopping={handleContinueShopping}
+            onGoToCart={handleGoToCart}
+        />
         </div>
     );
 }
