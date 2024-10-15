@@ -46,7 +46,7 @@
 .navbarMenu a, .navbarMenu span {
   color: #333;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.3rem;
   transition: color 0.3s ease;
   cursor: pointer;
 }
@@ -165,7 +165,7 @@
   }
   .navbarMenu ul ul {
     flex-direction: column;
-    padding: 0 2rem;
+    padding: 0 ;
     gap: 1rem;
   }
 
@@ -199,7 +199,7 @@
     box-shadow: none;
     max-width: none;
     max-height: 0;
-    transition: max-height 0.3s ease, opacity 0.3s ease;
+    transition: max-height .3s ease, opacity .5s ease;
     opacity: 0;
     overflow: hidden;
   }
