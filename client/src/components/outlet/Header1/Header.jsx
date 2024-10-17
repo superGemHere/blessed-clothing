@@ -5,6 +5,7 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import styles from './header.module.css';
+import { useSelector } from 'react-redux';
 
 export default function Navbar({
   navbarHeight,
@@ -13,6 +14,10 @@ export default function Navbar({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const location = useLocation();
+
+  const totalItems = useSelector(state => 
+    state.cart.items.reduce((sum, item) => sum + item.quantity, 0)
+  );
 
   useEffect(() => {
     if (visibilityState.isCartOpen) {
@@ -119,7 +124,7 @@ export default function Navbar({
         <div className={styles.navbarIcons}>
          <div className={styles.cartIcon} onClick={() => visibilityState.setIsCartOpen((prevState) => !prevState)}>
             <ShoppingCartOutlinedIcon style={{fontSize: '2.5rem', cursor: 'pointer',}} />
-            <span>3</span>
+            <span>{totalItems}</span>
          </div>
           <div className={styles.menuIcon} onClick={toggleMenu}>
             {isMenuOpen ? <CloseIcon style={{fontSize: '2.5rem'}}/> : <MenuIcon style={{fontSize: '2.5rem'}}/>}
