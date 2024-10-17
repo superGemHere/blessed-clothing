@@ -26,9 +26,8 @@ export default function ModalCart({
     }
   };
 
-  const totalPrice = cart.items.reduce((sum, item) => sum + item.newPrice * item.quantity, 0); // Calculate total price
-  const totalItems = cart.items.reduce((sum, item) => sum + item.quantity, 0);  // Calculate total items in the cart
-
+  const totalPrice = cart.items.reduce((sum, item) => sum + item.newPrice * item.quantity, 0);
+  const totalItems = cart.items.reduce((sum, item) => sum + item.quantity, 0);  
   return (
     <div className={`${styles.modalOverlay} ${visibilityState.isCartOpen ? styles.modalOverlayOpen : ''}`} onClick={() => visibilityState.setIsCartOpen(false)}>
       <div className={`${styles.modalContent} ${visibilityState.isCartOpen ? styles.modalContentOpen : ''}`} onClick={e => e.stopPropagation()}>
