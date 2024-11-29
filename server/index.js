@@ -8,11 +8,13 @@ const cookieParser = require('cookie-parser');
 const routes = require('./routes');
 const { auth } = require('./middlewares/authMiddleware');
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 const app = express();
 
 app.use(cookieParser());
 
-mongoose.connect(process.env.MONGO_DB_URL)
+mongoose.connect(isProduction ? process.env.MONGO_DB_URL : process.env.MONGO_DB_LOCAL_URL)
     .then(() => console.log('Database connected successfuly.'))
     .catch((err) => console.log(err));
 
