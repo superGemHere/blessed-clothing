@@ -1,2 +1,2 @@
-# blessed-clothing
-Clothing Store
+# FootGear
+E-commerce Web App for Shooes
