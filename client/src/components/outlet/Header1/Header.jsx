@@ -4,8 +4,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import AdminPanelSettingsRoundedIcon from '@mui/icons-material/AdminPanelSettingsRounded';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import styles from './header.module.css';
 import { useSelector } from 'react-redux';
+import { useAuth } from '../../../Context/authContext.jsx';
 
 export default function Navbar({
   navbarHeight,
@@ -14,6 +18,7 @@ export default function Navbar({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const location = useLocation();
+  const {isAdmin, user} = useAuth();
 
   const totalItems = useSelector(state => 
     state.cart.items.reduce((sum, item) => sum + item.quantity, 0)
@@ -122,6 +127,18 @@ export default function Navbar({
           </ul>
         </div>
         <div className={styles.navbarIcons}>
+         {user ? (<Link className={styles.cartIcon} to={`${import.meta.env.MODE === 'development' ? import.meta.env.VITE_LOCAL_FRONTEND_URL : import.meta.env.VITE_FRONTEND_URL}users/logout`}>
+            <LogoutRoundedIcon style={{fontSize: '2.5rem', cursor: 'pointer',}} />
+          </Link>)
+         : (<Link className={styles.cartIcon} to={`${import.meta.env.MODE === 'development' ? import.meta.env.VITE_LOCAL_FRONTEND_URL : import.meta.env.VITE_FRONTEND_URL}users/login`}>
+            <AccountCircleRoundedIcon style={{fontSize: '2.5rem', cursor: 'pointer',}} />
+          </Link>)}
+         {isAdmin && (
+          <Link className={styles.cartIcon} to={`${import.meta.env.MODE === 'development' ? import.meta.env.VITE_LOCAL_FRONTEND_URL : import.meta.env.VITE_FRONTEND_URL}users/admin`}>
+            <AdminPanelSettingsRoundedIcon style={{fontSize: '2.5rem', cursor: 'pointer',}} />
+          </Link>
+          )
+         }
          <div className={styles.cartIcon} onClick={() => visibilityState.setIsCartOpen((prevState) => !prevState)}>
             <ShoppingCartOutlinedIcon style={{fontSize: '2.5rem', cursor: 'pointer',}} />
             <span>{totalItems}</span>
